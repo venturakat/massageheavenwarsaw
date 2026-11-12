@@ -1,0 +1,100 @@
+---
+/**
+ * FAQ — "Przed pierwszą wizytą" (Figma desktop 151:138, mobile 240:1258). Anchor #faq.
+ * Title column + 10 questions from faq.json; the first one starts open.
+ * "Instagramie" in the intro links to Instagram (DM on phones, profile on desktop).
+ */
+import SectionTitle from '../SectionTitle.astro';
+import FaqItem from '../FaqItem.astro';
+import type { Content } from '../../data';
+
+type Props = { content: Content };
+const { site, faq, ui } = Astro.props.content;
+const { faqSection, studio } = site;
+
+const linkWord = ui.faqIntroLink;
+const at = faqSection.intro.indexOf(linkWord);
+const [before, after] =
+  at >= 0 ? [faqSection.intro.slice(0, at), faqSection.intro.slice(at + linkWord.length)] : [faqSection.intro, ''];
+---
+
+<section id="faq" class="faq" aria-labelledby="faq-title">
+  <div class="container faq__inner">
+    <div class="faq__intro">
+      <SectionTitle eyebrow={faqSection.eyebrow} title={faqSection.title} id="faq-title" />
+      <p class="faq__text">
+        {before}{
+          at >= 0 && (
+            <a
+              class="faq__link"
+              href={studio.instagramProfile}
+              data-href-touch={studio.instagramDm}
+              target="_blank"
+              rel="noopener"
+            >
+              {linkWord}<span class="visually-hidden"> {ui.newTab}</span>
+            </a>
+          )
+        }{after}
+      </p>
+    </div>
+    <div class="faq__list">
+      {faq.items.map((item, i) => <FaqItem id={`faq-${i + 1}`} question={item.q} answer={item.a} open={i === 0} />)}
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../../scripts/touch-links';
+</script>
+
+<style>
+  .faq {
+    padding-block: var(--section-pad-mobile);
+    background: var(--bg-default);
+  }
+
+  .faq__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .faq__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .faq__intro :global(.section-title) { gap: 16px; }
+
+  .faq__text { color: var(--text-secondary); }
+  .faq__link {
+    color: var(--text-highlight);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color var(--dur-hover) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .faq__link:hover { color: var(--plum-600); }
+  }
+
+  @media (min-width: 1024px) {
+    .faq { padding-block: var(--section-pad-desktop); }
+    .faq__inner {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    .faq__intro {
+      flex: 0 0 320px;
+      gap: 24px;
+    }
+    .faq__intro :global(.section-title) { gap: 24px; }
+    .faq__list {
+      flex: 1 1 0;
+      max-width: 840px;
+      margin-left: auto;
+    }
+  }
+</style>

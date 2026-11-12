@@ -33,6 +33,15 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Pop-up dim:** the colour isn't in Figma. Using plum-700 at 45 %.
 - [ ] **Treatment row "Zarezerwuj":** the Figma component note says it links to Booksy; `website.md` says every booking button opens the general chooser. Built as the chooser (the newer decision).
 
+## Found while building (step 3, sections)
+- [ ] **About feature text on mobile:** Figma 240:1241 uses shorter texts ("ul. Krucza 16/22 — łatwy dojazd", "Od terapii po pielęgnację twarzy.") and joins the two paragraphs. Built from `site.json` (the longer texts, two paragraphs), so mobile About is ~74 px taller than Figma. Add mobile variants to the content if the client wants the short ones.
+- [ ] **Image descriptions (alt text):** written by Claude for the hero photos and the studio photo, in `src/data/ui.pl.json` → `alt`. Please review.
+- [ ] **Map before cookie consent:** built as the Figma placeholder (self-hosted map image + pin, links to Google Maps) plus a "Pokaż mapę" button that opens the cookie settings. The Google iframe loads only after "Funkcjonalne" consent (wired in step 4). Confirm this is the wanted placeholder.
+- [ ] **Voucher preview text:** "Gift certificate", the tagline and "Warszawa · Krucza 16/22" aren't in `site.json`; taken from Figma into `src/data/ui.pl.json` → `certificate`.
+- [ ] **Team colours:** Figma 151:135 uses a white eyebrow and a periwinkle-300 italic line; `design-system.md` says periwinkle-200 italic on plum. Built as Figma.
+- [ ] **Mobile gift section bottom padding:** Figma 240:1273 has 36 px under the voucher; built with the standard 56 px.
+- [ ] **Hero buttons at 1024–1100 px:** the three buttons don't fit on one line, so the two secondary ones wrap below "Zarezerwuj wizytę". Not designed; looks fine, confirm.
+
 ## Decided (for reference)
 - Lowest price stays **"od 80 zł"** (the client's old site said 64 zł; ignore it).
 - Names: **Anastazja** and **Ina** everywhere. The privacy policy keeps the legal name Anastasiia Zhelezniak.

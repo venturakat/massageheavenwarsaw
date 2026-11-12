@@ -1,0 +1,103 @@
+---
+/**
+ * Treatment panel for one category (Figma desktop 198:1275, mobile 240:1135).
+ * Opened by its ServiceCard. Desktop header: number, name, tagline + "Zwiń";
+ * mobile shows only the tagline (the card above already names the category).
+ */
+import Button from './Button.astro';
+import IconLink from './IconLink.astro';
+import TreatmentRow from './TreatmentRow.astro';
+
+type Option = { duration: string; price: string };
+type Props = {
+  id: string;
+  number: string;
+  name: string;
+  tagline: string;
+  treatments: { name: string; options: Option[] }[];
+  collapseLabel: string;
+  bookLabel: string;
+  bookVisitLabel: string;
+  footerText: string;
+};
+
+const { id, number, name, tagline, treatments, collapseLabel, bookLabel, bookVisitLabel, footerText } = Astro.props;
+---
+
+<div class="panel" id={id} role="region" aria-label={name} hidden data-service-panel>
+  <div class="panel__header">
+    <div class="panel__title">
+      <p class="label panel__number">{number}</p>
+      <h3 class="panel__name">{name}</h3>
+      <p class="panel__tagline">{tagline}</p>
+    </div>
+    <IconLink data-collapse aria-controls={id}>{collapseLabel}</IconLink>
+  </div>
+
+  <div class="panel__list">
+    {treatments.map((t) => <TreatmentRow name={t.name} options={t.options} bookLabel={bookLabel} />)}
+  </div>
+
+  <div class="panel__footer">
+    <p class="panel__hint">{footerText}</p>
+    <Button class="panel__book" data-booking="general" aria-haspopup="dialog">{bookVisitLabel}</Button>
+  </div>
+</div>
+
+<style>
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 20px;
+    border-radius: 28px;
+    background: var(--bg-nav);
+  }
+  .panel[hidden] { display: none; }
+
+  .panel__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .panel__title {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .panel__number,
+  .panel__name { display: none; }
+  .panel__number {
+    color: var(--text-highlight);
+    line-height: 15px;
+  }
+  .panel__name {
+    font: var(--type-h3);
+    letter-spacing: var(--tracking-h3);
+    color: var(--text-primary);
+  }
+  .panel__tagline { color: var(--text-secondary); }
+
+  .panel__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--periwinkle-300);
+  }
+  .panel__hint { color: var(--text-secondary); }
+  .panel__footer :global(.panel__book) { width: 100%; }
+
+  @media (min-width: 1024px) {
+    .panel { padding: 36px 40px; }
+    .panel__number,
+    .panel__name { display: block; }
+    .panel__footer {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .panel__footer :global(.panel__book) { width: auto; }
+  }
+</style>

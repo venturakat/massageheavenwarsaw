@@ -16,5 +16,25 @@
     "pl": "Polski",
     "en": "English",
     "ua": "Українська"
+  },
+  "searchLabel": "Szukaj zabiegu",
+  "alt": {
+    "_note": "Image descriptions for screen readers. Written by Claude from the Figma images; please review.",
+    "heroLarge": "Dłonie masażystki podczas masażu pleców",
+    "heroSmall": "Masaż w studiu Massage Heaven",
+    "studio": "Gabinet Massage Heaven: stół do masażu, ciepłe światło i rośliny",
+    "certificate": "Podgląd bonu podarunkowego Massage Heaven",
+    "map": "Mapa okolicy ul. Kruczej 16/22 w Warszawie"
+  },
+  "faqIntroLink": "Instagramie",
+  "showMap": "Pokaż mapę",
+  "mapTitle": "Mapa: Massage Heaven, ul. Krucza 16/22, Warszawa",
+  "certificate": {
+    "_note": "Text on the voucher preview card (Figma 97:109 / Printables 520:83).",
+    "title": "Bon podarunkowy",
+    "subtitle": "Gift certificate",
+    "tagline": "Chwila tylko dla Ciebie · A moment just for you",
+    "address": "Warszawa · Krucza 16/22",
+    "website": "massageheavenwarsaw.com"
   }
 }

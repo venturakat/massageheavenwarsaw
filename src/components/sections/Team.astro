@@ -1,0 +1,64 @@
+---
+/**
+ * Team — "Za każdym masażem stoi człowiek" (Figma desktop 151:135, mobile 240:1299). Anchor #zespol.
+ * Plum-600 background, centred title, one TeamCard per person in team.json.
+ * Figma uses a white eyebrow and a periwinkle-300 italic line here.
+ */
+import SectionTitle from '../SectionTitle.astro';
+import TeamCard from '../TeamCard.astro';
+import type { Content } from '../../data';
+
+type Props = { content: Content };
+const { site, team } = Astro.props.content;
+---
+
+<section id="zespol" class="team" aria-labelledby="team-title">
+  <div class="container team__inner">
+    <SectionTitle eyebrow={site.teamSection.eyebrow} title={site.teamSection.title} tone="dark" align="center" id="team-title" class="team__title" />
+    <ul class="team__cards" role="list">
+      {
+        team.people.map((p) => (
+          <li>
+            <TeamCard id={p.id} name={p.name} bookingLabel={p.bookingLabel} chooser={p.chooser} photoAlt={`${p.name}, ${p.role}`} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .team {
+    padding-block: var(--section-pad-mobile);
+    background: var(--plum-600);
+  }
+
+  .team__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .team__inner :global(.section-title__eyebrow) { color: var(--text-inverse); }
+  .team__inner :global(.section-title__heading em) { color: var(--periwinkle-300); }
+
+  .team__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .team__cards {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px 100px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .team { padding-block: var(--section-pad-desktop); }
+    .team__inner { gap: 30px; }
+  }
+</style>

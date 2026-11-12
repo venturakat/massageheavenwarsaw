@@ -1,0 +1,195 @@
+---
+/**
+ * Gift voucher — "Bon podarunkowy" (Figma desktop 97:100, mobile 240:1273). Anchor #bon.
+ * Copy + "Zamów bon" (opens the voucher form pop-up, step 4) + a tilted voucher preview,
+ * built from the Figma parts (97:109) so it stays sharp at any size.
+ */
+import { Image } from 'astro:assets';
+import SectionTitle from '../SectionTitle.astro';
+import Button from '../Button.astro';
+import arch from '../../assets/gift/arch.jpg';
+import halo from '../../assets/gift/halo.svg';
+import logo from '../../assets/gift/logo.svg';
+import type { Content } from '../../data';
+
+type Props = { content: Content };
+const { site, ui } = Astro.props.content;
+const { gift } = site;
+const card = ui.certificate;
+---
+
+<section id="bon" class="gift" aria-labelledby="gift-title">
+  <div class="container gift__inner">
+    <div class="gift__copy">
+      <SectionTitle eyebrow={gift.eyebrow} title={gift.title} id="gift-title" class="gift__title" />
+      <p class="gift__text">{gift.text}</p>
+      <Button data-open-dialog="gift-form" aria-haspopup="dialog">{gift.button}</Button>
+    </div>
+
+    <div class="gift__visual">
+      <div class="voucher" role="img" aria-label={ui.alt.certificate}>
+        <img class="voucher__halo" src={halo.src} alt="" width="110" height="17" />
+        <div class="voucher__arch">
+          <Image src={arch} alt="" widths={[200, 400]} sizes="171px" loading="lazy" />
+        </div>
+        <div class="voucher__content" aria-hidden="true">
+          <img class="voucher__logo" src={logo.src} alt="" width="130" height="24" />
+          <div class="voucher__titles">
+            <p class="voucher__title">{card.title}</p>
+            <p class="voucher__subtitle">{card.subtitle}</p>
+            <p class="voucher__tagline">{card.tagline}</p>
+          </div>
+          <div class="voucher__footer">
+            <span>{card.address}</span>
+            <span>{card.website}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gift {
+    padding-block: var(--section-pad-mobile);
+    background: var(--bg-accent-subtle);
+  }
+
+  .gift__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .gift__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .gift__copy :global(.gift__title) { gap: 24px; }
+  .gift__copy :global(.section-title__eyebrow) { color: var(--text-highlight); }
+  .gift__text {
+    max-width: 480px;
+    font: var(--type-lead);
+    color: var(--text-secondary);
+  }
+
+  /* ── Voucher preview: 528 × 249 card, tilted 4°. Sizes in em so it scales. ── */
+  /* Mobile (Figma 240:1282): the card is 82 % size and runs off the right edge. */
+  .gift__visual {
+    display: flex;
+    justify-content: flex-start;
+    margin-right: calc(-1 * var(--gutter));
+    padding-left: 26px;
+    overflow-x: clip;
+    font-size: 8.22px;
+  }
+  .gift__visual .voucher { margin-block: 2.98em; }
+  @media (min-width: 768px) {
+    .gift__visual {
+      justify-content: center;
+      margin-right: 0;
+      padding-left: 0;
+      overflow-x: visible;
+    }
+  }
+  .voucher {
+    position: relative;
+    flex-shrink: 0;
+    width: 52.8em;
+    height: 24.91em;
+    margin-block: 5.55em; /* 360 px tall area at full size (Figma 97:108) */
+    overflow: hidden;
+    border-radius: 1.408em;
+    background: var(--brand-plum);
+    box-shadow: 0 2.112em 4.224em color-mix(in srgb, var(--plum-600) 25%, transparent);
+    transform: rotate(4deg);
+  }
+  .voucher__halo {
+    position: absolute;
+    left: 36.19em;
+    top: 1.15em;
+    width: 11.03em;
+    height: auto;
+  }
+  .voucher__arch {
+    position: absolute;
+    left: 33.21em;
+    top: 3.49em;
+    width: 17.03em;
+    height: 21.46em;
+    overflow: hidden;
+    border-radius: 8.516em 8.516em 0 0;
+  }
+  .voucher__arch :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .voucher__content {
+    position: absolute;
+    left: 2.98em;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 27.68em;
+    height: 18.74em;
+    color: var(--text-inverse);
+    transform: translateY(-50%);
+  }
+  .voucher__logo { width: 13em; height: auto; }
+  .voucher__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.26em;
+  }
+  .voucher__title {
+    font: 400 4.258em/0.95 var(--font-serif);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .voucher__subtitle {
+    font: italic 400 2.725em/1 var(--font-serif);
+    color: var(--text-inverse-subtle);
+  }
+  .voucher__tagline {
+    padding-top: 1.1em;
+    font: 400 0.85em/1.35 var(--font-sans);
+    color: var(--text-inverse-subtle);
+    white-space: nowrap;
+  }
+  .voucher__footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.68em;
+    border-top: 0.064em solid var(--border-inverse);
+    font: 500 0.639em/normal var(--font-sans);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 1024px) {
+    .gift { padding-block: var(--section-pad-desktop); }
+    .gift__inner {
+      flex-direction: row;
+      align-items: center;
+      gap: 64px;
+    }
+    .gift__copy {
+      flex: 1 1 0;
+      gap: 28px;
+    }
+    .gift__copy :global(.gift__title) { gap: 28px; }
+    .gift__visual {
+      flex: 0 1 590px;
+      font-size: min(10px, (100vw - 2 * var(--gutter) - 64px) / 2 / 59);
+    }
+    .gift__visual .voucher { margin-block: 5.55em; }
+  }
+  @media (min-width: 1248px) {
+    .gift__visual { font-size: 10px; }
+  }
+</style>

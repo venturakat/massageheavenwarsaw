@@ -1,0 +1,283 @@
+---
+/**
+ * Services (Figma desktop 198:1068, mobile 240:1085; all states in 164:1339). Anchor #cennik.
+ * - 6 category cards; a card opens its treatment panel (one at a time).
+ *   Desktop: the panel sits below the card's grid row. Mobile: right under the card.
+ * - Search filters all treatments by name (case and Polish diacritics ignored),
+ *   with a results state and a "no results" state with category chips.
+ */
+import SectionTitle from '../SectionTitle.astro';
+import ServiceCard from '../ServiceCard.astro';
+import ServicePanel from '../ServicePanel.astro';
+import TreatmentRow from '../TreatmentRow.astro';
+import FilterChip from '../FilterChip.astro';
+import IconLink from '../IconLink.astro';
+import Icon from '../Icon.astro';
+import { fill, lowestPrice } from '../../data/format';
+import type { Content } from '../../data';
+
+type Props = { content: Content };
+const { site, services: data, ui } = Astro.props.content;
+const copy = site.services;
+const cats = data.categories;
+const total = String(cats.length).padStart(2, '0');
+const COLUMNS = 3;
+
+const price = (amount: number) => fill(ui.price, { amount, currency: data.currency });
+const withPrices = (t: (typeof cats)[number]['treatments'][number]) => ({
+  name: t.name,
+  options: t.options.map((o) => ({ duration: o.duration, price: price(o.price) })),
+});
+
+const categories = cats.map((c, i) => {
+  const gridRow = Math.floor(i / COLUMNS) * 2 + 1; // desktop: cards on odd rows,
+  return {
+    ...c,
+    numberLabel: fill(ui.cardNumber, { number: c.number, total }),
+    from: fill(ui.priceFrom, { price: price(lowestPrice(c.treatments)) }),
+    panelId: `panel-${c.id}`,
+    cardRow: gridRow,
+    panelRow: gridRow + 1, // the open panel on the row below
+    treatments: c.treatments.map(withPrices),
+  };
+});
+---
+
+<section id="cennik" class="services" aria-labelledby="services-title" data-services>
+  <div class="container">
+    <div class="services__header">
+      <SectionTitle eyebrow={copy.eyebrow} title={copy.title} id="services-title" class="services__title" />
+      <div class="search" data-search>
+        <label class="visually-hidden" for="service-search">{ui.searchLabel}</label>
+        <Icon name="search" class="search__icon" />
+        <input
+          class="search__input"
+          id="service-search"
+          type="search"
+          placeholder={copy.searchPlaceholder}
+          autocomplete="off"
+          spellcheck="false"
+          data-search-input
+        />
+        <button class="search__clear" type="button" aria-label={copy.clearSearch} hidden data-search-clear>
+          <Icon name="close-small" />
+        </button>
+      </div>
+    </div>
+
+    <div class="services__grid" data-grid>
+      {
+        categories.map((c) => (
+          <>
+            <div class="services__card" style={`--row: ${c.cardRow}`}>
+              <ServiceCard
+                number={c.numberLabel}
+                name={c.name}
+                tagline={c.tagline}
+                list={c.cardList}
+                price={c.from}
+                controls={c.panelId}
+              />
+            </div>
+            <div class="services__panel" style={`--row: ${c.panelRow}`}>
+              <ServicePanel
+                id={c.panelId}
+                number={c.numberLabel}
+                name={c.name}
+                tagline={c.tagline}
+                treatments={c.treatments}
+                collapseLabel={copy.collapse}
+                bookLabel={copy.bookButton}
+                bookVisitLabel={ui.bookVisit}
+                footerText={copy.panelFooter}
+              />
+            </div>
+          </>
+        ))
+      }
+    </div>
+
+    <div class="search-panel" hidden data-results>
+      <div class="search-panel__header">
+        <h3 class="search-panel__title" data-results-title data-template={copy.resultsTitle}></h3>
+        <IconLink kind="clear" data-search-clear>{copy.clearSearch}</IconLink>
+      </div>
+      <div>
+        {
+          categories.flatMap((c) =>
+            c.treatments.map((t) => (
+              <div data-result data-name={t.name}>
+                <TreatmentRow name={t.name} options={t.options} bookLabel={copy.bookButton} category={c.name} />
+              </div>
+            )),
+          )
+        }
+      </div>
+    </div>
+
+    <div class="search-panel search-panel--empty" hidden data-empty>
+      <h3 class="search-panel__title" data-empty-title data-template={copy.emptyTitle}></h3>
+      <p class="search-panel__text">{copy.emptyText}</p>
+      <ul class="search-panel__chips" role="list">
+        {categories.map((c) => <li><FilterChip data-open-category={c.panelId}>{c.name}</FilterChip></li>)}
+      </ul>
+      <IconLink kind="clear" class="search-panel__clear" data-search-clear>{copy.clearSearch}</IconLink>
+    </div>
+
+    <p class="visually-hidden" aria-live="polite" data-search-status></p>
+  </div>
+</section>
+
+<script>
+  import { initServices } from '../../scripts/services';
+  document.querySelectorAll<HTMLElement>('[data-services]').forEach(initServices);
+</script>
+
+<style>
+  .services { padding-block: var(--section-pad-mobile); }
+
+  /* ── Header + search ── */
+  .services__header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  .search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    background: var(--bg-default);
+    transition: border-color var(--dur-hover) var(--ease-out), box-shadow var(--dur-hover) var(--ease-out);
+  }
+  .search.is-active {
+    border-color: var(--border-highlight);
+    box-shadow: inset 0 0 0 0.5px var(--border-highlight);
+  }
+  .search :global(.search__icon) { color: var(--text-secondary); }
+  .search__input {
+    flex: 1;
+    min-width: 0;
+    height: 42px;
+    border: 0;
+    background: none;
+    color: var(--text-primary);
+    font: var(--type-nav);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .search__input::placeholder { color: var(--text-secondary); opacity: 1; }
+  .search__input::-webkit-search-cancel-button { display: none; }
+  .search__input:focus { outline: none; }
+  .search:focus-within {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+  .search__clear {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    margin-right: -4px;
+    border-radius: 999px;
+    color: var(--text-highlight);
+  }
+  .search__clear[hidden] { display: none; }
+
+  /* ── Cards + panels ── */
+  .services__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
+  .services__grid[hidden] { display: none; }
+  .services__card,
+  .services__panel { scroll-margin-top: calc(var(--header-h) + 16px); }
+  .services__panel:not(:has(.panel:not([hidden]))) { display: none; }
+
+  /* ── Search states ── */
+  .search-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 20px;
+    border-radius: 28px;
+    background: var(--bg-nav);
+  }
+  .search-panel[hidden] { display: none; }
+  .search-panel__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .search-panel__title {
+    font: var(--type-h3);
+    letter-spacing: var(--tracking-h3);
+    color: var(--text-primary);
+  }
+  [data-result][hidden] { display: none; }
+
+  .search-panel--empty {
+    align-items: center;
+    padding-block: 48px;
+    text-align: center;
+  }
+  .search-panel__text {
+    max-width: 520px;
+    color: var(--text-secondary);
+  }
+  .search-panel__chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 900px;
+  }
+  .search-panel__chips li { display: flex; }
+  .search-panel :global(.search-panel__clear) { padding-top: 8px; }
+
+  /* ── Desktop ── */
+  @media (min-width: 1024px) {
+    .services { padding-block: var(--section-pad-desktop); }
+
+    .services__header {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .services__header :global(.services__title) { grid-column: 1 / 3; }
+    .search { grid-column: 3; }
+
+    /* Cards on odd rows, the open panel on the row below. Margins (not row-gap)
+       so the empty panel rows add no space. */
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 20px;
+      row-gap: 0;
+      margin-bottom: -20px;
+    }
+    .services__card,
+    .services__panel {
+      grid-row: var(--row);
+      margin-bottom: 20px;
+    }
+    .services__panel { grid-column: 1 / -1; }
+
+    .search-panel { padding: 36px 40px; }
+    .search-panel__header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .search-panel--empty { padding-block: 72px; }
+  }
+</style>

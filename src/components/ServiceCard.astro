@@ -3,7 +3,7 @@
  * Service category card (Figma 163:122 desktop, 240:1091 mobile).
  * A <button> that opens its treatment panel: aria-expanded="true" = Active (plum).
  * The services section (step 3) owns the open/close behaviour; the card only styles both states.
- * Mobile hides the tagline, as in Figma.
+ * Below 1024 px it uses the mobile layout (no tagline), as in Figma 240:1091.
  */
 import arrow from '../assets/icons/card-arrow.svg';
 import arrowActive from '../assets/icons/card-arrow-active.svg';
@@ -109,7 +109,7 @@ const { number, name, tagline, list, price, controls, expanded = false, class: c
     .service-card[aria-expanded='false']:hover { background: var(--bg-accent-subtle); }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .service-card {
       min-height: 356px;
       padding: 28px;
