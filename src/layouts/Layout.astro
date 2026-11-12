@@ -5,31 +5,39 @@ import '../styles/base.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Overlays from '../components/overlays/Overlays.astro';
-import { getContent, htmlLang, localePath, locales, defaultLocale, type Locale } from '../data';
+import { getContent, htmlLang, ogLocale, localePath, locales, defaultLocale, isTranslated, type Locale } from '../data';
 
 type Props = { locale: Locale; title?: string; description?: string };
 
 const { locale } = Astro.props;
 const content = getContent(locale);
-const title = Astro.props.title ?? 'Massage Heaven — masaż w centrum Warszawy';
+const title = Astro.props.title ?? content.ui.seoTitle;
 const description = Astro.props.description ?? content.site.hero.lead;
 const canonical = new URL(localePath[locale], Astro.site);
+// Until a language is translated its page shows Polish text: say so in <html lang>,
+// keep the copy out of search results and out of the hreflang alternates.
+const translated = isTranslated(locale);
+const alternates = locales.filter(isTranslated);
 ---
 
 <!doctype html>
-<html lang={htmlLang[locale]}>
+<html lang={htmlLang[content.contentLocale]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {locales.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={new URL(localePath[l], Astro.site)} />)}
-    <link rel="alternate" hreflang="x-default" href={new URL(localePath[defaultLocale], Astro.site)} />
+    {translated ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex, follow" />}
+    {
+      translated &&
+        alternates.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={new URL(localePath[l], Astro.site)} />)
+    }
+    {translated && <link rel="alternate" hreflang="x-default" href={new URL(localePath[defaultLocale], Astro.site)} />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale[content.contentLocale]} />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body id="top">

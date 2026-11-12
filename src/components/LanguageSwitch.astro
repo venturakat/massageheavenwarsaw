@@ -1,7 +1,7 @@
 ---
 /**
  * PL / EN / UA switch (Figma 207:1062). Real links between the locale routes;
- * a small script carries the current #anchor over to the other language.
+ * scripts/language-switch.ts keeps your place (section + offset) across the switch.
  */
 import { locales, localePath, htmlLang, type Locale } from '../data';
 
@@ -28,12 +28,7 @@ const { locale, label, names, class: className } = Astro.props;
 </nav>
 
 <script>
-  // Keep the in-page anchor when switching language.
-  document.addEventListener('click', (event) => {
-    const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[data-lang-link]');
-    if (!link || !location.hash) return;
-    link.href = link.pathname + location.hash;
-  });
+  import '../scripts/language-switch';
 </script>
 
 <style>

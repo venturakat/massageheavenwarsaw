@@ -15,6 +15,7 @@ Website for **Massage Heaven**, a massage studio at ul. Krucza 16/22, Warsaw. Th
 | How the website behaves (booking chooser, services, FAQ, gift form, cookies, links) | `docs/behaviour/website.md` |
 | Admin panel and gift voucher PDF (developer's part) | `docs/behaviour/admin-and-vouchers.md` |
 | All Polish copy and data | `docs/content/*.json`, `docs/content/privacy-policy.pl.md` |
+| How to add EN/UA translations | `docs/content/translations.md` |
 | Things still unconfirmed with the client | `docs/open-questions.md` |
 
 ## Rules

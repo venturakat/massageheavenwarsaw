@@ -13,7 +13,7 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **About feature** says "20+ zabiegów". There are 24 now; fine as is unless the client wants the exact number.
 
 ## Not designed yet (use a sensible, consistent default)
-- [ ] EN and UA translations (only the language switch exists).
+- [ ] EN and UA translations. The structure is ready (see `docs/content/translations.md`); until a language has its own `site.<lang>.json`, its route shows Polish with `noindex`.
 - [ ] Hover states for close buttons, the Contact Instagram block, the map, inline links, service cards, FAQ items, filter chips and the language switch.
 - [ ] The map placeholder shown before cookie consent.
 - [ ] Gift form "Kwota" state: an amount field (min/max? preset amounts?).
