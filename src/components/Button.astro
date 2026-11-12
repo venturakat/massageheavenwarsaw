@@ -1,0 +1,70 @@
+---
+/**
+ * Pill button (Figma component 352:1681).
+ * Renders an <a> when `href` is set, otherwise a <button type="button">.
+ * Extra attributes (data-*, aria-*) pass through.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = {
+  variant?: 'primary' | 'secondary' | 'inverse';
+  size?: 'sm' | 'md';
+  href?: string;
+  block?: boolean;
+  class?: string;
+} & Omit<HTMLAttributes<'button'>, 'class'> &
+  Omit<HTMLAttributes<'a'>, 'class'>;
+
+const { variant = 'primary', size = 'md', href, block = false, class: className, ...rest } = Astro.props;
+const Tag = href ? 'a' : 'button';
+const typeAttr = href ? {} : { type: 'button' as const };
+---
+
+<Tag
+  href={href}
+  class:list={['btn', `btn--${variant}`, `btn--${size}`, { 'btn--block': block }, className]}
+  {...typeAttr}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font: var(--type-button);
+    white-space: nowrap;
+    transition:
+      background-color var(--dur-hover) var(--ease-out),
+      color var(--dur-hover) var(--ease-out),
+      border-color var(--dur-hover) var(--ease-out);
+  }
+
+  .btn--sm { padding: 8px 19px; }   /* 35 px tall: nav */
+  .btn--md { padding: 13px 23px; }  /* 45 px tall */
+  .btn--block { display: flex; width: 100%; }
+
+  .btn--primary {
+    background: var(--bg-highlight);
+    color: var(--text-inverse);
+  }
+  .btn--secondary {
+    border-color: var(--border-highlight);
+    color: var(--text-highlight);
+  }
+  .btn--inverse {
+    background: var(--bg-default);
+    color: var(--text-highlight);
+  }
+
+  @media (hover: hover) {
+    .btn--primary:hover { background: var(--plum-600); }
+    .btn--secondary:hover { background: var(--plum-100); }
+    .btn--inverse:hover { background: var(--plum-100); }
+  }
+</style>

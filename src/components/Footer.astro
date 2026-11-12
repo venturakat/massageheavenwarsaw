@@ -1,0 +1,205 @@
+---
+/**
+ * Site footer (Figma desktop 97:151, mobile 240:1334).
+ * The "Online" column links straight to each channel (the only booking links
+ * that skip the chooser). Legal buttons open pop-ups built in step 4.
+ */
+import logo from '../assets/brand/logo-white.svg';
+import type { Content } from '../data';
+
+type Props = { content: Content };
+const { content } = Astro.props;
+const { site, ui } = content;
+const { columns, copyright, legal } = site.footer;
+
+const general = site.booking.general.groups.flatMap((g) => g.options);
+const channelUrl = (id: string) => general.find((o) => o.id === id)?.url;
+const online = [
+  { label: columns.online.links[0], href: channelUrl('booksy') },
+  { label: columns.online.links[1], href: channelUrl('fresha') },
+  { label: columns.online.links[2], href: channelUrl('whatsapp') },
+  { label: columns.online.links[3], href: site.studio.instagramProfile },
+];
+const [privacyLabel, cookiesLabel] = legal;
+---
+
+<footer class="site-footer">
+  <div class="container footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="footer__logo" href="#top" aria-label={ui.logoHome}>
+          <img src={logo.src} width="240" height="44" alt="" loading="lazy" />
+        </a>
+        <p class="footer__tagline">{site.taglines.footer}</p>
+      </div>
+
+      <div class="footer__columns">
+        <nav class="footer__col" aria-labelledby="footer-menu">
+          <p class="label footer__label" id="footer-menu">{columns.menu}</p>
+          <ul role="list">
+            {site.nav.map((item) => <li><a class="footer-link" href={`#${item.anchor}`}>{item.label}</a></li>)}
+          </ul>
+        </nav>
+
+        <div class="footer__col">
+          <p class="label footer__label">{columns.studio.title}</p>
+          <ul role="list">
+            <li>
+              <a class="footer-link" href={site.studio.googleMaps} target="_blank" rel="noopener">
+                {columns.studio.lines[0]}<span class="visually-hidden"> {ui.newTab}</span>
+              </a>
+            </li>
+            {columns.studio.lines.slice(1).map((line) => <li class="footer__text">{line}</li>)}
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <p class="label footer__label">{columns.online.title}</p>
+          <ul role="list">
+            {
+              online.map((link) => (
+                <li>
+                  <a class="footer-link" href={link.href} target="_blank" rel="noopener">
+                    {link.label}
+                    <span class="visually-hidden"> {ui.newTab}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="label">{copyright}</p>
+      <ul class="footer__legal" role="list">
+        <li><button class="label legal-link" type="button" aria-haspopup="dialog" data-open-privacy>{privacyLabel}</button></li>
+        <li><button class="label legal-link" type="button" aria-haspopup="dialog" data-open-cookie-settings>{cookiesLabel}</button></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--bg-footer);
+    color: var(--text-inverse);
+    padding-block: 48px 24px;
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .footer__top {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .footer__logo { border-radius: 4px; }
+  .footer__logo img { width: 240px; height: 44px; }
+  .footer__tagline { color: var(--text-inverse-subtle); }
+
+  .footer__columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px 48px;
+  }
+  /* Mobile: Menu + Studio share the first row, Online wraps below (Figma 240:1340). */
+  .footer__col { min-width: 118px; }
+
+  .footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  /* Flex items so the list rows take the 17 / 15 px link height, not the body line height. */
+  .footer__col li,
+  .footer__legal li { display: flex; }
+
+  .footer__label,
+  .footer__bottom { color: var(--text-footer-label); }
+  .footer__label { line-height: 15px; }
+
+  .footer-link,
+  .footer__text {
+    font: var(--type-nav);
+    line-height: 17px;
+    white-space: nowrap;
+  }
+
+  .footer-link,
+  .legal-link {
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition:
+      color var(--dur-hover) var(--ease-out),
+      text-decoration-color var(--dur-hover) var(--ease-out);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-footer);
+    line-height: 15px;
+  }
+  .footer__legal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .legal-link { line-height: 15px; text-align: left; }
+
+  :where(.site-footer) :focus-visible { outline-color: var(--periwinkle-200); }
+
+  @media (hover: hover) {
+    .footer-link:hover {
+      color: var(--text-inverse-subtle);
+      text-decoration-color: currentColor;
+    }
+    .legal-link:hover {
+      color: var(--text-inverse);
+      text-decoration-color: currentColor;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-footer { padding-block: 64px 32px; }
+    .footer__inner { gap: 51px; }
+    .footer__top {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 48px;
+    }
+    .footer__columns {
+      flex-wrap: nowrap;
+      gap: 96px;
+    }
+    .footer__col { min-width: 0; }
+    .footer__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .footer__legal {
+      flex-direction: row;
+      gap: 24px;
+    }
+  }
+</style>

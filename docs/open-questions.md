@@ -20,6 +20,13 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] Form error states and messages.
 - [ ] A 404 page.
 
+## Found while building (step 1, header + footer)
+- [ ] **Mobile logo size:** `design-system.md` says 150 px wide; Figma 240:1368 is 218 × 40. Built at 218 to match Figma.
+- [ ] **Header between 1024 and 1179 px:** the full desktop nav (logo + 6 links + language switch + button) needs about 1180 px and doesn't fit at 1024. Below 1180 the header keeps the mobile layout (logo + menu button). Confirm or design a compact nav.
+- [ ] **Tablet gutter (768–1023):** not specified. Using 40 px side padding.
+- [ ] **Language switch font:** Figma 207:1062 uses Inter Regular 12; `design-system.md` says the Label style. Built with Label (Instrument Sans 500, uppercase), so no extra font is loaded.
+- [ ] **Cyrillic:** Instrument Serif and Instrument Sans have no Cyrillic glyphs (only latin + latin-ext). The UA translation will fall back to the system font. Pick a Cyrillic fallback font, or accept it.
+
 ## Decided (for reference)
 - Lowest price stays **"od 80 zł"** (the client's old site said 64 zł; ignore it).
 - Names: **Anastazja** and **Ina** everywhere. The privacy policy keeps the legal name Anastasiia Zhelezniak.

@@ -1,0 +1,74 @@
+---
+/**
+ * PL / EN / UA switch (Figma 207:1062). Real links between the locale routes;
+ * a small script carries the current #anchor over to the other language.
+ */
+import { locales, localePath, htmlLang, type Locale } from '../data';
+
+type Props = { locale: Locale; label: string; names: Record<Locale, string>; class?: string };
+const { locale, label, names, class: className } = Astro.props;
+---
+
+<nav class:list={['lang-switch', className]} aria-label={label}>
+  {
+    locales.map((l) => (
+      <a
+        class="lang-switch__option"
+        href={localePath[l]}
+        hreflang={htmlLang[l]}
+        lang={htmlLang[l]}
+        aria-current={l === locale ? 'page' : undefined}
+        data-lang-link
+      >
+        <span aria-hidden="true">{l.toUpperCase()}</span>
+        <span class="visually-hidden">{names[l]}</span>
+      </a>
+    ))
+  }
+</nav>
+
+<script>
+  // Keep the in-page anchor when switching language.
+  document.addEventListener('click', (event) => {
+    const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[data-lang-link]');
+    if (!link || !location.hash) return;
+    link.href = link.pathname + location.hash;
+  });
+</script>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+  }
+
+  .lang-switch__option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font: var(--type-label);
+    line-height: 1.25;
+    transition:
+      background-color var(--dur-hover) var(--ease-out),
+      color var(--dur-hover) var(--ease-out);
+  }
+
+  .lang-switch__option[aria-current='page'] {
+    background: var(--bg-highlight);
+    color: var(--text-inverse);
+  }
+
+  @media (hover: hover) {
+    .lang-switch__option:not([aria-current='page']):hover {
+      background: var(--bg-default);
+      color: var(--text-primary);
+    }
+  }
+</style>
