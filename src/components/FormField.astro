@@ -1,0 +1,115 @@
+---
+/**
+ * Form field (Figma 152:125): label above a white input, for the plum gift form.
+ * Types: text, tel, number, select, textarea. Extra attributes pass to the control.
+ * `error` shows a message and sets aria-invalid (error states aren't designed yet).
+ */
+import type { HTMLAttributes } from 'astro/types';
+import Icon from './Icon.astro';
+
+type Option = { value: string; label: string };
+type Props = {
+  id: string;
+  label: string;
+  type?: 'text' | 'tel' | 'number' | 'select' | 'textarea';
+  options?: Option[];
+  placeholder?: string;
+  error?: string;
+  class?: string;
+} & Omit<HTMLAttributes<'input'>, 'class' | 'type' | 'id'>;
+
+const { id, label, type = 'text', options = [], placeholder, error, class: className, ...rest } = Astro.props;
+const errorId = `${id}-error`;
+const aria = {
+  'aria-invalid': error ? ('true' as const) : undefined,
+  'aria-describedby': error ? errorId : undefined,
+};
+---
+
+<div class:list={['field', className]}>
+  <label class="label field__label" for={id}>{label}</label>
+  {
+    type === 'select' ? (
+      <div class="field__select">
+        <select class="field__control" id={id} {...aria} {...(rest as HTMLAttributes<'select'>)}>
+          {placeholder && (
+            <option value="" disabled selected>
+              {placeholder}
+            </option>
+          )}
+          {options.map((o) => (
+            <option value={o.value}>{o.label}</option>
+          ))}
+        </select>
+        <Icon name="chevron-down" class="field__chevron" />
+      </div>
+    ) : type === 'textarea' ? (
+      <textarea
+        class="field__control field__control--textarea"
+        id={id}
+        placeholder={placeholder}
+        rows={4}
+        {...aria}
+        {...(rest as HTMLAttributes<'textarea'>)}
+      />
+    ) : (
+      <input class="field__control" id={id} type={type} placeholder={placeholder} {...aria} {...rest} />
+    )
+  }
+  <p class="field__error" id={errorId} hidden={!error}>{error}</p>
+</div>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .field__label {
+    color: var(--text-inverse);
+    line-height: 15px;
+  }
+
+  .field__control {
+    width: 100%;
+    padding: 16px 19px; /* 17 / 20 in Figma, minus the 1 px border */
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: var(--bg-default);
+    color: var(--text-primary);
+    font: var(--type-body);
+  }
+  .field__control::placeholder { color: var(--text-secondary); opacity: 1; }
+  .field__control:focus-visible {
+    outline: 2px solid var(--periwinkle-200);
+    outline-offset: 2px;
+  }
+  .field__control[aria-invalid='true'] { border-color: var(--plum-200); }
+
+  .field__control--textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .field__select { position: relative; }
+  .field__select .field__control {
+    appearance: none;
+    padding-right: 47px;
+    cursor: pointer;
+  }
+  .field__select .field__control:has(option[value='']:checked) { color: var(--text-secondary); }
+  .field__select :global(.field__chevron) {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    color: var(--text-secondary);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .field__error {
+    font: 500 14px/1.4 var(--font-sans);
+    color: var(--plum-100);
+  }
+  .field__error[hidden] { display: none; }
+</style>

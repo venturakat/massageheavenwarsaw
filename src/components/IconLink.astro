@@ -1,0 +1,66 @@
+---
+/**
+ * Icon link (Figma 352:1709): label + 16 px icon.
+ *   collapse  "Zwiń" + chevron-up       plum-500 → plum-600
+ *   clear     "Wyczyść…" + close        plum-500 → plum-600
+ *   arrow     team card link + arrow     periwinkle-200 → white (on plum)
+ * Renders <a> with `href`, otherwise a <button>.
+ */
+import type { HTMLAttributes } from 'astro/types';
+import Icon, { type IconName } from './Icon.astro';
+
+type Props = {
+  kind?: 'collapse' | 'clear' | 'arrow';
+  href?: string;
+  class?: string;
+} & Omit<HTMLAttributes<'a'>, 'class'> &
+  Omit<HTMLAttributes<'button'>, 'class' | 'type'>;
+
+const { kind = 'collapse', href, class: className, ...rest } = Astro.props;
+const iconFor: Record<NonNullable<Props['kind']>, IconName> = {
+  collapse: 'chevron-up',
+  clear: 'close-small',
+  arrow: 'arrow-right',
+};
+const Tag = href ? 'a' : 'button';
+const typeAttr = href ? {} : { type: 'button' };
+---
+
+<Tag href={href} class:list={['icon-link', `icon-link--${kind}`, className]} {...typeAttr} {...rest}>
+  <span class="icon-link__label"><slot /></span>
+  <Icon name={iconFor[kind]} />
+</Tag>
+
+<style>
+  .icon-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: var(--type-button);
+    line-height: 17px;
+    text-align: left;
+    transition: color var(--dur-hover) var(--ease-out);
+  }
+  .icon-link__label {
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: text-decoration-color var(--dur-hover) var(--ease-out);
+  }
+
+  .icon-link--collapse,
+  .icon-link--clear { color: var(--text-highlight); }
+  .icon-link--arrow { color: var(--text-inverse-subtle); }
+
+  /* The arrow icon in Figma is periwinkle-300 while the label is periwinkle-200. */
+  .icon-link--arrow :global(.icon) { color: var(--periwinkle-300); }
+
+  @media (hover: hover) {
+    .icon-link:hover .icon-link__label { text-decoration-color: currentColor; }
+    .icon-link--collapse:hover,
+    .icon-link--clear:hover { color: var(--plum-600); }
+    .icon-link--arrow:hover,
+    .icon-link--arrow:hover :global(.icon) { color: var(--text-inverse); }
+  }
+</style>

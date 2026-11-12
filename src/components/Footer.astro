@@ -5,6 +5,7 @@
  * that skip the chooser). Legal buttons open pop-ups built in step 4.
  */
 import logo from '../assets/brand/logo-white.svg';
+import TextLink from './TextLink.astro';
 import type { Content } from '../data';
 
 type Props = { content: Content };
@@ -37,7 +38,7 @@ const [privacyLabel, cookiesLabel] = legal;
         <nav class="footer__col" aria-labelledby="footer-menu">
           <p class="label footer__label" id="footer-menu">{columns.menu}</p>
           <ul role="list">
-            {site.nav.map((item) => <li><a class="footer-link" href={`#${item.anchor}`}>{item.label}</a></li>)}
+            {site.nav.map((item) => <li><TextLink kind="footer" href={`#${item.anchor}`}>{item.label}</TextLink></li>)}
           </ul>
         </nav>
 
@@ -45,9 +46,9 @@ const [privacyLabel, cookiesLabel] = legal;
           <p class="label footer__label">{columns.studio.title}</p>
           <ul role="list">
             <li>
-              <a class="footer-link" href={site.studio.googleMaps} target="_blank" rel="noopener">
-                {columns.studio.lines[0]}<span class="visually-hidden"> {ui.newTab}</span>
-              </a>
+              <TextLink kind="footer" href={site.studio.googleMaps} external newTabLabel={ui.newTab}>
+                {columns.studio.lines[0]}
+              </TextLink>
             </li>
             {columns.studio.lines.slice(1).map((line) => <li class="footer__text">{line}</li>)}
           </ul>
@@ -59,10 +60,9 @@ const [privacyLabel, cookiesLabel] = legal;
             {
               online.map((link) => (
                 <li>
-                  <a class="footer-link" href={link.href} target="_blank" rel="noopener">
+                  <TextLink kind="footer" href={link.href} external newTabLabel={ui.newTab}>
                     {link.label}
-                    <span class="visually-hidden"> {ui.newTab}</span>
-                  </a>
+                  </TextLink>
                 </li>
               ))
             }
@@ -74,8 +74,8 @@ const [privacyLabel, cookiesLabel] = legal;
     <div class="footer__bottom">
       <p class="label">{copyright}</p>
       <ul class="footer__legal" role="list">
-        <li><button class="label legal-link" type="button" aria-haspopup="dialog" data-open-privacy>{privacyLabel}</button></li>
-        <li><button class="label legal-link" type="button" aria-haspopup="dialog" data-open-cookie-settings>{cookiesLabel}</button></li>
+        <li><TextLink kind="legal" aria-haspopup="dialog" data-open-dialog="privacy-policy">{privacyLabel}</TextLink></li>
+        <li><TextLink kind="legal" aria-haspopup="dialog" data-open-dialog="cookie-settings">{cookiesLabel}</TextLink></li>
       </ul>
     </div>
   </div>
@@ -132,22 +132,10 @@ const [privacyLabel, cookiesLabel] = legal;
   .footer__bottom { color: var(--text-footer-label); }
   .footer__label { line-height: 15px; }
 
-  .footer-link,
   .footer__text {
     font: var(--type-nav);
     line-height: 17px;
     white-space: nowrap;
-  }
-
-  .footer-link,
-  .legal-link {
-    text-decoration-line: underline;
-    text-decoration-color: transparent;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
-    transition:
-      color var(--dur-hover) var(--ease-out),
-      text-decoration-color var(--dur-hover) var(--ease-out);
   }
 
   .footer__bottom {
@@ -164,20 +152,8 @@ const [privacyLabel, cookiesLabel] = legal;
     align-items: flex-start;
     gap: 12px;
   }
-  .legal-link { line-height: 15px; text-align: left; }
 
   :where(.site-footer) :focus-visible { outline-color: var(--periwinkle-200); }
-
-  @media (hover: hover) {
-    .footer-link:hover {
-      color: var(--text-inverse-subtle);
-      text-decoration-color: currentColor;
-    }
-    .legal-link:hover {
-      color: var(--text-inverse);
-      text-decoration-color: currentColor;
-    }
-  }
 
   @media (min-width: 1024px) {
     .site-footer { padding-block: 64px 32px; }

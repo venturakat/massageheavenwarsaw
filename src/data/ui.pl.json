@@ -1,13 +1,17 @@
 {
-  "_note": "Polish interface strings that are not visible copy in Figma (screen-reader labels, skip link). EN/UA not written yet.",
+  "_note": "Polish interface strings that are not visible copy in Figma (screen-reader labels, skip link, small formats). EN/UA not written yet.",
   "skipToContent": "Przejdź do treści",
   "logoHome": "Massage Heaven — na początek strony",
   "mainNav": "Menu główne",
   "footerNav": "Menu w stopce",
   "languageSwitch": "Wybór języka",
   "openMenu": "Otwórz menu",
+  "close": "Zamknij",
   "bookVisit": "Zarezerwuj wizytę",
   "newTab": "(otwiera się w nowej karcie)",
+  "priceFrom": "od {price}",
+  "price": "{amount} {currency}",
+  "cardNumber": "{number} / {total}",
   "languages": {
     "pl": "Polski",
     "en": "English",

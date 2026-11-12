@@ -1,0 +1,160 @@
+---
+/**
+ * Pop-up shell (overlays in Figma, e.g. 293:1219 desktop / 293:1327 mobile).
+ * Built on <dialog> + showModal(): the rest of the page becomes inert (focus stays
+ * inside), Esc closes, and the browser draws the dim.
+ *
+ * Desktop: centred card, `width` px wide. Mobile (<768): `mobile="sheet"` (bottom sheet)
+ * or `mobile="fullscreen"`.
+ *
+ * Open:  any element with data-open-dialog="<id>", or openDialog(id) from scripts/dialogs.
+ * Close: the close button, Esc, a click on the dim, or any [data-close-dialog] inside.
+ * Title: [plain, italic] — the second part is set in plum italic.
+ */
+import Icon from './Icon.astro';
+
+type Props = {
+  id: string;
+  title: [string, string] | string[];
+  closeLabel: string;
+  width?: number;
+  mobile?: 'sheet' | 'fullscreen';
+  class?: string;
+};
+
+const { id, title, closeLabel, width = 440, mobile = 'sheet', class: className } = Astro.props;
+const [plain, italic] = title;
+const titleId = `${id}-title`;
+---
+
+<dialog
+  id={id}
+  class:list={['modal', `modal--${mobile}`, className]}
+  aria-labelledby={titleId}
+  style={`--modal-width: ${width}px`}
+  data-dialog
+>
+  <div class="modal__card">
+    <div class="modal__top">
+      <h2 class="modal__title" id={titleId}>
+        {plain}{italic && <> <em>{italic}</em></>}
+      </h2>
+      <button type="button" class="modal__close" aria-label={closeLabel} data-close-dialog>
+        <Icon name="close" />
+      </button>
+    </div>
+    <div class="modal__body">
+      <slot />
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import '../scripts/dialogs';
+</script>
+
+<style>
+  .modal {
+    width: min(var(--modal-width), 100% - 2 * var(--gutter-mobile));
+    max-width: none;
+    max-height: calc(100dvh - 48px);
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--border-default);
+    border-radius: 24px;
+    background: var(--bg-default);
+    color: var(--text-primary);
+    box-shadow: 0 24px 64px color-mix(in srgb, var(--plum-700) 30%, transparent);
+    overflow: hidden;
+  }
+
+  .modal__card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: inherit;
+    padding: 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .modal__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .modal__title {
+    font: var(--type-h4);
+    color: var(--text-primary);
+  }
+  .modal__title em {
+    font-style: italic;
+    color: var(--text-highlight);
+  }
+
+  .modal__close {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--plum-600);
+    color: var(--text-inverse);
+    transition: background-color var(--dur-hover) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .modal__close:hover { background: var(--bg-highlight); }
+  }
+
+  .modal::backdrop {
+    background: color-mix(in srgb, var(--plum-700) 45%, transparent);
+  }
+
+  /* Fade in / out, 200 ms. */
+  .modal,
+  .modal::backdrop {
+    opacity: 0;
+    transition:
+      opacity var(--dur-overlay) var(--ease-out),
+      overlay var(--dur-overlay) allow-discrete,
+      display var(--dur-overlay) allow-discrete;
+  }
+  .modal[open],
+  .modal[open]::backdrop { opacity: 1; }
+  @starting-style {
+    .modal[open],
+    .modal[open]::backdrop { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .modal,
+    .modal::backdrop { transition: none; }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .modal--sheet {
+      width: 100%;
+      max-height: calc(100dvh - 32px);
+      margin: auto 0 0;
+      border-bottom: 0;
+      border-radius: 24px 24px 0 0;
+    }
+    .modal--sheet .modal__card { padding: 20px 20px 32px; }
+
+    .modal--fullscreen {
+      width: 100%;
+      height: 100dvh;
+      max-height: none;
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+    }
+    .modal--fullscreen .modal__card {
+      height: 100%;
+      padding: 20px;
+    }
+  }
+</style>

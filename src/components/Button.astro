@@ -1,8 +1,12 @@
 ---
 /**
- * Pill button (Figma component 352:1681).
+ * Pill button (Figma 352:1681).
  * Renders an <a> when `href` is set, otherwise a <button type="button">.
- * Extra attributes (data-*, aria-*) pass through.
+ * Extra attributes (data-*, aria-*, type="submit") pass through.
+ *
+ * Sizes (Figma):
+ *   md  primary/inverse 45 px, secondary 48 px (1.5 px border)
+ *   sm  primary 35 px (nav), secondary 39 px with a 1 px border (treatment row)
  */
 import type { HTMLAttributes } from 'astro/types';
 
@@ -13,11 +17,11 @@ type Props = {
   block?: boolean;
   class?: string;
 } & Omit<HTMLAttributes<'button'>, 'class'> &
-  Omit<HTMLAttributes<'a'>, 'class'>;
+  Omit<HTMLAttributes<'a'>, 'class' | 'type'>;
 
-const { variant = 'primary', size = 'md', href, block = false, class: className, ...rest } = Astro.props;
+const { variant = 'primary', size = 'md', href, block = false, class: className, type, ...rest } = Astro.props;
 const Tag = href ? 'a' : 'button';
-const typeAttr = href ? {} : { type: 'button' as const };
+const typeAttr = href ? {} : { type: type ?? 'button' };
 ---
 
 <Tag
@@ -35,36 +39,43 @@ const typeAttr = href ? {} : { type: 'button' as const };
     align-items: center;
     justify-content: center;
     gap: 8px;
-    border: 1px solid transparent;
     border-radius: 999px;
     font: var(--type-button);
+    line-height: 17px;
+    text-align: center;
     white-space: nowrap;
     transition:
       background-color var(--dur-hover) var(--ease-out),
-      color var(--dur-hover) var(--ease-out),
-      border-color var(--dur-hover) var(--ease-out);
+      color var(--dur-hover) var(--ease-out);
   }
 
-  .btn--sm { padding: 8px 19px; }   /* 35 px tall: nav */
-  .btn--md { padding: 13px 23px; }  /* 45 px tall */
+  .btn--md { padding: 14px 24px; }
+  .btn--sm { padding: 9px 20px; }
   .btn--block { display: flex; width: 100%; }
 
   .btn--primary {
     background: var(--bg-highlight);
     color: var(--text-inverse);
   }
+
   .btn--secondary {
-    border-color: var(--border-highlight);
+    border: 1.5px solid var(--border-highlight);
     color: var(--text-highlight);
   }
+  .btn--secondary.btn--sm {
+    padding: 10px 17px;
+    border-width: 1px;
+  }
+
   .btn--inverse {
     background: var(--bg-default);
     color: var(--text-highlight);
   }
 
+  /* Figma 352:1681 hover states. */
   @media (hover: hover) {
     .btn--primary:hover { background: var(--plum-600); }
-    .btn--secondary:hover { background: var(--plum-100); }
-    .btn--inverse:hover { background: var(--plum-100); }
+    .btn--secondary:hover,
+    .btn--inverse:hover { background: var(--periwinkle-100); }
   }
 </style>

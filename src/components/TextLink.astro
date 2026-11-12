@@ -1,0 +1,70 @@
+---
+/**
+ * Text link (Figma 352:1726). Kinds: nav, footer, legal, contact.
+ * Renders <a> when `href` is set, otherwise a <button> (for links that open pop-ups).
+ * `external` opens in a new tab and adds a screen-reader note.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = {
+  kind?: 'nav' | 'footer' | 'legal' | 'contact';
+  href?: string;
+  external?: boolean;
+  newTabLabel?: string;
+  class?: string;
+} & Omit<HTMLAttributes<'a'>, 'class'> &
+  Omit<HTMLAttributes<'button'>, 'class' | 'type'>;
+
+const { kind = 'nav', href, external = false, newTabLabel, class: className, ...rest } = Astro.props;
+const Tag = href ? 'a' : 'button';
+const extra = href ? (external ? { target: '_blank', rel: 'noopener' } : {}) : { type: 'button' };
+---
+
+<Tag href={href} class:list={['text-link', `text-link--${kind}`, className]} {...extra} {...rest}>
+  <slot />{external && newTabLabel && <span class="visually-hidden"> {newTabLabel}</span>}
+</Tag>
+
+<style>
+  .text-link {
+    text-align: left;
+    white-space: nowrap;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition:
+      color var(--dur-hover) var(--ease-out),
+      text-decoration-color var(--dur-hover) var(--ease-out);
+  }
+
+  .text-link--nav,
+  .text-link--footer {
+    font: var(--type-nav);
+    line-height: 17px;
+  }
+  .text-link--nav { color: var(--text-primary); }
+  .text-link--footer { color: var(--text-inverse); }
+
+  .text-link--legal {
+    font: var(--type-label);
+    line-height: 15px;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--plum-300);
+  }
+
+  .text-link--contact {
+    font: var(--type-price);
+    line-height: 20px;
+    color: var(--text-primary);
+    white-space: normal;
+  }
+
+  @media (hover: hover) {
+    .text-link:hover { text-decoration-color: currentColor; }
+    .text-link--nav:hover,
+    .text-link--contact:hover { color: var(--text-highlight); }
+    .text-link--footer:hover { color: var(--text-inverse-subtle); }
+    .text-link--legal:hover { color: var(--text-inverse); }
+  }
+</style>

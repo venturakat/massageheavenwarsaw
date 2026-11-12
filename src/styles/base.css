@@ -43,6 +43,9 @@ html {
   html { scroll-behavior: smooth; }
 }
 
+/* No page scroll behind an open pop-up. */
+html:has(dialog[open]) { overflow: hidden; }
+
 body {
   min-height: 100vh;
   background: var(--bg-default);
