@@ -52,7 +52,13 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Analytics hook:** no tool yet. The consent script fires a `mh:consent` event on `window` with the choice; start analytics there when one is chosen.
 - [ ] **Mobile menu logo:** the menu uses the 150 px logo (Figma 242:1206), the page header the 218 px one (240:1368). Built as Figma; this also explains the "150 px" in `design-system.md`.
 
+## Found in the final checks (step 6)
+- [ ] **Grey text on lavender:** the hero lead and the gift text use neutral-600 instead of Figma's text-secondary, which was below the 4.5:1 contrast minimum there (4.0–4.3:1). Update Figma to match, or pick another colour that passes.
+- [ ] **Open Graph image:** none yet (link previews on WhatsApp/Facebook show no picture). Needs a 1200 × 630 image; not designed.
+- [ ] **JSON-LD (LocalBusiness):** not added yet; it needs the confirmed opening hours.
+
 ## Decided (for reference)
+- Favicon: the square plum brand icon (Figma 45:1936).
 - Lowest price stays **"od 80 zł"** (the client's old site said 64 zł; ignore it).
 - Names: **Anastazja** and **Ina** everywhere. The privacy policy keeps the legal name Anastasiia Zhelezniak.
 - Website has exactly **6 categories**. The Instagram stories have 7 (website 03 = stories 03 + 04).

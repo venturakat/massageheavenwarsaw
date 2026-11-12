@@ -72,7 +72,8 @@ const card = ui.certificate;
   .gift__text {
     max-width: 480px;
     font: var(--type-lead);
-    color: var(--text-secondary);
+    /* Darker than Figma's text-secondary (4.0:1 on periwinkle-200) for 4.5:1+ contrast. */
+    color: var(--neutral-600);
   }
 
   /* ── Voucher preview: 528 × 249 card, tilted 4°. Sizes in em so it scales. ── */

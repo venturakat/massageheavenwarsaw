@@ -41,7 +41,7 @@ const [bookLabel, pricesLabel, mapLabel] = hero.actions;
     </div>
 
     <div class="hero__visual">
-      <Image class="hero__arch hero__arch--large" src={archLarge} alt={ui.alt.heroLarge} widths={[342, 684]} sizes="342px" loading="eager" />
+      <Image class="hero__arch hero__arch--large" src={archLarge} alt={ui.alt.heroLarge} widths={[342, 684]} sizes="342px" loading="eager" fetchpriority="high" />
       <div class="hero__arch hero__arch--small">
         <Image src={archSmall} alt={ui.alt.heroSmall} widths={[263, 526]} sizes="263px" loading="eager" />
       </div>
@@ -85,7 +85,9 @@ const [bookLabel, pricesLabel, mapLabel] = hero.actions;
   .hero__lead {
     max-width: 520px;
     font: var(--type-lead);
-    color: var(--text-secondary);
+    /* Darker than Figma's text-secondary: on the lavender gradient that is ~4.3:1,
+       below the 4.5:1 minimum. neutral-600 gives ~6.8:1. */
+    color: var(--neutral-600);
   }
 
   .hero__actions {

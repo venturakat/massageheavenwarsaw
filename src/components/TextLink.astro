@@ -67,4 +67,14 @@ const extra = href ? (external ? { target: '_blank', rel: 'noopener' } : {}) : {
     .text-link--footer:hover { color: var(--text-inverse-subtle); }
     .text-link--legal:hover { color: var(--text-inverse); }
   }
+
+  /* Touch screens: a larger invisible tap area around small text links (no layout change). */
+  @media (pointer: coarse) {
+    .text-link { position: relative; }
+    .text-link::after {
+      content: '';
+      position: absolute;
+      inset: -8px -6px;
+    }
+  }
 </style>

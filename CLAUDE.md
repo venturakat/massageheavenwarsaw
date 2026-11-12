@@ -17,6 +17,7 @@ Website for **Massage Heaven**, a massage studio at ul. Krucza 16/22, Warsaw. Th
 | All Polish copy and data | `docs/content/*.json`, `docs/content/privacy-policy.pl.md` |
 | How to add EN/UA translations | `docs/content/translations.md` |
 | Things still unconfirmed with the client | `docs/open-questions.md` |
+| Results of the final checks (Lighthouse, keyboard, widths, Figma) | `docs/quality-checks.md` |
 
 ## Rules
 - **Figma is the source of truth for the look; `docs/content/` is the source of truth for text and prices.** When they disagree, follow `docs/content/` and add the mismatch to `docs/open-questions.md`.
