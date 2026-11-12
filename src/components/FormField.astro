@@ -8,17 +8,19 @@ import type { HTMLAttributes } from 'astro/types';
 import Icon from './Icon.astro';
 
 type Option = { value: string; label: string };
+type OptionGroup = { label: string; options: Option[] };
 type Props = {
   id: string;
   label: string;
   type?: 'text' | 'tel' | 'number' | 'select' | 'textarea';
   options?: Option[];
+  optionGroups?: OptionGroup[];
   placeholder?: string;
   error?: string;
   class?: string;
 } & Omit<HTMLAttributes<'input'>, 'class' | 'type' | 'id'>;
 
-const { id, label, type = 'text', options = [], placeholder, error, class: className, ...rest } = Astro.props;
+const { id, label, type = 'text', options = [], optionGroups = [], placeholder, error, class: className, ...rest } = Astro.props;
 const errorId = `${id}-error`;
 const aria = {
   'aria-invalid': error ? ('true' as const) : undefined,
@@ -40,6 +42,13 @@ const aria = {
           {options.map((o) => (
             <option value={o.value}>{o.label}</option>
           ))}
+          {optionGroups.map((g) => (
+            <optgroup label={g.label}>
+              {g.options.map((o) => (
+                <option value={o.value}>{o.label}</option>
+              ))}
+            </optgroup>
+          ))}
         </select>
         <Icon name="chevron-down" class="field__chevron" />
       </div>
@@ -48,7 +57,7 @@ const aria = {
         class="field__control field__control--textarea"
         id={id}
         placeholder={placeholder}
-        rows={4}
+        rows={1}
         {...aria}
         {...(rest as HTMLAttributes<'textarea'>)}
       />
@@ -87,9 +96,10 @@ const aria = {
   .field__control[aria-invalid='true'] { border-color: var(--plum-200); }
 
   .field__control--textarea {
-    min-height: 120px;
+    min-height: 59px;
     resize: vertical;
   }
+  .field__control:disabled { cursor: not-allowed; opacity: 0.75; }
 
   .field__select { position: relative; }
   .field__select .field__control {

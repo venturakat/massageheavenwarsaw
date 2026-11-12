@@ -41,7 +41,7 @@ const { icon, title, hint, href, hrefTouch, note, newTabLabel } = Astro.props;
     align-items: center;
     gap: 14px;
     min-height: 72px;
-    padding: 14px 5px;
+    padding: 13.5px 5px; /* 72 px with the 1 px divider, as in Figma */
     border-top: 1px solid var(--border-default);
     transition: background-color var(--dur-hover) var(--ease-out);
   }
@@ -66,11 +66,12 @@ const { icon, title, hint, href, hrefTouch, note, newTabLabel } = Astro.props;
   }
   .booking-option__title {
     font: var(--type-price);
+    line-height: 20px;
     color: var(--text-primary);
   }
   .booking-option__hint,
   .booking-option__note {
-    font: 400 14px/1.5 var(--font-sans);
+    font: 400 14px/20px var(--font-sans);
     color: var(--text-secondary);
   }
   .booking-option__note { color: var(--text-highlight); }

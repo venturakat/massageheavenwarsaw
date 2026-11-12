@@ -4,6 +4,7 @@ import '../styles/tokens.css';
 import '../styles/base.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Overlays from '../components/overlays/Overlays.astro';
 import { getContent, htmlLang, localePath, locales, defaultLocale, type Locale } from '../data';
 
 type Props = { locale: Locale; title?: string; description?: string };
@@ -38,5 +39,6 @@ const canonical = new URL(localePath[locale], Astro.site);
       <slot />
     </main>
     <Footer content={content} />
+    <Overlays locale={locale} content={content} />
   </body>
 </html>

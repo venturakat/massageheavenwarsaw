@@ -1,0 +1,60 @@
+---
+/**
+ * Reservation chooser pop-up (Figma 293:1219 general, 293:1435 / 293:1651 therapists;
+ * mobile bottom sheets 293:1327 / 293:1543 / 293:1759).
+ * Opened by any element with data-booking="<chooser id>".
+ */
+import Modal from '../Modal.astro';
+import BookingOption from '../BookingOption.astro';
+import { chooserDialogId, type Chooser } from '../../data/booking';
+
+type Props = { chooser: Chooser; closeLabel: string; newTabLabel: string };
+const { chooser, closeLabel, newTabLabel } = Astro.props;
+---
+
+<Modal id={chooserDialogId(chooser.id)} title={chooser.title} closeLabel={closeLabel} width={440} mobile="sheet">
+  <p class="chooser__intro">{chooser.intro}</p>
+  <div class="chooser__groups">
+    {
+      chooser.groups.map((group) => (
+        <div class="chooser__group">
+          <p class="label chooser__label">{group.label}</p>
+          <div>
+            {group.options.map((o) => (
+              <BookingOption
+                icon={o.icon}
+                title={o.title}
+                hint={o.hint}
+                note={o.note}
+                href={o.href}
+                hrefTouch={o.hrefTouch}
+                newTabLabel={newTabLabel}
+              />
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Modal>
+
+<style>
+  .chooser__intro {
+    font: 400 14px/1.5 var(--font-sans);
+    color: var(--text-secondary);
+  }
+  .chooser__groups {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .chooser__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .chooser__label {
+    color: var(--text-secondary);
+    line-height: 15px;
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+/**
+ * Privacy policy pop-up (Figma desktop 226:1057, mobile full screen 251:1253).
+ * Text from docs/content/privacy-policy.pl.md; [placeholders] in plum until filled in.
+ * Opened from the footer, the gift form consent link and the cookie banner
+ * (data-open-dialog="privacy-policy").
+ */
+import Modal from '../Modal.astro';
+import { inline, parsePolicy, policySources } from '../../data/policy';
+import type { Content } from '../../data';
+
+type Props = { content: Content };
+const { ui } = Astro.props.content;
+// Only the Polish policy exists; other languages show it until translated.
+const policy = parsePolicy(policySources.pl, ui.policyUpdatedPrefix);
+const words = policy.title.split(' ');
+const title = [words[0], words.slice(1).join(' ')];
+---
+
+<Modal id="privacy-policy" title={title} closeLabel={ui.close} width={720} size="document" mobile="fullscreen">
+  <div class="policy">
+    <p class="policy__lead" set:html={inline(policy.lead)} />
+    {
+      policy.sections.map((section) => (
+        <section class="policy__section">
+          <h3 class="policy__heading">{section.title}</h3>
+          {section.blocks.map((block) =>
+            block.type === 'ul' ? (
+              <ul class="policy__list">
+                {block.items.map((item) => (
+                  <li set:html={inline(item)} />
+                ))}
+              </ul>
+            ) : (
+              <p set:html={inline(block.items[0])} />
+            ),
+          )}
+        </section>
+      ))
+    }
+    {policy.updated && <p class="label policy__updated" set:html={inline(policy.updated)} />}
+  </div>
+</Modal>
+
+<style>
+  .policy {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    color: var(--text-secondary);
+  }
+  .policy__lead {
+    font: var(--type-lead);
+    color: var(--text-primary);
+  }
+  .policy__section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .policy__section > p + p,
+  .policy__section > p + ul,
+  .policy__section > ul + p { margin-top: -2px; }
+  .policy__heading {
+    font: var(--type-h4);
+    color: var(--text-primary);
+  }
+  .policy__list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0;
+    list-style: none;
+  }
+  .policy__list li::before { content: '• '; }
+  .policy__updated { line-height: 15px; }
+  .policy :global(.policy-placeholder) {
+    font-weight: 500;
+    color: var(--text-highlight);
+  }
+</style>

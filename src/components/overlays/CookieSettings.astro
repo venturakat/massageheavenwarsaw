@@ -1,0 +1,96 @@
+---
+/**
+ * Cookie settings (Figma desktop 232:1074, mobile bottom sheet 251:1302).
+ * Niezbędne (always on), Funkcjonalne (Google map) and Analityczne toggles, off by default.
+ * Opened from the banner, the footer and the map's "Pokaż mapę" (data-open-dialog="cookie-settings").
+ */
+import Modal from '../Modal.astro';
+import Button from '../Button.astro';
+import Toggle from '../Toggle.astro';
+import type { Content } from '../../data';
+
+type Props = { content: Content };
+const { ui } = Astro.props.content;
+const c = ui.cookies;
+const rows = [
+  { key: 'functional', ...c.functional },
+  { key: 'analytics', ...c.analytics },
+];
+---
+
+<Modal id="cookie-settings" title={c.settingsTitle} closeLabel={ui.close} width={440} mobile="sheet">
+  <p class="settings__intro">{c.settingsIntro}</p>
+
+  <div class="settings__row">
+    <div class="settings__text">
+      <h3 class="settings__name">{c.necessary.title}</h3>
+      <p class="settings__desc">{c.necessary.text}</p>
+    </div>
+    <p class="label settings__always">{c.necessary.status}</p>
+  </div>
+
+  {
+    rows.map((row) => (
+      <div class="settings__row">
+        <div class="settings__text">
+          <h3 class="settings__name" id={`consent-${row.key}`}>{row.title}</h3>
+          <p class="settings__desc" id={`consent-${row.key}-desc`}>{row.text}</p>
+        </div>
+        <Toggle
+          data-consent-toggle={row.key}
+          aria-labelledby={`consent-${row.key}`}
+          aria-describedby={`consent-${row.key}-desc`}
+        />
+      </div>
+    ))
+  }
+
+  <div class="settings__buttons">
+    <Button variant="secondary" data-consent="save">{c.save}</Button>
+    <Button data-consent="accept-all">{c.acceptAll}</Button>
+  </div>
+</Modal>
+
+<style>
+  .settings__intro,
+  .settings__desc {
+    font: 400 14px/1.5 var(--font-sans);
+    color: var(--text-secondary);
+  }
+
+  .settings__row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-default);
+  }
+  .settings__text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .settings__name { font: var(--type-price); line-height: 20px; }
+  .settings__always {
+    flex-shrink: 0;
+    color: var(--text-highlight);
+    line-height: 15px;
+  }
+
+  .settings__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .settings__buttons :global(.btn) {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .settings__buttons { flex-direction: row; }
+  }
+</style>
