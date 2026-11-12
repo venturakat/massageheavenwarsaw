@@ -9,6 +9,7 @@
  * - focus returns to the element that opened it; an opener with aria-expanded
  *   is kept in sync
  * - the page behind doesn't scroll (base.css: html:has(dialog[open]))
+ * - fires "mh:beforeopen" on the dialog just before it opens
  */
 const openers = new WeakMap<HTMLDialogElement, HTMLElement | null>();
 
@@ -17,6 +18,8 @@ export function openDialog(id: string, opener: HTMLElement | null = null): void 
   if (!(dialog instanceof HTMLDialogElement) || dialog.open) return;
   openers.set(dialog, opener);
   if (opener?.hasAttribute('aria-expanded')) opener.setAttribute('aria-expanded', 'true');
+  // Lets the content reset itself while still hidden (see gift-form.ts).
+  dialog.dispatchEvent(new Event('mh:beforeopen'));
   dialog.showModal();
 }
 

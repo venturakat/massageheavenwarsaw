@@ -4,9 +4,10 @@
  * Details (address → Google Maps, bookings → chooser, Instagram → profile), two buttons, map.
  *
  * Map: no third-party request before consent. By default it shows the Figma placeholder
- * (a self-hosted map image + pin, linking to Google Maps) and a "Pokaż mapę" button that
- * opens the cookie settings. Once "Funkcjonalne" cookies are allowed, the consent script
- * (step 4) swaps in the Google Maps iframe from data-embed-src.
+ * (a self-hosted map image, linking to the business on Google Maps) and a "Pokaż mapę"
+ * button that opens the cookie settings. Once "Funkcjonalne" cookies are allowed, the
+ * consent script swaps in the Google Maps embed of the Massage Heaven place
+ * (studio.googleMapsEmbed). The Figma rings + brand pin sit on top in both states.
  */
 import { Image } from 'astro:assets';
 import SectionTitle from '../SectionTitle.astro';
@@ -23,9 +24,8 @@ const { site, ui } = Astro.props.content;
 const { contact, studio } = site;
 const [address, bookings, instagram] = contact.details;
 const [bookLabel, instagramLabel] = contact.actions;
-const embedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-  `${studio.address}, ${studio.postcode} ${studio.city}`,
-)}&output=embed`;
+// The Massage Heaven place itself (same place as the googleMaps link), not just the street address.
+const embedSrc = studio.googleMapsEmbed;
 ---
 
 <section id="kontakt" class="contact" aria-labelledby="contact-title">
@@ -71,11 +71,17 @@ const embedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
     <div class="map" data-map data-embed-src={embedSrc} data-embed-title={ui.mapTitle}>
       <a class="map__static" href={studio.googleMaps} target="_blank" rel="noopener">
         <Image class="map__image" src={mapImage} alt={ui.alt.map} widths={[496, 992]} sizes="(min-width: 1024px) 496px, 100vw" loading="lazy" />
-        <img class="map__ring map__ring--outer" src={ringOuter.src} alt="" width="220" height="220" />
-        <img class="map__ring map__ring--inner" src={ringInner.src} alt="" width="120" height="120" />
-        <span class="map__pin"><img src={sign.src} alt="" width="32" height="37" /></span>
         <span class="visually-hidden">{studio.addressLong} {ui.newTab}</span>
       </a>
+      <!-- Figma rings + brand pin, over the placeholder and over the live map alike.
+           The rings let clicks through to the map; the pin opens the business in Google Maps. -->
+      <div class="map__marker">
+        <img class="map__ring map__ring--outer" src={ringOuter.src} alt="" width="220" height="220" />
+        <img class="map__ring map__ring--inner" src={ringInner.src} alt="" width="120" height="120" />
+        <a class="map__pin" href={studio.googleMaps} target="_blank" rel="noopener" aria-label={`${ui.openInMaps} ${ui.newTab}`}>
+          <img src={sign.src} alt="" width="32" height="37" />
+        </a>
+      </div>
       <button class="map__show" type="button" data-open-dialog="cookie-settings" aria-haspopup="dialog">{ui.showMap}</button>
     </div>
   </div>
@@ -147,6 +153,19 @@ const embedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
     height: 100%;
     object-fit: cover;
   }
+  /* Above the map (placeholder or Google iframe), clicks pass through to the map. */
+  .map__marker {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  /* Live map in greyscale, to sit with the black-and-white photos. */
+  .map :global(iframe) {
+    z-index: 1;
+    filter: grayscale(1);
+  }
+  .map__show { z-index: 3; }
   .map__ring,
   .map__pin {
     position: absolute;
@@ -165,6 +184,20 @@ const embedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
     background: var(--brand-plum);
   }
   .map__pin img { width: 44%; height: auto; }
+  a.map__pin {
+    pointer-events: auto;
+    transition: transform var(--dur-hover) var(--ease-out), background-color var(--dur-hover) var(--ease-out);
+  }
+  a.map__pin:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+  @media (hover: hover) {
+    a.map__pin:hover {
+      background: var(--plum-600);
+      transform: scale(1.06);
+    }
+  }
 
   .map__show {
     position: absolute;

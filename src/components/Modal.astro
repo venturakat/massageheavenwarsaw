@@ -4,8 +4,8 @@
  * Built on <dialog> + showModal(): the rest of the page becomes inert (focus stays
  * inside), Esc closes, and the browser draws the dim.
  *
- * Desktop: centred card, `width` px wide. Mobile (<768): `mobile="sheet"` (bottom sheet)
- * or `mobile="fullscreen"`.
+ * Desktop: centred card, `width` px wide. Mobile (<768): `mobile="sheet"` (a centred card
+ * 12 px from the screen sides) or `mobile="fullscreen"`.
  *
  * Open:  any element with data-open-dialog="<id>", or openDialog(id) from scripts/dialogs.
  * Close: the close button, Esc, a click on the dim, or any [data-close-dialog] inside.
@@ -25,18 +25,22 @@ type Props = {
   mobile?: 'sheet' | 'fullscreen';
   size?: 'default' | 'large' | 'document';
   tone?: 'light' | 'plum';
+  /** Large/document titles break before the italic part; false keeps them on one line. */
+  titleBreak?: boolean;
+  /** Tighter spacing for tall content (the gift form). */
+  compact?: boolean;
   class?: string;
 };
 
-const { id, title, closeLabel, width = 440, mobile = 'sheet', size = 'default', tone = 'light', class: className } = Astro.props;
-const twoLines = size !== 'default';
+const { id, title, closeLabel, width = 440, mobile = 'sheet', size = 'default', tone = 'light', titleBreak, compact = false, class: className } = Astro.props;
+const twoLines = titleBreak ?? size !== 'default';
 const [plain, italic] = title;
 const titleId = `${id}-title`;
 ---
 
 <dialog
   id={id}
-  class:list={['modal', `modal--${mobile}`, `modal--${size}`, `modal--${tone}`, className]}
+  class:list={['modal', `modal--${mobile}`, `modal--${size}`, `modal--${tone}`, { 'modal--compact': compact }, className]}
   aria-labelledby={titleId}
   style={`--modal-width: ${width}px`}
   data-dialog
@@ -91,6 +95,12 @@ const titleId = `${id}-title`;
     justify-content: space-between;
     gap: 16px;
   }
+  /* Blocks inside a pop-up sit 16 px apart, like the header and the body (Figma 293:1219, 232:1074). */
+  .modal__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
   .modal__title {
     font: var(--type-h4);
     color: var(--text-primary);
@@ -130,6 +140,8 @@ const titleId = `${id}-title`;
     font: 400 32px/1.1 var(--font-serif);
     letter-spacing: -0.005em;
   }
+
+  .modal--compact .modal__card { gap: 12px; }
 
   .modal--document { height: min(760px, 100dvh - 48px); }
   .modal--document .modal__card {
@@ -179,49 +191,19 @@ const titleId = `${id}-title`;
 
   @media (prefers-reduced-motion: reduce) {
     .modal,
-    /* ── Large (gift form) and document (privacy policy) ── */
-  .modal--large,
-  .modal--document {
-    border: 0;
-    border-radius: 32px;
-  }
-  .modal--large .modal__card,
-  .modal--document .modal__card { padding: 32px 40px; }
-  .modal--large .modal__top,
-  .modal--document .modal__top { align-items: flex-start; }
-  .modal--large .modal__title,
-  .modal--document .modal__title {
-    font: 400 32px/1.1 var(--font-serif);
-    letter-spacing: -0.005em;
-  }
-
-  .modal--document { height: min(760px, 100dvh - 48px); }
-  .modal--document .modal__card {
-    height: 100%;
-    gap: 24px;
-    overflow: hidden;
-  }
-  .modal--document .modal__body {
-    flex: 1;
-    min-height: 0;
-    padding-right: 8px;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
-
-  .modal::backdrop { transition: none; }
+    .modal::backdrop { transition: none; }
   }
 
   /* ── Mobile ── */
   @media (max-width: 767px) {
+    /* Floating card centred on screen, 12 px from the sides, all corners rounded. */
     .modal--sheet {
-      width: 100%;
-      max-height: calc(100dvh - 32px);
-      margin: auto 0 0;
-      border-bottom: 0;
-      border-radius: 24px 24px 0 0;
+      width: calc(100% - 24px);
+      max-height: calc(100dvh - 24px);
+      margin: auto;
+      border-radius: 24px;
     }
-    .modal--sheet .modal__card { padding: 20px 20px 32px; }
+    .modal--sheet .modal__card { padding: 20px; }
 
     .modal--fullscreen {
       width: 100%;

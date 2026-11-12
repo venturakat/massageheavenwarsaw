@@ -22,7 +22,7 @@ const photo = teamPhotos[id];
 
 <article class="team-card">
   <div class="team-card__photo">
-    {photo && <Image src={photo} alt={photoAlt} widths={[290, 580]} sizes="290px" loading="lazy" />}
+    {photo && <Image src={photo} alt={photoAlt} width={290} height={290} fit="fill" densities={[1, 2]} loading="lazy" />}
   </div>
   <h3 class="team-card__name">{name}</h3>
   <IconLink kind="arrow" data-booking={chooser} aria-haspopup="dialog">{bookingLabel}</IconLink>
@@ -44,11 +44,12 @@ const photo = teamPhotos[id];
     border-radius: 50%;
     background: linear-gradient(to bottom, var(--bg-highlight), var(--plum-700));
   }
+  /* As in Figma 156:836: the whole cut-out photo fills the circle (not cropped);
+     generated at 290 × 290 with fit="fill", 1× and 2×. */
   .team-card__photo :global(img) {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: bottom;
+    object-fit: fill;
   }
 
   .team-card__name {

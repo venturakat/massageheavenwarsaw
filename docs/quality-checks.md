@@ -17,7 +17,7 @@ Mobile: LCP 2.6–2.7 s, CLS 0. Desktop: LCP 0.6 s, CLS 0.
 
 Fixed during this step:
 - **Contrast:** grey text on the lavender backgrounds (hero lead, gift text) was 4.0–4.3:1. Now neutral-600 (6.8:1).
-- **Favicon:** missing (a 404 in the console). Added from the Figma brand icon 45:1936: `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-512.png` in `public/`.
+- **Favicon:** missing (a 404 in the console). Added from the Figma brand icons: round 45:1940 for `favicon.svg`, `favicon-32.png` and `icon-512.png`; square 45:1936 for `apple-touch-icon.png` (iOS rounds it itself).
 - **Fonts:** the four above-the-fold fonts are preloaded (Sans 400/600, Serif 400 regular + italic). That removed a font-swap layout shift on desktop and cut mobile Speed Index from 4.9 s to 2.0 s.
 - **Hero photo:** loads with `fetchpriority="high"` (it is the LCP image).
 

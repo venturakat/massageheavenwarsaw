@@ -43,7 +43,7 @@ const [before, after] = c.bannerText.split('{link}');
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-    padding: 24px;
+    padding: 20px;
     border: 1px solid var(--border-default);
     border-radius: 24px;
     background: var(--bg-default);
@@ -73,10 +73,11 @@ const [before, after] = c.bannerText.split('{link}');
     text-underline-offset: 2px;
   }
 
+  /* Mobile (Figma 251:1301): "Akceptuję wszystkie" on top, 8 px apart. */
   .cookie-banner__buttons {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: column-reverse;
+    gap: 8px;
     width: 100%;
   }
   .cookie-banner__buttons :global(.btn) {
@@ -91,7 +92,13 @@ const [before, after] = c.bannerText.split('{link}');
       right: auto;
       bottom: 24px;
       width: 400px;
+      padding: 24px;
     }
-    .cookie-banner__buttons { flex-direction: row; }
+    /* Desktop (232:1064): side by side, 12 px apart, each button its own height. */
+    .cookie-banner__buttons {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+    }
   }
 </style>

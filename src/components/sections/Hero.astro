@@ -41,9 +41,9 @@ const [bookLabel, pricesLabel, mapLabel] = hero.actions;
     </div>
 
     <div class="hero__visual">
-      <Image class="hero__arch hero__arch--large" src={archLarge} alt={ui.alt.heroLarge} widths={[342, 684]} sizes="342px" loading="eager" fetchpriority="high" />
+      <Image class="hero__arch hero__arch--large" src={archLarge} alt={ui.alt.heroLarge} width={342} height={420} fit="fill" densities={[1, 1.5]} loading="eager" fetchpriority="high" />
       <div class="hero__arch hero__arch--small">
-        <Image src={archSmall} alt={ui.alt.heroSmall} widths={[263, 526]} sizes="263px" loading="eager" />
+        <Image src={archSmall} alt={ui.alt.heroSmall} width={263} height={323} fit="fill" densities={[1, 2]} loading="eager" />
       </div>
       <img class="hero__halo" src={halo.src} width="207" height="33" alt="" />
     </div>
@@ -141,11 +141,11 @@ const [bookLabel, pricesLabel, mapLabel] = hero.actions;
       overflow: hidden;
       border-radius: 50% 50% 0 0 / 40.6% 40.6% 0 0;
     }
+    /* Figma fills each arch with the whole photo, stretched to the shape (not cropped).
+       The images are generated at exactly that shape (fit="fill"), 1× and 2×
+       (1.5× for the large arch: its source photo is only 649 px tall). */
     .hero__arch,
-    .hero__arch :global(img) {
-      object-fit: cover;
-      object-position: bottom;
-    }
+    .hero__arch :global(img) { object-fit: fill; }
     .hero__arch--large {
       left: 33.85%;
       top: 13.74%;

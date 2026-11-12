@@ -164,8 +164,10 @@ export function initGiftForm(form: HTMLFormElement): void {
     sentView.hidden = true;
     dialog?.classList.remove('is-sent');
   };
-  dialog?.addEventListener('close', () => {
-    // Keep a half-filled form; start fresh only after a request was sent.
+  // Keep a half-filled form; start fresh only after a request was sent. Reset just
+  // before the pop-up opens again — resetting on close showed the form for a moment
+  // while the success screen was still fading out.
+  dialog?.addEventListener('mh:beforeopen', () => {
     if (dialog.classList.contains('is-sent')) reset();
   });
 

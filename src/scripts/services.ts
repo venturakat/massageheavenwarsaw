@@ -1,7 +1,8 @@
 /**
  * Services behaviour (docs/behaviour/website.md → Services).
- * - Card click: open its panel (closing any other); click again or "Zwiń" to close.
- *   The page scrolls so the card + panel are in view.
+ * - Card click: open its panel (closing any other); the page scrolls so the panel
+ *   sits just under the header. Click the card again or "Zwiń" to close; the page
+ *   scrolls back to the card.
  * - Search: filters treatment names, ignoring case and Polish diacritics.
  *   Results title uses Polish plurals (1 zabieg, 2–4 zabiegi, 5+ zabiegów).
  * - "No results" chips clear the search and open that category.
@@ -50,12 +51,11 @@ export function initServices(root: HTMLElement): void {
   const status = root.querySelector<HTMLElement>('[data-search-status]')!;
   const searchIndex = resultRows.map((row) => normalise(row.dataset.name ?? ''));
 
-  const scrollToCard = (card: HTMLElement) => {
-    card.closest<HTMLElement>('.services__card')?.scrollIntoView({
-      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-      block: 'start',
-    });
-  };
+  const scrollTo = (el: HTMLElement | null | undefined) =>
+    el?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+  const scrollToCard = (card: HTMLElement) => scrollTo(card.closest<HTMLElement>('.services__card'));
+  /** Opened: bring the panel (the big list) up under the header, with a little space. */
+  const scrollToPanel = (card: HTMLElement) => scrollTo(panelFor(card as HTMLButtonElement)?.closest<HTMLElement>('.services__panel'));
 
   const setOpen = (card: HTMLButtonElement, open: boolean) => {
     card.setAttribute('aria-expanded', String(open));
@@ -66,7 +66,7 @@ export function initServices(root: HTMLElement): void {
   const openCategory = (card: HTMLButtonElement) => {
     cards.forEach((c) => c !== card && setOpen(c, false));
     setOpen(card, true);
-    scrollToCard(card);
+    scrollToPanel(card);
   };
 
   const closeCategory = (card: HTMLButtonElement) => {
