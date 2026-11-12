@@ -48,7 +48,6 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Gift form "Kwota" field:** built as a plain number field "Kwota (zł)", any positive amount. Min/max or preset amounts still to decide.
 - [ ] **Form error messages:** written by Claude (`src/data/ui.pl.json` → `giftForm.errors`), shown in plum-100 under each field. Not designed; please review the wording.
 - [ ] **Copy for pop-ups:** the gift form, success screen and cookie texts came from Figma into `src/data/ui.pl.json`. The developer may want to move them into `site.json` so the admin panel can edit them.
-- [ ] **Google map embed:** uses the keyless `google.com/maps?q=…&output=embed` URL built from the address. Swap for an official embed URL from Google Maps → Share → Embed if preferred.
 - [ ] **Analytics hook:** no tool yet. The consent script fires a `mh:consent` event on `window` with the choice; start analytics there when one is chosen.
 - [ ] **Mobile menu logo:** the menu uses the 150 px logo (Figma 242:1206), the page header the 218 px one (240:1368). Built as Figma; this also explains the "150 px" in `design-system.md`.
 
@@ -58,7 +57,10 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **JSON-LD (LocalBusiness):** not added yet; it needs the confirmed opening hours.
 
 ## Decided (for reference)
-- Favicon: the square plum brand icon (Figma 45:1936).
+- Mobile booking choosers and cookie settings: a card centred on screen, 12 px from the sides, all corners rounded, instead of Figma's edge-to-edge bottom sheet (2026-11-13).
+- Map: the live map embeds the Massage Heaven place itself (`site.json` → `studio.googleMapsEmbed`, same place as the `googleMaps` link), with the Figma rings and brand pin on top (2026-11-13).
+- Hero and team photos: shown exactly as in Figma, which stretches each photo to its arch/circle. When the client supplies new photos, export them already cropped to the shape (342 × 420, 263 × 323, 290 × 290 at 2×) so nothing is distorted.
+- Favicon: the round plum brand icon (Figma 45:1940) for browser tabs; the iPhone home-screen icon (`apple-touch-icon.png`) stays the square one (45:1936), because iOS rounds it itself and would fill round icons' transparent corners with black (2026-11-13).
 - Lowest price stays **"od 80 zł"** (the client's old site said 64 zł; ignore it).
 - Names: **Anastazja** and **Ina** everywhere. The privacy policy keeps the legal name Anastasiia Zhelezniak.
 - Website has exactly **6 categories**. The Instagram stories have 7 (website 03 = stories 03 + 04).

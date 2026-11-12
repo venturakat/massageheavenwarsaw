@@ -29,7 +29,7 @@ const durations = Object.fromEntries(
 );
 ---
 
-<Modal id="gift-form" title={gift.title} closeLabel={ui.close} width={720} size="large" tone="plum" mobile="fullscreen" class="gift-modal">
+<Modal id="gift-form" title={gift.title} closeLabel={ui.close} width={720} size="large" tone="plum" mobile="fullscreen" titleBreak={false} compact class="gift-modal">
   <form
     class="gift-form"
     novalidate
@@ -109,7 +109,7 @@ const durations = Object.fromEntries(
   .gift-form__view {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
   }
   .gift-form__view[hidden] { display: none; }
 
@@ -177,7 +177,7 @@ const durations = Object.fromEntries(
   .gift-form__row {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
   }
   .gift-form__row[hidden] { display: none; }
   .gift-form__row > :global(*) { flex: 1 1 0; min-width: 0; }
@@ -276,6 +276,7 @@ const durations = Object.fromEntries(
     max-width: 494px;
     color: var(--text-inverse-subtle);
   }
+
 
   /* While the success screen shows, the header keeps only the close button. */
   :global(.gift-modal.is-sent .modal__title) { visibility: hidden; }

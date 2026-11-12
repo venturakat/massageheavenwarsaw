@@ -79,10 +79,11 @@ const rows = [
     line-height: 15px;
   }
 
+  /* Mobile (251:1302): "Akceptuję wszystkie" on top, 8 px apart. */
   .settings__buttons {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: column-reverse;
+    gap: 8px;
   }
   .settings__buttons :global(.btn) {
     flex: 1 1 0;
@@ -90,7 +91,12 @@ const rows = [
     padding-inline: 12px;
   }
 
+  /* Desktop (232:1074): side by side, 12 px apart, each button its own height. */
   @media (min-width: 768px) {
-    .settings__buttons { flex-direction: row; }
+    .settings__buttons {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+    }
   }
 </style>

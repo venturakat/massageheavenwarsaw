@@ -99,13 +99,13 @@ const { about } = site;
 
   @media (min-width: 1024px) {
     /* Figma 97:64 is a fixed 660 px frame with the copy centred (86 px above and below). */
+    /* Grid (not flex) so .container keeps its own width and side margins. */
     .about {
-      display: flex;
-      align-items: center;
+      display: grid;
+      align-content: center;
       min-height: 660px;
       padding-block: var(--section-pad-desktop);
     }
-    .about__inner { flex: 1; }
     .about__inner,
     .about__inner :global(.section-title) { gap: 32px; }
     .about__inner > * { max-width: 664px; }
