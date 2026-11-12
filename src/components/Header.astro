@@ -1,0 +1,163 @@
+---
+/**
+ * Site header (Figma desktop 205:1041, mobile 240:1362). Sticky.
+ * Top bar with the address + nav bar. The full nav shows from 1180 px; below
+ * that the nav bar has the logo and the menu button (menu overlay: build step 4).
+ */
+import logo from '../assets/brand/logo-plum.svg';
+import MenuIcon from '../assets/brand/icon-menu.svg';
+import Button from './Button.astro';
+import LanguageSwitch from './LanguageSwitch.astro';
+import type { Content, Locale } from '../data';
+
+type Props = { locale: Locale; content: Content };
+const { locale, content } = Astro.props;
+const { site, ui } = content;
+---
+
+<header class="site-header">
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <p class="label topbar__address">{site.studio.addressTopBar}</p>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="container navbar__inner">
+      <a class="navbar__logo" href="#top" aria-label={ui.logoHome}>
+        <img src={logo.src} width="218" height="40" alt="" />
+      </a>
+
+      <nav class="navbar__links" aria-label={ui.mainNav}>
+        <ul role="list">
+          {
+            site.nav.map((item) => (
+              <li>
+                <a class="nav-link" href={`#${item.anchor}`}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <LanguageSwitch locale={locale} label={ui.languageSwitch} names={ui.languages} />
+        <Button size="sm" data-booking="general" aria-haspopup="dialog">{ui.bookVisit}</Button>
+      </div>
+
+      <button
+        class="navbar__menu-btn"
+        type="button"
+        aria-label={ui.openMenu}
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        data-open-menu
+      >
+        <MenuIcon width={20} height={20} aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    background: var(--bg-topbar);
+    color: var(--text-inverse-subtle);
+    padding-block: 10px;
+  }
+  .topbar__inner {
+    display: flex;
+    justify-content: center;
+  }
+  .topbar__address {
+    line-height: 15px;
+    white-space: nowrap;
+  }
+
+  /* ── Nav bar ── */
+  .navbar {
+    background: var(--bg-nav);
+    padding-block: 12px;
+  }
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .navbar__logo {
+    flex-shrink: 0;
+    border-radius: 4px;
+  }
+  .navbar__logo img {
+    width: 218px;
+    height: 40px;
+  }
+
+  .navbar__links,
+  .navbar__actions { display: none; }
+
+  .navbar__links ul {
+    display: flex;
+    gap: 30px;
+  }
+  .navbar__links li { display: flex; }
+
+  .nav-link {
+    font: var(--type-nav);
+    line-height: 17px;
+    color: var(--text-primary);
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition:
+      color var(--dur-hover) var(--ease-out),
+      text-decoration-color var(--dur-hover) var(--ease-out);
+  }
+
+  .navbar__actions {
+    align-items: center;
+    gap: 20px;
+  }
+
+  .navbar__menu-btn {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-highlight);
+    border-radius: 999px;
+    transition: background-color var(--dur-hover) var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .nav-link:hover {
+      color: var(--text-highlight);
+      text-decoration-color: currentColor;
+    }
+    .navbar__menu-btn:hover { background: var(--plum-100); }
+  }
+
+  @media (min-width: 768px) {
+    .topbar__inner { justify-content: flex-end; }
+  }
+
+  @media (min-width: 1180px) {
+    .navbar { padding-block: 20px; }
+    .navbar__links { display: block; }
+    .navbar__actions { display: flex; }
+    .navbar__menu-btn { display: none; }
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+/**
+ * The one-page site, shared by all locales.
+ * Step 1: placeholder sections with the final anchor ids so the nav can be tested.
+ * Replace each one with the real section in build step 3.
+ */
+import Layout from '../layouts/Layout.astro';
+import { getContent, type Locale } from '../data';
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const { site } = getContent(locale);
+
+const placeholders = [
+  { id: 'start', name: site.hero.eyebrow },
+  { id: 'cennik', name: site.services.eyebrow },
+  { id: 'o-nas', name: site.about.eyebrow },
+  { id: 'faq', name: site.faqSection.eyebrow },
+  { id: 'bon', name: site.gift.eyebrow },
+  { id: 'zespol', name: site.teamSection.eyebrow },
+  { id: 'kontakt', name: site.contact.eyebrow },
+];
+---
+
+<Layout locale={locale}>
+  {
+    placeholders.map((s) => (
+      <section id={s.id} class="placeholder" aria-label={s.name}>
+        <div class="container">
+          <p class="label">{s.name}</p>
+        </div>
+      </section>
+    ))
+  }
+</Layout>
+
+<style>
+  .placeholder {
+    min-height: 70vh;
+    padding-block: var(--section-pad-mobile);
+    border-bottom: 1px dashed var(--border-default);
+    color: var(--text-secondary);
+  }
+  @media (min-width: 1024px) {
+    .placeholder { padding-block: var(--section-pad-desktop); }
+  }
+</style>

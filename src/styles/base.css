@@ -1,0 +1,114 @@
+/* Base styles: reset, page defaults, layout helpers, shared text styles.
+   Colours, type and spacing come from tokens.css. */
+
+/* ── Component aliases (Figma values with no semantic token) ── */
+:root {
+  --bg-nav: var(--periwinkle-100);
+  --bg-topbar: var(--plum-500);
+  --bg-footer: var(--plum-600);
+  --text-footer-label: var(--plum-300);
+  --border-footer: var(--plum-400);
+  --focus-ring: var(--periwinkle-500);
+
+  --container-content: 1120px;           /* 1280 frame − 2 × 80 */
+  --gutter: var(--gutter-mobile);
+  --header-h: var(--header-h-mobile);
+}
+
+/* Between the mobile and desktop layouts the mobile layout sits in a wider gutter. */
+@media (min-width: 768px) {
+  :root { --gutter: 40px; }
+}
+@media (min-width: 1024px) {
+  :root { --gutter: var(--gutter-desktop); }
+}
+/* The full desktop nav needs ~1180 px; below that the header keeps the menu button. */
+@media (min-width: 1180px) {
+  :root { --header-h: var(--header-h-desktop); }
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-default);
+  color: var(--text-primary);
+  font: var(--type-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg, picture, video { display: block; max-width: 100%; }
+
+input, button, textarea, select { font: inherit; color: inherit; }
+
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+ul[role='list'], ol[role='list'] { list-style: none; padding: 0; }
+
+h1, h2, h3, h4 { font-weight: 400; text-wrap: balance; }
+
+p { text-wrap: pretty; }
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Layout helpers ── */
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container-content));
+  margin-inline: auto;
+}
+
+section[id] { scroll-margin-top: var(--header-h); }
+
+/* ── Shared text styles ── */
+.label {
+  font: var(--type-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1000;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--bg-highlight);
+  color: var(--text-inverse);
+  font: var(--type-button);
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; }
