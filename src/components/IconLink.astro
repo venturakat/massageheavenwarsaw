@@ -63,4 +63,14 @@ const typeAttr = href ? {} : { type: 'button' };
     .icon-link--arrow:hover,
     .icon-link--arrow:hover :global(.icon) { color: var(--text-inverse); }
   }
+
+  /* Touch screens: a larger invisible tap area around small text links (no layout change). */
+  @media (pointer: coarse) {
+    .icon-link { position: relative; }
+    .icon-link::after {
+      content: '';
+      position: absolute;
+      inset: -8px -6px;
+    }
+  }
 </style>

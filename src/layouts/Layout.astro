@@ -5,6 +5,12 @@ import '../styles/base.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Overlays from '../components/overlays/Overlays.astro';
+// Preload the fonts used above the fold so text doesn't wait for the stylesheet chain
+// (the italic is the hero's "dla Ciebie"; loading it late shifted the page).
+import sansRegular from '@fontsource/instrument-sans/files/instrument-sans-latin-400-normal.woff2?url';
+import serifRegular from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import sansSemibold from '@fontsource/instrument-sans/files/instrument-sans-latin-600-normal.woff2?url';
+import serifItalic from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
 import { getContent, htmlLang, ogLocale, localePath, locales, defaultLocale, isTranslated, type Locale } from '../data';
 
 type Props = { locale: Locale; title?: string; description?: string };
@@ -26,6 +32,13 @@ const alternates = locales.filter(isTranslated);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <link rel="preload" href={sansRegular} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifRegular} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifItalic} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sansSemibold} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="description" content={description} />
     {translated ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex, follow" />}
     {

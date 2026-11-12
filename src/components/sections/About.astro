@@ -98,7 +98,14 @@ const { about } = site;
   }
 
   @media (min-width: 1024px) {
-    .about { padding-block: var(--section-pad-desktop); }
+    /* Figma 97:64 is a fixed 660 px frame with the copy centred (86 px above and below). */
+    .about {
+      display: flex;
+      align-items: center;
+      min-height: 660px;
+      padding-block: var(--section-pad-desktop);
+    }
+    .about__inner { flex: 1; }
     .about__inner,
     .about__inner :global(.section-title) { gap: 32px; }
     .about__inner > * { max-width: 664px; }
