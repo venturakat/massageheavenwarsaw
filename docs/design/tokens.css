@@ -1,0 +1,111 @@
+/* Massage Heaven — design tokens
+   Exported from the Figma variables (collections "Primitives" and "Brand") on 2026-11-12.
+   Copy into src/styles/tokens.css. Components use the semantic tokens, not the primitives. */
+
+:root {
+  /* ── Primitives ─────────────────────────────── */
+  --periwinkle-100: #EFF0FB;
+  --periwinkle-200: #D0D4F4;
+  --periwinkle-300: #A1AAE9;
+  --periwinkle-400: #7182DE;
+  --periwinkle-500: #425CC6;
+  --periwinkle-600: #2A3D88;
+  --periwinkle-700: #14204E;
+
+  --plum-100: #F2E1EA;
+  --plum-200: #DBB2C9;
+  --plum-300: #C686AB;
+  --plum-400: #A8598A;
+  --plum-500: #832F66;
+  --plum-600: #511A3E;
+  --plum-700: #220719;
+
+  --neutral-100: #F0F1F1;
+  --neutral-200: #D5D5D8;
+  --neutral-300: #ADAEB3;
+  --neutral-400: #87888F;
+  --neutral-500: #63646C;
+  --neutral-600: #424248;
+  --neutral-700: #232327;
+
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* ── Brand / semantic (Figma "Brand" collection) ── */
+  --brand-periwinkle: var(--periwinkle-400);
+  --brand-plum: var(--plum-500);
+  --brand-ink: var(--neutral-700);
+  --brand-white: var(--white);
+
+  --bg-default: var(--white);
+  --bg-surface: var(--neutral-100);
+  --bg-accent: var(--periwinkle-400);
+  --bg-accent-strong: var(--periwinkle-600);
+  --bg-accent-subtle: var(--periwinkle-200);
+  --bg-highlight: var(--plum-500);
+  --bg-highlight-subtle: var(--plum-200);
+  --bg-inverse: var(--neutral-700);
+
+  --text-primary: var(--neutral-700);
+  --text-secondary: var(--neutral-500);
+  --text-inverse: var(--white);
+  --text-inverse-subtle: var(--periwinkle-200);
+  --text-accent: var(--periwinkle-600);
+  --text-highlight: var(--plum-500);
+
+  --border-default: var(--neutral-200);
+  --border-strong: var(--neutral-700);
+  --border-inverse: var(--periwinkle-300);
+  --border-highlight: var(--plum-500);
+
+  --logo-ink: var(--neutral-700);
+  --logo-white: var(--white);
+  --logo-periwinkle: var(--periwinkle-400);
+  --logo-plum: var(--plum-500);
+
+  /* ── Type ───────────────────────────────────── */
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
+
+  /* Desktop scale (Figma text styles Website/*) */
+  --type-display: 400 80px/0.94 var(--font-serif);   /* letter-spacing -0.015em */
+  --type-h2: 400 52px/1 var(--font-serif);           /* -0.01em */
+  --type-h3: 400 28px/1.12 var(--font-serif);        /* -0.005em */
+  --type-h4: 400 22px/1.15 var(--font-serif);
+  --type-lead: 400 18px/1.5 var(--font-sans);
+  --type-body: 400 16px/1.55 var(--font-sans);
+  --type-nav: 500 14px/normal var(--font-sans);
+  --type-button: 600 14px/normal var(--font-sans);
+  --type-price: 600 16px/normal var(--font-sans);
+  --type-label: 500 12px/normal var(--font-sans);    /* uppercase, letter-spacing 0.12em */
+
+  --tracking-display: -0.015em;
+  --tracking-h2: -0.01em;
+  --tracking-h3: -0.005em;
+  --tracking-label: 0.12em;
+
+  /* ── Layout ─────────────────────────────────── */
+  --container-max: 1280px;
+  --gutter-desktop: 64px;
+  --gutter-mobile: 20px;
+  --section-pad-desktop: 80px;
+  --section-pad-mobile: 56px;
+  --header-h-desktop: 114px;   /* 35 top bar + 79 nav */
+  --header-h-mobile: 99px;
+
+  /* ── Motion ─────────────────────────────────── */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 150ms;
+  --dur-toggle: 200ms;
+  --dur-overlay: 200ms;
+  --dur-accordion: 250ms;
+}
+
+/* Mobile scale (Website/Mobile/*), below 768px */
+@media (max-width: 767px) {
+  :root {
+    --type-display: 400 46px/0.94 var(--font-serif);
+    --type-h2: 400 36px/1 var(--font-serif);
+    --type-h3: 400 24px/1.12 var(--font-serif);
+  }
+}

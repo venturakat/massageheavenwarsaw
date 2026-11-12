@@ -1,0 +1,27 @@
+{
+  "_note": "The website team cards (Figma 151:135) show the portrait, name and the booking link. Role and bio come from the client's own Instagram stories (Figma 327:2889 / 327:2918) and are ready for the site and the admin panel. Portraits: cut-out photos on a plum gradient, exported from Figma.",
+  "people": [
+    {
+      "id": "anastazja",
+      "name": "Anastazja",
+      "role": "masażystka",
+      "bookingLabel": "Zarezerwuj masaż z Anastazją",
+      "chooser": "anastazja",
+      "bio": [
+        "Anastazja to wykwalifikowana masażystka z ponad 5-letnim doświadczeniem i wielką pasją do pracy z ciałem. Ukończyła dwuletnią naukę na kierunku technik masażysta, zdobywając solidne, medyczne i anatomiczne fundamenty.",
+        "W swojej codziennej praktyce Anastazja stawia na indywidualne podejście. Płynnie łączy i kombinuje różne techniki masażu, tworząc autorski zabieg idealnie dopasowany do potrzeb konkretnej osoby."
+      ]
+    },
+    {
+      "id": "ina",
+      "name": "Ina",
+      "role": "masażystka i jogaterapeutka",
+      "bookingLabel": "Zarezerwuj masaż z Iną",
+      "chooser": "ina",
+      "bio": [
+        "Ina — doświadczona masażystka, wieloletnia nauczycielka jogi, aromaterapeutka i jogaterapeutka.",
+        "Specjalizuje się w pracy z osobami doświadczającymi stresu, głębokiego napięcia mięśniowego, bólów pleców i karku, przeciążeń oraz zmęczenia psychosomatycznego."
+      ]
+    }
+  ]
+}

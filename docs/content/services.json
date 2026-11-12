@@ -1,0 +1,430 @@
+{
+  "_note": "Polish price list, synced with the Instagram price list stories (Figma page 43:1452) on 2026-11-12. Prices in PLN. 'from' is calculated: compute it in code, don't hard-code it. Website keeps exactly 6 categories.",
+  "currency": "zł",
+  "categories": [
+    {
+      "id": "klasyczne",
+      "number": "01",
+      "name": "Masaże klasyczne i terapeutyczne",
+      "tagline": "Uwolnij napięcie. Poczuj ulgę.",
+      "cardList": "Klasyczny · Sportowy · Leczniczy · Tkanek głębokich",
+      "treatments": [
+        {
+          "name": "Masaż klasyczny",
+          "options": [
+            {
+              "duration": "30 min",
+              "price": 130
+            },
+            {
+              "duration": "45 min",
+              "price": 180
+            },
+            {
+              "duration": "60 min",
+              "price": 230
+            },
+            {
+              "duration": "90 min",
+              "price": 310
+            }
+          ]
+        },
+        {
+          "name": "Masaż sportowy",
+          "options": [
+            {
+              "duration": "45 min",
+              "price": 190
+            },
+            {
+              "duration": "60 min",
+              "price": 240
+            },
+            {
+              "duration": "90 min",
+              "price": 310
+            }
+          ]
+        },
+        {
+          "name": "Masaż leczniczy",
+          "options": [
+            {
+              "duration": "30 min",
+              "price": 150
+            },
+            {
+              "duration": "45 min",
+              "price": 200
+            },
+            {
+              "duration": "60 min",
+              "price": 250
+            }
+          ]
+        },
+        {
+          "name": "Masaż tkanek głębokich + terapia punktów spustowych",
+          "options": [
+            {
+              "duration": "30 min",
+              "price": 140
+            },
+            {
+              "duration": "45 min",
+              "price": 180
+            },
+            {
+              "duration": "60 min",
+              "price": 250
+            },
+            {
+              "duration": "90 min",
+              "price": 320
+            }
+          ]
+        }
+      ],
+      "from": 130
+    },
+    {
+      "id": "miejscowe",
+      "number": "02",
+      "name": "Masaże miejscowe",
+      "tagline": "Precyzyjna pielęgnacja wybranych partii ciała.",
+      "cardList": "Kark i szyja · Głowa i szyja · Plecy i kręgosłup · Stopy",
+      "treatments": [
+        {
+          "name": "Masaż karku i szyi",
+          "options": [
+            {
+              "duration": "15 min",
+              "price": 80
+            },
+            {
+              "duration": "30 min",
+              "price": 140
+            },
+            {
+              "duration": "45 min",
+              "price": 190
+            },
+            {
+              "duration": "60 min",
+              "price": 240
+            }
+          ]
+        },
+        {
+          "name": "Masaż głowy i szyi",
+          "options": [
+            {
+              "duration": "30 min",
+              "price": 130
+            },
+            {
+              "duration": "45 min",
+              "price": 180
+            }
+          ]
+        },
+        {
+          "name": "Masaż pleców i kręgosłupa",
+          "options": [
+            {
+              "duration": "30 min",
+              "price": 130
+            },
+            {
+              "duration": "45 min",
+              "price": 190
+            },
+            {
+              "duration": "60 min",
+              "price": 240
+            }
+          ]
+        },
+        {
+          "name": "Masaż stóp",
+          "options": [
+            {
+              "duration": "30 min",
+              "price": 130
+            }
+          ]
+        }
+      ],
+      "from": 80
+    },
+    {
+      "id": "relaksacyjne",
+      "number": "03",
+      "name": "Masaże relaksacyjne i rytuały",
+      "tagline": "Zatrzymaj się. Oddychaj. Odpocznij.",
+      "cardList": "Relaksacyjny · Aromatyczny · Gorącą świecą · Lomi Lomi · Thai Mix · Balijski",
+      "treatments": [
+        {
+          "name": "Masaż relaksacyjny",
+          "options": [
+            {
+              "duration": "60 min",
+              "price": 230
+            },
+            {
+              "duration": "90 min",
+              "price": 320
+            },
+            {
+              "duration": "120 min",
+              "price": 400
+            }
+          ]
+        },
+        {
+          "name": "Masaż aromatyczny",
+          "options": [
+            {
+              "duration": "30 min · plecy",
+              "price": 170
+            },
+            {
+              "duration": "60 min · całe ciało",
+              "price": 250
+            }
+          ]
+        },
+        {
+          "name": "Masaż gorącą świecą",
+          "options": [
+            {
+              "duration": "60 min",
+              "price": 250
+            },
+            {
+              "duration": "90 min",
+              "price": 350
+            },
+            {
+              "duration": "120 min",
+              "price": 430
+            }
+          ]
+        },
+        {
+          "name": "Masaż głowy z olejowaniem",
+          "options": [
+            {
+              "duration": "45 min",
+              "price": 180
+            }
+          ]
+        },
+        {
+          "name": "Masaż Lomi Lomi",
+          "options": [
+            {
+              "duration": "60 min",
+              "price": 250
+            },
+            {
+              "duration": "90 min",
+              "price": 340
+            },
+            {
+              "duration": "120 min",
+              "price": 430
+            }
+          ]
+        },
+        {
+          "name": "Masaż Thai Mix",
+          "options": [
+            {
+              "duration": "60 min",
+              "price": 260
+            },
+            {
+              "duration": "90 min",
+              "price": 340
+            },
+            {
+              "duration": "120 min",
+              "price": 430
+            }
+          ]
+        },
+        {
+          "name": "Masaż balijski",
+          "options": [
+            {
+              "duration": "60 min",
+              "price": 250
+            },
+            {
+              "duration": "90 min",
+              "price": 330
+            },
+            {
+              "duration": "120 min",
+              "price": 420
+            }
+          ]
+        }
+      ],
+      "from": 170
+    },
+    {
+      "id": "twarz",
+      "number": "04",
+      "name": "Masaże twarzy i pielęgnacja",
+      "tagline": "Naturalne piękno i chwila dla siebie.",
+      "cardList": "Kobido · Lift · Masaż bukalny · Zabieg Thalgo",
+      "treatments": [
+        {
+          "name": "Masaż Kobido",
+          "options": [
+            {
+              "duration": "45 min",
+              "price": 210
+            },
+            {
+              "duration": "60 min",
+              "price": 260
+            }
+          ]
+        },
+        {
+          "name": "Masaż twarzy Lift z elementami Kobido",
+          "options": [
+            {
+              "duration": "45 min",
+              "price": 210
+            },
+            {
+              "duration": "60 min",
+              "price": 260
+            }
+          ]
+        },
+        {
+          "name": "Masaż bukalny (transbukalny) – naturalny lifting",
+          "options": [
+            {
+              "duration": "60 min",
+              "price": 260
+            }
+          ]
+        },
+        {
+          "name": "Zabieg odmładzający Thalgo – luksusowa pielęgnacja",
+          "options": [
+            {
+              "duration": "90 min",
+              "price": 380
+            }
+          ]
+        }
+      ],
+      "from": 210
+    },
+    {
+      "id": "sylwetka",
+      "number": "05",
+      "name": "Modelowanie sylwetki i drenaż",
+      "tagline": "Lekkość, odprężenie, świadoma pielęgnacja.",
+      "cardList": "Antycellulitowy · Drenaż limfatyczny · Bańka chińska",
+      "treatments": [
+        {
+          "name": "Masaż antycellulitowy",
+          "options": [
+            {
+              "duration": "30 min",
+              "price": 140
+            },
+            {
+              "duration": "45 min",
+              "price": 190
+            },
+            {
+              "duration": "60 min",
+              "price": 240
+            }
+          ]
+        },
+        {
+          "name": "Drenaż limfatyczny",
+          "options": [
+            {
+              "duration": "60 min",
+              "price": 220
+            },
+            {
+              "duration": "90 min",
+              "price": 280
+            }
+          ]
+        },
+        {
+          "name": "Masaż bańką chińską",
+          "options": [
+            {
+              "duration": "30 min",
+              "price": 130
+            },
+            {
+              "duration": "45 min",
+              "price": 170
+            }
+          ]
+        }
+      ],
+      "from": 130
+    },
+    {
+      "id": "refleksologia",
+      "number": "06",
+      "name": "Refleksologia",
+      "tagline": "Małe gesty. Głębokie odprężenie.",
+      "cardList": "Dłonie i przedramiona · Stopy i nogi",
+      "treatments": [
+        {
+          "name": "Refleksologia dłoni i przedramion",
+          "options": [
+            {
+              "duration": "20 min",
+              "price": 90
+            },
+            {
+              "duration": "30 min",
+              "price": 120
+            },
+            {
+              "duration": "40 min",
+              "price": 160
+            }
+          ]
+        },
+        {
+          "name": "Refleksologia stóp i nóg",
+          "options": [
+            {
+              "duration": "20 min",
+              "price": 90
+            },
+            {
+              "duration": "30 min",
+              "price": 120
+            },
+            {
+              "duration": "40 min",
+              "price": 160
+            }
+          ]
+        }
+      ],
+      "from": 90
+    }
+  ]
+}

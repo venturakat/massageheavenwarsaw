@@ -1,0 +1,166 @@
+{
+  "_note": "Polish copy. Source: Figma file J7HQH69jG2BbPrzjCWG5dx, exported 2026-11-12. EN/UA translations not written yet.",
+  "studio": {
+    "name": "Massage Heaven",
+    "address": "ul. Krucza 16/22",
+    "addressTopBar": "ul. Krucza 16/22, piętro 3",
+    "addressLong": "ul. Krucza 16/22, Warszawa Centrum",
+    "postcode": "00-526",
+    "city": "Warszawa",
+    "district": "Śródmieście",
+    "floor": "3 piętro, winda",
+    "phone": "+48 731 711 509",
+    "phoneHref": "tel:+48731711509",
+    "instagramHandle": "@massage_heaven_warsaw",
+    "instagramProfile": "https://www.instagram.com/massage_heaven_warsaw/",
+    "instagramDm": "https://ig.me/m/massage_heaven_warsaw",
+    "googleMaps": "https://maps.app.goo.gl/JGEJEcDB9WyVuLMB8",
+    "website": "https://massageheavenwarsaw.com",
+    "hours": {
+      "_note": "From the door sign DRAFT. Confirm with the client before launch.",
+      "mon": "9:00–23:00",
+      "tue": "8:30–21:00",
+      "wed": "8:30–22:00",
+      "thu": "8:30–23:00",
+      "fri": "8:30–23:00",
+      "sat": "9:30–23:00",
+      "sun": "10:00–23:00"
+    }
+  },
+  "taglines": {
+    "hero": "Chwila tylko dla Ciebie",
+    "about": "Uwolnimy Cię od bólu i napięć",
+    "footer": "Najlepszy masaż w centrum Warszawy."
+  },
+  "nav": [
+    { "label": "Cennik", "anchor": "cennik" },
+    { "label": "O nas", "anchor": "o-nas" },
+    { "label": "FAQ", "anchor": "faq" },
+    { "label": "Bon podarunkowy", "anchor": "bon" },
+    { "label": "Zespół", "anchor": "zespol" },
+    { "label": "Kontakt", "anchor": "kontakt" }
+  ],
+  "hero": {
+    "eyebrow": "Studio masażu · Warszawa Centrum",
+    "title": ["Chwila tylko", "dla Ciebie"],
+    "lead": "Uwolnimy Cię od bólu i napięć. Masaże klasyczne, relaksacyjne, twarzy i refleksologia — w spokojnym studiu w samym centrum Warszawy.",
+    "actions": ["Zarezerwuj wizytę", "Zobacz cennik", "Zobacz na mapie"]
+  },
+  "services": {
+    "eyebrow": "Usługi",
+    "title": ["Masaże dopasowane", "do Twoich potrzeb"],
+    "searchPlaceholder": "Szukaj zabiegu…",
+    "panelFooter": "Nie wiesz, który wybrać? Napisz do nas — doradzimy.",
+    "resultsTitle": "{count} {zabieg|zabiegi|zabiegów} dla „{query}”",
+    "clearSearch": "Wyczyść wyszukiwanie",
+    "collapse": "Zwiń",
+    "emptyTitle": "Nie znaleźliśmy „{query}”",
+    "emptyText": "Sprawdź pisownię albo wybierz kategorię. Możesz też napisać do nas — doradzimy, który masaż będzie najlepszy.",
+    "bookButton": "Zarezerwuj"
+  },
+  "about": {
+    "eyebrow": "poznaj gabinet",
+    "title": ["Uwolnimy Cię", "od bólu i napięć"],
+    "text": [
+      "Massage Heaven to studio masażu w sercu Warszawy, przy ul. Kruczej. Zanim zaczniemy, chwilę rozmawiamy — o tym, co Ci dolega, czego oczekujesz i jak mocny ma być nacisk. Dopiero potem dobieramy technikę.",
+      "Łączymy techniki terapeutyczne z rytuałami relaksacyjnymi, żeby każda wizyta była czasem tylko dla Ciebie — bez pośpiechu, w ciszy i cieple."
+    ],
+    "features": [
+      { "title": "Centrum Warszawy", "text": "ul. Krucza 16/22 — łatwy dojazd z każdej części miasta." },
+      { "title": "20+ zabiegów", "text": "Sześć kategorii: od terapii po pielęgnację twarzy." },
+      { "title": "Rezerwacja online", "text": "Wybierz termin w Booksy lub Fresha w kilka sekund." }
+    ]
+  },
+  "faqSection": {
+    "eyebrow": "FAQ",
+    "title": ["Przed pierwszą", "wizytą"],
+    "intro": "Nie ma tu Twojego pytania? Napisz do nas na Instagramie — chętnie pomożemy."
+  },
+  "gift": {
+    "eyebrow": "Bon podarunkowy",
+    "title": ["Podaruj komuś", "chwilę spokoju"],
+    "text": "Bon na wybraną kwotę lub konkretny masaż — elegancki prezent na urodziny, święta czy po prostu bez okazji. Zrealizujesz go, rezerwując wizytę przez Booksy.",
+    "_textNote": "Still mentions only Booksy; the voucher terms now name all four channels. See open-questions.md.",
+    "button": "Zamów bon",
+    "form": {
+      "voucherTypes": ["Konkretny masaż", "Kwota"],
+      "fields": {
+        "massage": "Masaż",
+        "massagePlaceholder": "Wybierz masaż",
+        "duration": "Czas trwania",
+        "recipient": "Dla kogo (opcjonalnie)",
+        "recipientPlaceholder": "Imię — wpiszemy je na bonie",
+        "name": "Twoje imię",
+        "phone": "Telefon",
+        "message": "Wiadomość (opcjonalnie)",
+        "messagePlaceholder": "Masz pytanie albo prośbę? Napisz tutaj."
+      },
+      "_note": "Read the remaining labels (heading, consent sentence, submit button, hint, success screen copy) from Figma 165:887 and 165:947."
+    }
+  },
+  "teamSection": {
+    "eyebrow": "Zespół",
+    "title": ["Za każdym masażem", "stoi człowiek"]
+  },
+  "contact": {
+    "eyebrow": "Kontakt",
+    "title": ["Zarezerwuj", "swoją chwilę"],
+    "details": [
+      { "label": "Adres", "value": "ul. Krucza 16/22, Warszawa Centrum", "action": "maps" },
+      { "label": "Rezerwacje", "value": "Booksy · Fresha · WhatsApp", "action": "chooser" },
+      { "label": "Instagram", "value": "@massage_heaven_warsaw", "action": "instagramProfile" }
+    ],
+    "actions": ["Zarezerwuj wizytę", "Napisz na Instagramie"]
+  },
+  "footer": {
+    "columns": {
+      "menu": "Menu",
+      "studio": { "title": "Studio", "lines": ["ul. Krucza 16/22", "Warszawa Centrum"] },
+      "online": { "title": "Online", "links": ["Booksy", "Fresha", "WhatsApp", "Instagram"] }
+    },
+    "copyright": "© 2026 Massage Heaven",
+    "legal": ["Polityka prywatności", "Ustawienia cookies"]
+  },
+  "booking": {
+    "general": {
+      "title": ["Zarezerwuj", "wizytę"],
+      "intro": "Umów się online albo napisz do nas.",
+      "groups": [
+        {
+          "label": "Rezerwacja online",
+          "options": [
+            { "id": "booksy", "icon": "calendar", "title": "Booksy", "hint": "Wolne terminy na bieżąco", "url": "https://massageheaven68.booksy.com/a" },
+            { "id": "fresha", "icon": "calendar", "title": "Fresha", "hint": "Wolne terminy na bieżąco", "url": "https://www.fresha.com/en-GB/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/all-offer?pId=2749004" }
+          ]
+        },
+        {
+          "label": "Napisz do nas",
+          "options": [
+            { "id": "whatsapp", "icon": "chat", "title": "WhatsApp", "hint": "+48 731 711 509", "url": "https://wa.me/48731711509?text=Dzie%C5%84%20dobry!%20Chc%C4%99%20um%C3%B3wi%C4%87%20wizyt%C4%99%20w%20Massage%20Heaven." },
+            { "id": "instagram", "icon": "at", "title": "Instagram", "hint": "@massage_heaven_warsaw", "url": "instagram (profile on desktop, ig.me DM on mobile)" }
+          ]
+        }
+      ]
+    },
+    "therapists": {
+      "anastazja": {
+        "title": ["Masaż z", "Anastazją"],
+        "intro": "Wybierz termin u Anastazji online albo napisz do nas.",
+        "hint": "Terminy Anastazji online",
+        "note": "W wiadomości podaj imię: Anastazja",
+        "booksy": "https://booksy.com/pl-pl/289641_massage-heaven_masaz_3_warszawa/staffer/650120#ba_s=dl_1",
+        "fresha": "https://www.fresha.com/en-GB/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/booking?pId=2749004&modal=employee-profile&employeeId=5027660&back=%2Fa%2Fmassage-heaven-warszawa-krucza-16-22-j9nsos6o",
+        "whatsapp": "https://wa.me/48731711509?text=Dzie%C5%84%20dobry!%20Chc%C4%99%20um%C3%B3wi%C4%87%20wizyt%C4%99%20u%20Anastazji."
+      },
+      "ina": {
+        "title": ["Masaż z", "Iną"],
+        "intro": "Wybierz termin u Iny online albo napisz do nas.",
+        "hint": "Terminy Iny online",
+        "note": "W wiadomości podaj imię: Ina",
+        "booksy": "https://booksy.com/pl-pl/289641_massage-heaven_masaz_3_warszawa/staffer/866067#ba_s=dl_1",
+        "fresha": "https://www.fresha.com/en-GB/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/booking?pId=2749004&modal=employee-profile&employeeId=5027663&back=%2Fa%2Fmassage-heaven-warszawa-krucza-16-22-j9nsos6o",
+        "whatsapp": "https://wa.me/48731711509?text=Dzie%C5%84%20dobry!%20Chc%C4%99%20um%C3%B3wi%C4%87%20wizyt%C4%99%20u%20Iny."
+      }
+    }
+  }
+}

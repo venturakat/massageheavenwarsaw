@@ -1,0 +1,15 @@
+{
+  "_note": "Polish. Same 10 questions and answers as the website (Figma 154:324) and the FAQ Instagram stories. Item 1 is open on load.",
+  "items": [
+    { "q": "Jak zarezerwować wizytę?", "a": "Najprościej online — przycisk „Zarezerwuj wizytę” prowadzi do Booksy lub Fresha, gdzie widać wolne terminy na bieżąco. Możesz też napisać do nas na WhatsAppie lub Instagramie." },
+    { "q": "Jak przygotować się do pierwszego masażu?", "a": "Przyjdź 5–10 minut wcześniej, a ostatni większy posiłek zjedz najpóźniej godzinę przed wizytą. Przed zabiegiem powiedz terapeutce o bólu, urazach i miejscach, których mamy unikać." },
+    { "q": "Czy muszę coś ze sobą zabrać?", "a": "Nic! Na miejscu czekają na Ciebie świeże ręczniki, jednorazowa bielizna i klapki. Po prostu przyjdź i się zrelaksuj." },
+    { "q": "Czy w gabinecie jest prysznic?", "a": "Tak. Po masażu z olejkami możesz wziąć odświeżający prysznic w naszym studiu." },
+    { "q": "Czy muszę się całkowicie rozebrać?", "a": "Nie. Rozbierasz się tylko na tyle, na ile czujesz się komfortowo, a na miejscu dostaniesz jednorazową bieliznę. Podczas masażu ciało jest przykryte ręcznikiem — odsłaniamy wyłącznie masowaną partię." },
+    { "q": "Czy mogę wybrać siłę nacisku?", "a": "Tak. Powiedz przed zabiegiem, jaki nacisk lubisz, i daj znać w trakcie, jeśli coś jest za mocno lub za słabo." },
+    { "q": "Jakie są przeciwwskazania do masażu?", "a": "Najważniejsze to gorączka, infekcje, stany zapalne skóry, świeże urazy i pierwszy trymestr ciąży. Jeśli masz wątpliwości lub chorujesz przewlekle, napisz do nas przed wizytą — chętnie doradzimy." },
+    { "q": "Jak odwołać lub przełożyć wizytę?", "a": "Zrób to w Booksy albo napisz do nas najpóźniej 24 godziny przed wizytą — zwolniony termin chętnie przekażemy komuś innemu.", "_todo": "24 h is a placeholder; only Booksy is named. See open-questions.md." },
+    { "q": "Jakie formy płatności akceptujecie?", "a": "Na miejscu zapłacisz gotówką, kartą lub BLIK-iem. Rezerwując przez Booksy, możesz też zapłacić online." },
+    { "q": "Jak do Was trafić?", "a": "ul. Krucza 16/22, 3 piętro — w budynku jest winda. To ścisłe centrum, 10 minut pieszo od stacji metra Centrum.", "_todo": "Confirm the 10-minute walk with the client." }
+  ]
+}
