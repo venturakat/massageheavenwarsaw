@@ -1,0 +1,48 @@
+---
+/**
+ * Eyebrow label + H2 with an italic second line, used by every section.
+ * tone="light": eyebrow text-accent, italic plum. tone="dark" (plum backgrounds):
+ * eyebrow + italic periwinkle-200, title white.
+ */
+type Props = {
+  eyebrow: string;
+  title: string[]; // [plain line, italic line]
+  tone?: 'light' | 'dark';
+  id?: string;
+  align?: 'start' | 'center';
+  class?: string;
+};
+const { eyebrow, title, tone = 'light', id, align = 'start', class: className } = Astro.props;
+const [plain, italic] = title;
+---
+
+<div class:list={['section-title', `section-title--${tone}`, `section-title--${align}`, className]}>
+  <p class="label section-title__eyebrow">{eyebrow}</p>
+  <h2 class="section-title__heading" id={id}>
+    {plain}{italic && <><br /><em>{italic}</em></>}
+  </h2>
+</div>
+
+<style>
+  .section-title {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .section-title--center { align-items: center; text-align: center; }
+
+  .section-title__eyebrow { line-height: 15px; }
+  .section-title__heading {
+    font: var(--type-h2);
+    letter-spacing: var(--tracking-h2);
+  }
+  .section-title__heading em { font-style: italic; }
+
+  .section-title--light .section-title__eyebrow { color: var(--text-accent); }
+  .section-title--light .section-title__heading { color: var(--text-primary); }
+  .section-title--light .section-title__heading em { color: var(--text-highlight); }
+
+  .section-title--dark .section-title__eyebrow,
+  .section-title--dark .section-title__heading em { color: var(--text-inverse-subtle); }
+  .section-title--dark .section-title__heading { color: var(--text-inverse); }
+</style>

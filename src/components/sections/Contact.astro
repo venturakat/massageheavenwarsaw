@@ -1,0 +1,217 @@
+---
+/**
+ * Contact — "Zarezerwuj swoją chwilę" (Figma desktop 97:124, mobile 240:1308). Anchor #kontakt.
+ * Details (address → Google Maps, bookings → chooser, Instagram → profile), two buttons, map.
+ *
+ * Map: no third-party request before consent. By default it shows the Figma placeholder
+ * (a self-hosted map image + pin, linking to Google Maps) and a "Pokaż mapę" button that
+ * opens the cookie settings. Once "Funkcjonalne" cookies are allowed, the consent script
+ * (step 4) swaps in the Google Maps iframe from data-embed-src.
+ */
+import { Image } from 'astro:assets';
+import SectionTitle from '../SectionTitle.astro';
+import Button from '../Button.astro';
+import TextLink from '../TextLink.astro';
+import mapImage from '../../assets/contact/map.png';
+import ringOuter from '../../assets/contact/ring-outer.svg';
+import ringInner from '../../assets/contact/ring-inner.svg';
+import sign from '../../assets/contact/sign.svg';
+import type { Content } from '../../data';
+
+type Props = { content: Content };
+const { site, ui } = Astro.props.content;
+const { contact, studio } = site;
+const [address, bookings, instagram] = contact.details;
+const [bookLabel, instagramLabel] = contact.actions;
+const embedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+  `${studio.address}, ${studio.postcode} ${studio.city}`,
+)}&output=embed`;
+---
+
+<section id="kontakt" class="contact" aria-labelledby="contact-title">
+  <div class="container contact__inner">
+    <div class="contact__copy">
+      <SectionTitle eyebrow={contact.eyebrow} title={contact.title} id="contact-title" class="contact__title" />
+
+      <dl class="details">
+        <div class="details__row">
+          <dt class="label details__label">{address.label}</dt>
+          <dd>
+            <TextLink kind="contact" href={studio.googleMaps} external newTabLabel={ui.newTab}>{address.value}</TextLink>
+          </dd>
+        </div>
+        <div class="details__row">
+          <dt class="label details__label">{bookings.label}</dt>
+          <dd>
+            <TextLink kind="contact" data-booking="general" aria-haspopup="dialog">{bookings.value}</TextLink>
+          </dd>
+        </div>
+        <div class="details__row">
+          <dt class="label details__label">{instagram.label}</dt>
+          <dd>
+            <TextLink kind="contact" href={studio.instagramProfile} external newTabLabel={ui.newTab}>{instagram.value}</TextLink>
+          </dd>
+        </div>
+      </dl>
+
+      <div class="contact__actions">
+        <Button data-booking="general" aria-haspopup="dialog">{bookLabel}</Button>
+        <Button
+          variant="secondary"
+          href={studio.instagramProfile}
+          data-href-touch={studio.instagramDm}
+          target="_blank"
+          rel="noopener"
+        >
+          {instagramLabel}<span class="visually-hidden"> {ui.newTab}</span>
+        </Button>
+      </div>
+    </div>
+
+    <div class="map" data-map data-embed-src={embedSrc} data-embed-title={ui.mapTitle}>
+      <a class="map__static" href={studio.googleMaps} target="_blank" rel="noopener">
+        <Image class="map__image" src={mapImage} alt={ui.alt.map} widths={[496, 992]} sizes="(min-width: 1024px) 496px, 100vw" loading="lazy" />
+        <img class="map__ring map__ring--outer" src={ringOuter.src} alt="" width="220" height="220" />
+        <img class="map__ring map__ring--inner" src={ringInner.src} alt="" width="120" height="120" />
+        <span class="map__pin"><img src={sign.src} alt="" width="32" height="37" /></span>
+        <span class="visually-hidden">{studio.addressLong} {ui.newTab}</span>
+      </a>
+      <button class="map__show" type="button" data-open-dialog="cookie-settings" aria-haspopup="dialog">{ui.showMap}</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../../scripts/touch-links';
+</script>
+
+<style>
+  .contact {
+    padding-block: var(--section-pad-mobile);
+    background: var(--bg-default);
+  }
+
+  .contact__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .contact__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .contact__copy :global(.contact__title) { gap: 24px; }
+
+  /* ── Details ── */
+  .details__row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-block: 14px;
+    border-bottom: 1px solid var(--border-default);
+  }
+  .details__label {
+    color: var(--text-secondary);
+    line-height: 15px;
+  }
+  .details dd { display: flex; margin: 0; }
+
+  .contact__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .contact__actions :global(.btn) { width: 100%; }
+
+  /* ── Map (496 × 448 in Figma; positions in % so it scales) ── */
+  .map {
+    position: relative;
+    aspect-ratio: 496 / 448;
+    overflow: hidden;
+    border-radius: 28px;
+    background: var(--bg-nav);
+  }
+  .map__static,
+  .map :global(iframe) {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .map__static :global(.map__image) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .map__ring,
+  .map__pin {
+    position: absolute;
+    aspect-ratio: 1;
+    height: auto;
+  }
+  .map__ring--outer { left: 27.82%; top: 20.98%; width: 44.35%; }
+  .map__ring--inner { left: 37.9%; top: 32.14%; width: 24.19%; }
+  .map__pin {
+    left: 42.74%;
+    top: 37.5%;
+    display: grid;
+    place-items: center;
+    width: 14.52%;
+    border-radius: 50%;
+    background: var(--brand-plum);
+  }
+  .map__pin img { width: 44%; height: auto; }
+
+  .map__show {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--bg-default);
+    color: var(--text-highlight);
+    font: var(--type-button);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--plum-700) 15%, transparent);
+    transition: background-color var(--dur-hover) var(--ease-out);
+  }
+  .map__show[hidden] { display: none; }
+  @media (hover: hover) {
+    .map__show:hover { background: var(--periwinkle-100); }
+  }
+
+  @media (min-width: 768px) {
+    .contact__actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 12px 16px;
+    }
+    .contact__actions :global(.btn) { width: auto; }
+  }
+
+  @media (min-width: 1024px) {
+    .contact { padding-block: var(--section-pad-desktop); }
+    .contact__inner {
+      flex-direction: row;
+      align-items: center;
+      gap: 64px;
+    }
+    .contact__copy {
+      flex: 1 1 400px;
+      gap: 32px;
+    }
+    .contact__copy :global(.contact__title) { gap: 32px; }
+    .details__row {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-block: 20px;
+    }
+    .details dd { justify-content: flex-end; text-align: right; }
+    .map { flex: 0 1 496px; min-width: 0; }
+  }
+</style>
