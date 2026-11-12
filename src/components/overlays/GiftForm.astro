@@ -1,0 +1,291 @@
+---
+/**
+ * Gift voucher form pop-up (Figma desktop 165:887, mobile full screen 251:1191)
+ * and its success screen "Bon wysłany" (165:947 / 251:1241), in one <dialog>.
+ * Opened by "Zamów bon" (data-open-dialog="gift-form").
+ * Validates in the browser, then calls submitVoucherRequest() (scripts/voucher.ts),
+ * which sends nothing in phase 1.
+ */
+import Modal from '../Modal.astro';
+import FormField from '../FormField.astro';
+import Button from '../Button.astro';
+import sign from '../../assets/brand/sign-white.svg';
+import type { Content, Locale } from '../../data';
+
+type Props = { locale: Locale; content: Content };
+const { locale, content } = Astro.props;
+const { site, services, ui } = content;
+const { gift } = site;
+const f = gift.form.fields;
+const copy = ui.giftForm;
+const [typeMassage, typeAmount] = gift.form.voucherTypes;
+
+const massageGroups = services.categories.map((c) => ({
+  label: c.name,
+  options: c.treatments.map((t) => ({ value: t.name, label: t.name })),
+}));
+const durations = Object.fromEntries(
+  services.categories.flatMap((c) => c.treatments.map((t) => [t.name, t.options.map((o) => o.duration)])),
+);
+---
+
+<Modal id="gift-form" title={gift.title} closeLabel={ui.close} width={720} size="large" tone="plum" mobile="fullscreen" class="gift-modal">
+  <form
+    class="gift-form"
+    novalidate
+    data-gift-form
+    data-locale={locale}
+    data-durations={JSON.stringify(durations)}
+    data-errors={JSON.stringify(copy.errors)}
+    data-duration-choose={copy.durationChoose}
+  >
+    <div class="gift-form__view" data-view="form">
+      <p class="gift-form__intro">{copy.intro}</p>
+
+      <fieldset class="segmented">
+        <legend class="label segmented__legend">{copy.typeLabel}</legend>
+        <div class="segmented__track">
+          <label class="segmented__option">
+            <input type="radio" name="type" value="massage" checked />
+            <span>{typeMassage}</span>
+          </label>
+          <label class="segmented__option">
+            <input type="radio" name="type" value="amount" />
+            <span>{typeAmount}</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="gift-form__row" data-for-type="massage">
+        <FormField id="gift-massage" name="massage" type="select" label={f.massage} placeholder={f.massagePlaceholder} optionGroups={massageGroups} required />
+        <FormField id="gift-duration" name="duration" type="select" label={f.duration} placeholder={copy.durationPlaceholder} required disabled />
+      </div>
+      <div class="gift-form__row" data-for-type="amount" hidden>
+        <FormField id="gift-amount" name="amount" type="number" label={copy.amount} placeholder={copy.amountPlaceholder} inputmode="numeric" min="1" step="1" required disabled />
+      </div>
+
+      <FormField id="gift-recipient" name="recipient" label={f.recipient} placeholder={f.recipientPlaceholder} maxlength={40} autocomplete="off" />
+
+      <div class="gift-form__row">
+        <FormField id="gift-name" name="name" label={f.name} placeholder={copy.namePlaceholder} maxlength={40} autocomplete="name" required />
+        <FormField id="gift-phone" name="phone" type="tel" label={f.phone} placeholder={copy.phonePlaceholder} autocomplete="tel" inputmode="tel" required />
+      </div>
+
+      <FormField id="gift-message" name="message" type="textarea" label={f.message} placeholder={f.messagePlaceholder} maxlength={1000} />
+
+      <div class="consent">
+        <input class="consent__box" type="checkbox" id="gift-consent" name="consent" required aria-describedby="gift-consent-error" />
+        <p class="consent__text">
+          <label for="gift-consent">{copy.consent}</label>
+          <button type="button" class="consent__link" data-open-dialog="privacy-policy" aria-haspopup="dialog">{copy.consentLink}</button>
+        </p>
+      </div>
+      <p class="field__error consent__error" id="gift-consent-error" hidden></p>
+
+      <div class="gift-form__submit">
+        <Button variant="inverse" type="submit" data-submit>{copy.submit}</Button>
+        <p class="gift-form__hint">{copy.submitHint}</p>
+      </div>
+      <p class="gift-form__send-error" role="alert" hidden data-send-error>{copy.errors.send}</p>
+    </div>
+
+    <div class="gift-form__view gift-sent" data-view="sent" hidden>
+      <img class="gift-sent__sign" src={sign.src} width="69" height="80" alt="" />
+      <h3 class="gift-sent__title" tabindex="-1" data-sent-title>
+        {copy.sent.title[0]}<br /><em>{copy.sent.title[1]}</em>
+      </h3>
+      <p class="gift-sent__text">{copy.sent.text}</p>
+      <Button variant="inverse" data-close-dialog>{copy.sent.close}</Button>
+    </div>
+  </form>
+</Modal>
+
+<script>
+  import { initGiftForm } from '../../scripts/gift-form';
+  document.querySelectorAll<HTMLFormElement>('[data-gift-form]').forEach(initGiftForm);
+</script>
+
+<style>
+  .gift-form__view {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .gift-form__view[hidden] { display: none; }
+
+  .gift-form__intro { color: var(--text-inverse-subtle); }
+
+  /* ── Segmented control ── */
+  .segmented {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .segmented__legend {
+    float: left; /* lets the legend sit in the flex column */
+    margin-bottom: 8px;
+    padding: 0;
+    color: var(--text-inverse);
+    line-height: 15px;
+  }
+  .segmented__track {
+    clear: both;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--plum-600);
+  }
+  .segmented__option {
+    position: relative;
+    flex: 1 1 0;
+    cursor: pointer;
+  }
+  .segmented__option input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .segmented__option span {
+    display: block;
+    padding: 10px 20px;
+    border-radius: 999px;
+    color: var(--text-inverse);
+    font: var(--type-button);
+    line-height: 17px;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color var(--dur-hover) var(--ease-out), color var(--dur-hover) var(--ease-out);
+  }
+  .segmented__option input:checked + span {
+    background: var(--bg-default);
+    color: var(--text-highlight);
+  }
+  .segmented__option input:focus-visible + span {
+    outline: 2px solid var(--periwinkle-200);
+    outline-offset: 2px;
+  }
+  @media (hover: hover) {
+    .segmented__option input:not(:checked):hover + span { background: var(--plum-700); }
+  }
+
+  /* ── Rows ── */
+  .gift-form__row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .gift-form__row[hidden] { display: none; }
+  .gift-form__row > :global(*) { flex: 1 1 0; min-width: 0; }
+
+  /* ── Consent ── */
+  .consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .consent__box {
+    appearance: none;
+    position: relative;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    border: 1.5px solid var(--white);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color var(--dur-hover) var(--ease-out);
+  }
+  .consent__box:checked { background: var(--white); }
+  .consent__box:checked::after {
+    content: '';
+    position: absolute;
+    left: 5.5px;
+    top: 1.5px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--bg-highlight);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .consent__box:focus-visible {
+    outline: 2px solid var(--periwinkle-200);
+    outline-offset: 3px;
+  }
+  .consent__box[aria-invalid='true'] { border-color: var(--plum-200); }
+  .consent__text {
+    font: 400 14px/1.55 var(--font-sans);
+    color: var(--text-inverse-subtle);
+  }
+  .consent__text label { cursor: pointer; }
+  .consent__link {
+    color: var(--text-inverse);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .consent__error { margin-top: -8px; }
+  .field__error {
+    font: 500 14px/1.4 var(--font-sans);
+    color: var(--plum-100);
+  }
+  .field__error[hidden] { display: none; }
+
+  /* ── Submit ── */
+  .gift-form__submit {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .gift-form__hint {
+    font: 400 14px/1.55 var(--font-sans);
+    color: var(--text-inverse-subtle);
+  }
+  .gift-form__submit :global(.btn[aria-busy='true']) { opacity: 0.7; cursor: progress; }
+  .gift-form__send-error {
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: var(--plum-600);
+    font: 500 14px/1.5 var(--font-sans);
+  }
+  .gift-form__send-error[hidden] { display: none; }
+
+  /* ── Success ── */
+  .gift-sent {
+    align-items: center;
+    gap: 20px;
+    padding-block: 8px 32px;
+    text-align: center;
+  }
+  .gift-sent__sign { width: 69px; height: auto; }
+  .gift-sent__title {
+    font: 400 36px/1 var(--font-serif);
+    letter-spacing: -0.005em;
+    color: var(--text-inverse);
+  }
+  .gift-sent__title:focus { outline: none; }
+  .gift-sent__title em {
+    font-style: italic;
+    color: var(--text-inverse-subtle);
+  }
+  .gift-sent__text {
+    max-width: 494px;
+    color: var(--text-inverse-subtle);
+  }
+
+  /* While the success screen shows, the header keeps only the close button. */
+  :global(.gift-modal.is-sent .modal__title) { visibility: hidden; }
+
+  @media (min-width: 768px) {
+    .gift-form__row { flex-direction: row; }
+    .gift-form__submit {
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+    }
+  }
+</style>

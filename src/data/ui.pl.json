@@ -36,5 +36,71 @@
     "tagline": "Chwila tylko dla Ciebie · A moment just for you",
     "address": "Warszawa · Krucza 16/22",
     "website": "massageheavenwarsaw.com"
+  },
+  "menu": "Menu",
+  "policyUpdatedPrefix": "Ostatnia aktualizacja:",
+  "giftForm": {
+    "_note": "Gift voucher form copy not in site.json, taken from Figma 165:887 / 165:947. Error messages and the amount field are not designed yet (see docs/open-questions.md).",
+    "intro": "Odezwiemy się, żeby ustalić szczegóły, płatność i odbiór bonu.",
+    "typeLabel": "Rodzaj bonu",
+    "amount": "Kwota (zł)",
+    "amountPlaceholder": "np. 300",
+    "durationPlaceholder": "Najpierw wybierz masaż",
+    "namePlaceholder": "Imię i nazwisko",
+    "phonePlaceholder": "+48",
+    "consent": "Zgadzam się na kontakt w sprawie zamówienia bonu.",
+    "consentLink": "Polityka prywatności",
+    "submit": "Wyślij zapytanie",
+    "submitHint": "To zapytanie, nie zamówienie — nic jeszcze nie płacisz.",
+    "sending": "Wysyłanie…",
+    "errors": {
+      "massage": "Wybierz masaż.",
+      "duration": "Wybierz czas trwania.",
+      "amount": "Wpisz kwotę bonu.",
+      "name": "Wpisz swoje imię.",
+      "phone": "Wpisz poprawny numer telefonu, np. 600 123 456.",
+      "consent": "Zaznacz zgodę, żebyśmy mogli się z Tobą skontaktować.",
+      "send": "Nie udało się wysłać zapytania. Spróbuj jeszcze raz albo napisz do nas na WhatsAppie."
+    },
+    "sent": {
+      "title": [
+        "Dziękujemy,",
+        "zapytanie wysłane"
+      ],
+      "text": "Odezwiemy się, żeby potwierdzić szczegóły bonu, płatność i odbiór.",
+      "close": "Zamknij"
+    },
+    "durationChoose": "Wybierz czas trwania"
+  },
+  "cookies": {
+    "_note": "Cookie banner and settings copy from Figma 232:1064 / 232:1074.",
+    "bannerTitle": [
+      "Pliki",
+      "cookies"
+    ],
+    "bannerText": "Używamy niezbędnych plików cookies, żeby strona działała. Za Twoją zgodą włączymy też mapę Google i statystyki odwiedzin. Więcej w {link}.",
+    "bannerLink": "Polityce prywatności",
+    "rejectAll": "Tylko niezbędne",
+    "acceptAll": "Akceptuję wszystkie",
+    "settingsLink": "Ustawienia cookies",
+    "settingsTitle": [
+      "Ustawienia",
+      "cookies"
+    ],
+    "settingsIntro": "Wybierz, na które pliki cookies się zgadzasz. Swój wybór możesz zmienić w każdej chwili w stopce strony.",
+    "necessary": {
+      "title": "Niezbędne",
+      "text": "Potrzebne do działania strony, np. do zapamiętania języka i Twojego wyboru cookies.",
+      "status": "Zawsze aktywne"
+    },
+    "functional": {
+      "title": "Funkcjonalne",
+      "text": "Wyświetlają mapę Google z dojazdem do gabinetu."
+    },
+    "analytics": {
+      "title": "Analityczne",
+      "text": "Pomagają nam zrozumieć, jak korzystasz ze strony, i ją ulepszać."
+    },
+    "save": "Zapisz wybór"
   }
 }

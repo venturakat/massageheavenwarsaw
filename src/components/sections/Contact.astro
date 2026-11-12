@@ -178,6 +178,7 @@ const embedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
     box-shadow: 0 4px 16px color-mix(in srgb, var(--plum-700) 15%, transparent);
     transition: background-color var(--dur-hover) var(--ease-out);
   }
+  .map__static[hidden],
   .map__show[hidden] { display: none; }
   @media (hover: hover) {
     .map__show:hover { background: var(--periwinkle-100); }

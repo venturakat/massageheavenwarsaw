@@ -10,6 +10,10 @@
  * Open:  any element with data-open-dialog="<id>", or openDialog(id) from scripts/dialogs.
  * Close: the close button, Esc, a click on the dim, or any [data-close-dialog] inside.
  * Title: [plain, italic] — the second part is set in plum italic.
+ * size="large": 32 / 40 px padding, 32 px radius, bigger two-line title (gift form 165:887).
+ * size="document": "large" with a fixed 760 px height where only the body scrolls
+ * (privacy policy 226:1057).
+ * tone="plum": plum card, white title with a periwinkle-200 italic line (gift form).
  */
 import Icon from './Icon.astro';
 
@@ -19,17 +23,20 @@ type Props = {
   closeLabel: string;
   width?: number;
   mobile?: 'sheet' | 'fullscreen';
+  size?: 'default' | 'large' | 'document';
+  tone?: 'light' | 'plum';
   class?: string;
 };
 
-const { id, title, closeLabel, width = 440, mobile = 'sheet', class: className } = Astro.props;
+const { id, title, closeLabel, width = 440, mobile = 'sheet', size = 'default', tone = 'light', class: className } = Astro.props;
+const twoLines = size !== 'default';
 const [plain, italic] = title;
 const titleId = `${id}-title`;
 ---
 
 <dialog
   id={id}
-  class:list={['modal', `modal--${mobile}`, className]}
+  class:list={['modal', `modal--${mobile}`, `modal--${size}`, `modal--${tone}`, className]}
   aria-labelledby={titleId}
   style={`--modal-width: ${width}px`}
   data-dialog
@@ -37,7 +44,7 @@ const titleId = `${id}-title`;
   <div class="modal__card">
     <div class="modal__top">
       <h2 class="modal__title" id={titleId}>
-        {plain}{italic && <> <em>{italic}</em></>}
+        {plain}{italic && (twoLines ? <><br /><em>{italic}</em></> : <> <em>{italic}</em></>)}
       </h2>
       <button type="button" class="modal__close" aria-label={closeLabel} data-close-dialog>
         <Icon name="close" />
@@ -108,6 +115,48 @@ const titleId = `${id}-title`;
     .modal__close:hover { background: var(--bg-highlight); }
   }
 
+  /* ── Large (gift form) and document (privacy policy) ── */
+  .modal--large,
+  .modal--document {
+    border: 0;
+    border-radius: 32px;
+  }
+  .modal--large .modal__card,
+  .modal--document .modal__card { padding: 32px 40px; }
+  .modal--large .modal__top,
+  .modal--document .modal__top { align-items: flex-start; }
+  .modal--large .modal__title,
+  .modal--document .modal__title {
+    font: 400 32px/1.1 var(--font-serif);
+    letter-spacing: -0.005em;
+  }
+
+  .modal--document { height: min(760px, 100dvh - 48px); }
+  .modal--document .modal__card {
+    height: 100%;
+    gap: 24px;
+    overflow: hidden;
+  }
+  .modal--document .modal__body {
+    flex: 1;
+    min-height: 0;
+    padding-right: 8px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  /* ── Plum tone ── */
+  .modal--plum {
+    background: var(--bg-highlight);
+    color: var(--text-inverse);
+  }
+  .modal--plum .modal__title { color: var(--text-inverse); }
+  .modal--plum .modal__title em { color: var(--text-inverse-subtle); }
+  @media (hover: hover) {
+    .modal--plum .modal__close:hover { background: var(--plum-700); }
+  }
+  .modal--plum :focus-visible { outline-color: var(--periwinkle-200); }
+
   .modal::backdrop {
     background: color-mix(in srgb, var(--plum-700) 45%, transparent);
   }
@@ -130,7 +179,37 @@ const titleId = `${id}-title`;
 
   @media (prefers-reduced-motion: reduce) {
     .modal,
-    .modal::backdrop { transition: none; }
+    /* ── Large (gift form) and document (privacy policy) ── */
+  .modal--large,
+  .modal--document {
+    border: 0;
+    border-radius: 32px;
+  }
+  .modal--large .modal__card,
+  .modal--document .modal__card { padding: 32px 40px; }
+  .modal--large .modal__top,
+  .modal--document .modal__top { align-items: flex-start; }
+  .modal--large .modal__title,
+  .modal--document .modal__title {
+    font: 400 32px/1.1 var(--font-serif);
+    letter-spacing: -0.005em;
+  }
+
+  .modal--document { height: min(760px, 100dvh - 48px); }
+  .modal--document .modal__card {
+    height: 100%;
+    gap: 24px;
+    overflow: hidden;
+  }
+  .modal--document .modal__body {
+    flex: 1;
+    min-height: 0;
+    padding-right: 8px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .modal::backdrop { transition: none; }
   }
 
   /* ── Mobile ── */
@@ -156,5 +235,10 @@ const titleId = `${id}-title`;
       height: 100%;
       padding: 20px;
     }
+    .modal--large .modal__card,
+    .modal--document .modal__card { padding: 20px; }
+    .modal--document .modal__card { gap: 20px; }
+    .modal--large .modal__title,
+    .modal--document .modal__title { font-size: 28px; }
   }
 </style>

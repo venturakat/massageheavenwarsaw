@@ -1,0 +1,97 @@
+---
+/**
+ * Cookie banner (Figma desktop 232:1064, mobile 251:1301). Not a modal: no dim,
+ * the page stays usable. Appears ~0.8 s after the first visit, bottom left on
+ * desktop, a card 12 px from the edges on mobile. Rejecting is as easy as accepting.
+ */
+import Button from '../Button.astro';
+import TextLink from '../TextLink.astro';
+import type { Content } from '../../data';
+
+type Props = { content: Content };
+const { ui } = Astro.props.content;
+const c = ui.cookies;
+const [before, after] = c.bannerText.split('{link}');
+---
+
+<section class="cookie-banner" aria-labelledby="cookie-banner-title" hidden data-cookie-banner>
+  <h2 class="cookie-banner__title" id="cookie-banner-title">
+    {c.bannerTitle[0]} <em>{c.bannerTitle[1]}</em>
+  </h2>
+  <p class="cookie-banner__text">
+    {before}<button type="button" class="cookie-banner__link" data-open-dialog="privacy-policy" aria-haspopup="dialog">{c.bannerLink}</button>{after}
+  </p>
+  <div class="cookie-banner__buttons">
+    <Button variant="secondary" data-consent="reject-all">{c.rejectAll}</Button>
+    <Button data-consent="accept-all">{c.acceptAll}</Button>
+  </div>
+  <TextLink kind="nav" data-open-dialog="cookie-settings" aria-haspopup="dialog">{c.settingsLink}</TextLink>
+</section>
+
+<script>
+  import '../../scripts/consent';
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px;
+    border: 1px solid var(--border-default);
+    border-radius: 24px;
+    background: var(--bg-default);
+    box-shadow: 0 24px 64px color-mix(in srgb, var(--plum-700) 30%, transparent);
+    animation: cookie-in var(--dur-overlay) var(--ease-out);
+  }
+  .cookie-banner[hidden] { display: none; }
+  @keyframes cookie-in {
+    from { opacity: 0; transform: translateY(8px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cookie-banner { animation: none; }
+  }
+
+  .cookie-banner__title { font: var(--type-h4); }
+  .cookie-banner__title em {
+    font-style: italic;
+    color: var(--text-highlight);
+  }
+  .cookie-banner__text {
+    font: 400 14px/1.5 var(--font-sans);
+    color: var(--text-secondary);
+  }
+  .cookie-banner__link {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cookie-banner__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .cookie-banner__buttons :global(.btn) {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .cookie-banner {
+      left: 24px;
+      right: auto;
+      bottom: 24px;
+      width: 400px;
+    }
+    .cookie-banner__buttons { flex-direction: row; }
+  }
+</style>

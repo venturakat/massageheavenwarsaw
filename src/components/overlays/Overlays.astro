@@ -1,0 +1,25 @@
+---
+/**
+ * Every pop-up on the page, rendered once at the end of <body>.
+ * They stay closed until a button with data-open-dialog / data-booking opens them.
+ */
+import BookingChooser from './BookingChooser.astro';
+import Menu from './Menu.astro';
+import PrivacyPolicy from './PrivacyPolicy.astro';
+import GiftForm from './GiftForm.astro';
+import CookieSettings from './CookieSettings.astro';
+import CookieBanner from './CookieBanner.astro';
+import { allChoosers } from '../../data/booking';
+import type { Content, Locale } from '../../data';
+
+type Props = { locale: Locale; content: Content };
+const { locale, content } = Astro.props;
+const { ui } = content;
+---
+
+{allChoosers(content).map((chooser) => <BookingChooser chooser={chooser} closeLabel={ui.close} newTabLabel={ui.newTab} />)}
+<Menu locale={locale} content={content} />
+<GiftForm locale={locale} content={content} />
+<CookieSettings content={content} />
+<PrivacyPolicy content={content} />
+<CookieBanner content={content} />

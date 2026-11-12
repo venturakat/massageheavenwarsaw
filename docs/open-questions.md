@@ -42,6 +42,16 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Mobile gift section bottom padding:** Figma 240:1273 has 36 px under the voucher; built with the standard 56 px.
 - [ ] **Hero buttons at 1024–1100 px:** the three buttons don't fit on one line, so the two secondary ones wrap below "Zarezerwuj wizytę". Not designed; looks fine, confirm.
 
+## Found while building (step 4, pop-ups)
+- [ ] **Therapist chooser rows with a note:** in Figma 293:1435 the WhatsApp and Instagram rows stay 72 px and the plum note overlaps the divider. Built so those rows grow to 92 px and nothing overlaps.
+- [ ] **Voucher type label:** Figma 165:887 says "Wybrana kwota"; `site.json` says "Kwota". Built with "Kwota" (content wins).
+- [ ] **Gift form "Kwota" field:** built as a plain number field "Kwota (zł)", any positive amount. Min/max or preset amounts still to decide.
+- [ ] **Form error messages:** written by Claude (`src/data/ui.pl.json` → `giftForm.errors`), shown in plum-100 under each field. Not designed; please review the wording.
+- [ ] **Copy for pop-ups:** the gift form, success screen and cookie texts came from Figma into `src/data/ui.pl.json`. The developer may want to move them into `site.json` so the admin panel can edit them.
+- [ ] **Google map embed:** uses the keyless `google.com/maps?q=…&output=embed` URL built from the address. Swap for an official embed URL from Google Maps → Share → Embed if preferred.
+- [ ] **Analytics hook:** no tool yet. The consent script fires a `mh:consent` event on `window` with the choice; start analytics there when one is chosen.
+- [ ] **Mobile menu logo:** the menu uses the 150 px logo (Figma 242:1206), the page header the 218 px one (240:1368). Built as Figma; this also explains the "150 px" in `design-system.md`.
+
 ## Decided (for reference)
 - Lowest price stays **"od 80 zł"** (the client's old site said 64 zł; ignore it).
 - Names: **Anastazja** and **Ina** everywhere. The privacy policy keeps the legal name Anastasiia Zhelezniak.

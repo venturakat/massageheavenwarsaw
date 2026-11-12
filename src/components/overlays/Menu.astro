@@ -1,0 +1,158 @@
+---
+/**
+ * Mobile menu (Figma 242:1204). Full-screen <dialog>, opened by the header menu
+ * button (shown below 1180 px). Logo, close, the six section links, language
+ * switch, "Zarezerwuj wizytę" (swaps the menu for the chooser) and the address.
+ * A link closes the menu, then scrolls to its section.
+ */
+import logo from '../../assets/brand/logo-plum.svg';
+import Icon from '../Icon.astro';
+import Button from '../Button.astro';
+import LanguageSwitch from '../LanguageSwitch.astro';
+import type { Content, Locale } from '../../data';
+
+type Props = { locale: Locale; content: Content };
+const { locale, content } = Astro.props;
+const { site, ui } = content;
+---
+
+<dialog id="menu" class="menu" aria-label={ui.menu} data-dialog>
+  <div class="menu__top">
+    <a class="menu__logo" href="#top" aria-label={ui.logoHome} data-menu-link>
+      <img src={logo.src} width="150" height="28" alt="" />
+    </a>
+    <button class="menu__close" type="button" aria-label={ui.close} data-close-dialog>
+      <Icon name="close-large" />
+    </button>
+  </div>
+
+  <nav class="menu__links" aria-label={ui.mainNav}>
+    <ul role="list">
+      {
+        site.nav.map((item) => (
+          <li>
+            <a class="menu__link" href={`#${item.anchor}`} data-menu-link>
+              <span>{item.label}</span>
+              <Icon name="arrow-right" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <div class="menu__bottom">
+    <LanguageSwitch locale={locale} label={ui.languageSwitch} names={ui.languages} />
+    <Button block data-booking="general" data-replace-dialog aria-haspopup="dialog">{ui.bookVisit}</Button>
+    <p class="label menu__address">{site.studio.addressTopBar} · {site.studio.city}</p>
+  </div>
+</dialog>
+
+<script>
+  import { closeDialog } from '../../scripts/dialogs';
+
+  // Close the menu first (the page can't scroll while it's open), then go to the section.
+  document.addEventListener('click', (event) => {
+    const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('[data-menu-link]');
+    const menu = document.getElementById('menu');
+    if (!link || !(menu instanceof HTMLDialogElement)) return;
+    event.preventDefault();
+    closeDialog(menu, false);
+    const hash = link.hash;
+    const target = hash === '#top' ? document.body : document.querySelector<HTMLElement>(hash);
+    const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    requestAnimationFrame(() => {
+      if (hash === '#top') window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+      else target?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
+      history.pushState(null, '', hash);
+      target?.focus({ preventScroll: true });
+    });
+  });
+</script>
+
+<style>
+  .menu {
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--bg-default);
+    color: var(--text-primary);
+  }
+  .menu[open] {
+    display: flex;
+    flex-direction: column;
+  }
+  .menu::backdrop { background: var(--bg-default); }
+
+  /* Fade, 200 ms. */
+  .menu {
+    opacity: 0;
+    transition:
+      opacity var(--dur-overlay) var(--ease-out),
+      overlay var(--dur-overlay) allow-discrete,
+      display var(--dur-overlay) allow-discrete;
+  }
+  .menu[open] { opacity: 1; }
+  @starting-style {
+    .menu[open] { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .menu { transition: none; }
+  }
+
+  .menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 47px var(--gutter) 12px;
+  }
+  .menu__logo img { width: 150px; height: auto; }
+
+  .menu__close {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-highlight);
+    border-radius: 999px;
+    color: var(--text-highlight);
+    transition: background-color var(--dur-hover) var(--ease-out);
+  }
+
+  .menu__links { padding: 16px var(--gutter) 0; }
+  .menu__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--border-default);
+    font: var(--type-h3);
+    letter-spacing: var(--tracking-h3);
+    color: var(--text-primary);
+    transition: color var(--dur-hover) var(--ease-out);
+  }
+  .menu__link :global(.icon) { color: var(--text-highlight); }
+
+  .menu__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: auto;
+    padding: 24px var(--gutter) 32px;
+  }
+  .menu__bottom :global(.btn) { padding-block: 13px; }
+  .menu__address {
+    color: var(--text-secondary);
+    line-height: 15px;
+  }
+
+  @media (hover: hover) {
+    .menu__close:hover { background: var(--plum-100); }
+    .menu__link:hover { color: var(--text-highlight); }
+  }
+</style>
