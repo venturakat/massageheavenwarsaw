@@ -7,6 +7,7 @@
 import logo from '../assets/brand/logo-plum.svg';
 import MenuIcon from '../assets/brand/icon-menu.svg';
 import Button from './Button.astro';
+import TextLink from './TextLink.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
 import type { Content, Locale } from '../data';
 
@@ -33,9 +34,7 @@ const { site, ui } = content;
           {
             site.nav.map((item) => (
               <li>
-                <a class="nav-link" href={`#${item.anchor}`}>
-                  {item.label}
-                </a>
+                <TextLink href={`#${item.anchor}`}>{item.label}</TextLink>
               </li>
             ))
           }
@@ -112,19 +111,6 @@ const { site, ui } = content;
   }
   .navbar__links li { display: flex; }
 
-  .nav-link {
-    font: var(--type-nav);
-    line-height: 17px;
-    color: var(--text-primary);
-    text-decoration-line: underline;
-    text-decoration-color: transparent;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
-    transition:
-      color var(--dur-hover) var(--ease-out),
-      text-decoration-color var(--dur-hover) var(--ease-out);
-  }
-
   .navbar__actions {
     align-items: center;
     gap: 20px;
@@ -143,10 +129,6 @@ const { site, ui } = content;
   }
 
   @media (hover: hover) {
-    .nav-link:hover {
-      color: var(--text-highlight);
-      text-decoration-color: currentColor;
-    }
     .navbar__menu-btn:hover { background: var(--plum-100); }
   }
 

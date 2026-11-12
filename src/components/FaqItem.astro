@@ -1,0 +1,126 @@
+---
+/**
+ * FAQ item (Figma 152:103). Question button with aria-expanded + answer region.
+ * Items open and close independently (250 ms). Pass `open` for the item that
+ * starts open (the first one on the page).
+ */
+import Icon from './Icon.astro';
+
+type Props = { id: string; question: string; answer: string; open?: boolean };
+const { id, question, answer, open = false } = Astro.props;
+const buttonId = `${id}-q`;
+const panelId = `${id}-a`;
+---
+
+<div class:list={['faq-item', { 'is-open': open }]} data-faq-item>
+  <h3 class="faq-item__heading">
+    <button
+      type="button"
+      class="faq-item__question"
+      id={buttonId}
+      aria-expanded={open ? 'true' : 'false'}
+      aria-controls={panelId}
+    >
+      <span class="faq-item__text">{question}</span>
+      <span class="faq-item__toggle">
+        <Icon name="plus" class="faq-item__plus" />
+        <Icon name="minus" class="faq-item__minus" />
+      </span>
+    </button>
+  </h3>
+  <div class="faq-item__panel" id={panelId} role="region" aria-labelledby={buttonId}>
+    <div class="faq-item__inner">
+      <p class="faq-item__answer">{answer}</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('click', (event) => {
+    const button = (event.target as Element | null)?.closest<HTMLButtonElement>('.faq-item__question');
+    if (!button) return;
+    const item = button.closest('[data-faq-item]');
+    const open = button.getAttribute('aria-expanded') !== 'true';
+    button.setAttribute('aria-expanded', String(open));
+    item?.classList.toggle('is-open', open);
+  });
+</script>
+
+<style>
+  .faq-item {
+    border-top: 1px solid var(--border-default);
+  }
+
+  .faq-item__question {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    padding-block: 22px;
+    text-align: left;
+  }
+  .faq-item.is-open .faq-item__question { padding-bottom: 0; }
+
+  .faq-item__text {
+    flex: 1;
+    font: var(--type-h4);
+    color: var(--text-primary);
+    transition: color var(--dur-hover) var(--ease-out);
+  }
+
+  .faq-item__toggle {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--bg-nav);
+    color: var(--text-highlight);
+    transition:
+      background-color var(--dur-accordion) var(--ease-out),
+      color var(--dur-accordion) var(--ease-out);
+  }
+  .faq-item__toggle :global(.icon) { grid-area: 1 / 1; }
+  .faq-item :global(.faq-item__minus),
+  .faq-item.is-open :global(.faq-item__plus) { display: none; }
+  .faq-item.is-open :global(.faq-item__minus) { display: inline-block; }
+  .faq-item.is-open .faq-item__toggle {
+    background: var(--bg-highlight);
+    color: var(--text-inverse);
+  }
+
+  /* Height animation: 0fr → 1fr. Closed answers are hidden from tab order and screen readers. */
+  .faq-item__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+      grid-template-rows var(--dur-accordion) var(--ease-out),
+      visibility 0s linear var(--dur-accordion);
+  }
+  .faq-item.is-open .faq-item__panel {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition:
+      grid-template-rows var(--dur-accordion) var(--ease-out),
+      visibility 0s;
+  }
+  .faq-item__inner { overflow: hidden; }
+  .faq-item__answer {
+    max-width: 720px;
+    padding: 10px 0 22px;
+    color: var(--text-secondary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item__panel,
+    .faq-item.is-open .faq-item__panel { transition: none; }
+  }
+
+  /* Not designed: light hover. */
+  @media (hover: hover) {
+    .faq-item__question:hover .faq-item__text { color: var(--text-highlight); }
+    .faq-item:not(.is-open) .faq-item__question:hover .faq-item__toggle { background: var(--bg-accent-subtle); }
+  }
+</style>

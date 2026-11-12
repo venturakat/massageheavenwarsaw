@@ -1,0 +1,31 @@
+---
+/** Duration + price chip (Figma 163:123). 42 px tall inside a treatment row. */
+type Props = { duration: string; price: string };
+const { duration, price } = Astro.props;
+---
+
+<span class="price-pill">
+  <span class="price-pill__duration">{duration}</span>
+  <span class="price-pill__price">{price}</span>
+</span>
+
+<style>
+  .price-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: var(--bg-default);
+    white-space: nowrap;
+  }
+  .price-pill__duration {
+    font: 400 14px/1.55 var(--font-sans);
+    color: var(--text-secondary);
+  }
+  .price-pill__price {
+    font: 600 15px/normal var(--font-sans);
+    color: var(--text-primary);
+  }
+</style>

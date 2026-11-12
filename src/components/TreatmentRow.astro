@@ -1,0 +1,85 @@
+---
+/**
+ * Treatment row (Figma 163:126 desktop, 241:1194 mobile).
+ * Name, price pills, "Zarezerwuj" (opens the general booking chooser).
+ * Lays out by its own width (container query): stacked when narrower than 700 px.
+ * `category` shows the category label above the name (search results).
+ */
+import Button from './Button.astro';
+import PricePill from './PricePill.astro';
+
+type Option = { duration: string; price: string };
+type Props = {
+  name: string;
+  options: Option[];
+  bookLabel: string;
+  category?: string;
+};
+
+const { name, options, bookLabel, category } = Astro.props;
+---
+
+<div class="treatment">
+  <div class="treatment__row">
+    <div class="treatment__info">
+      {category && <p class="label treatment__category">{category}</p>}
+      <h4 class="treatment__name">{name}</h4>
+    </div>
+    <ul class="treatment__options" role="list">
+      {options.map((o) => <li><PricePill duration={o.duration} price={o.price} /></li>)}
+    </ul>
+    <Button variant="secondary" size="sm" class="treatment__book" data-booking="general" aria-haspopup="dialog">
+      {bookLabel}<span class="visually-hidden">: {name}</span>
+    </Button>
+  </div>
+</div>
+
+<style>
+  .treatment {
+    container-type: inline-size;
+    border-top: 1px solid var(--periwinkle-300);
+  }
+
+  .treatment__row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding-block: 20px;
+  }
+
+  .treatment__info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .treatment__category {
+    color: var(--text-accent);
+    line-height: 15px;
+  }
+  .treatment__name {
+    font: var(--type-h4);
+    color: var(--text-primary);
+  }
+
+  .treatment__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .treatment__options li { display: flex; }
+
+  @container (min-width: 700px) {
+    .treatment__row {
+      flex-direction: row;
+      align-items: center;
+      gap: 32px;
+      padding-block: 16px;
+    }
+    .treatment__info {
+      flex: 0 0 min(380px, 36%);
+    }
+    .treatment__options { flex: 1 1 0; }
+    .treatment__row :global(.treatment__book) { flex-shrink: 0; }
+  }
+</style>

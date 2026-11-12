@@ -1,0 +1,52 @@
+---
+/**
+ * On/off switch (Figma 232:1061), used in the cookie settings.
+ * A real checkbox with role="switch"; label it with `aria-labelledby` or a <label for>.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = { checked?: boolean; class?: string } & Omit<HTMLAttributes<'input'>, 'class' | 'type' | 'role'>;
+const { checked = false, class: className, ...rest } = Astro.props;
+---
+
+<input type="checkbox" role="switch" class:list={['toggle', className]} checked={checked} {...rest} />
+
+<style>
+  .toggle {
+    appearance: none;
+    position: relative;
+    flex-shrink: 0;
+    width: 44px;
+    height: 24px;
+    margin: 0;
+    border-radius: 12px;
+    background: var(--border-default);
+    cursor: pointer;
+    transition: background-color var(--dur-toggle) var(--ease-out);
+  }
+  .toggle::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--white);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--black) 15%, transparent);
+    transition: transform var(--dur-toggle) var(--ease-out);
+  }
+  .toggle:checked { background: var(--bg-highlight); }
+  .toggle:checked::before { transform: translateX(20px); }
+  .toggle:disabled { cursor: not-allowed; opacity: 0.6; }
+
+  .toggle:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toggle,
+    .toggle::before { transition: none; }
+  }
+</style>

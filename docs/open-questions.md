@@ -27,6 +27,12 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Language switch font:** Figma 207:1062 uses Inter Regular 12; `design-system.md` says the Label style. Built with Label (Instrument Sans 500, uppercase), so no extra font is loaded.
 - [ ] **Cyrillic:** Instrument Serif and Instrument Sans have no Cyrillic glyphs (only latin + latin-ext). The UA translation will fall back to the system font. Pick a Cyrillic fallback font, or accept it.
 
+## Found while building (step 2, components)
+- [ ] **Hover colours:** `design-system.md` says secondary/inverse buttons and booking rows get a plum-100 fill on hover. Figma (352:1681, 354:3558) uses periwinkle-100. Built with periwinkle-100 to match Figma.
+- [ ] **Team card width:** `design-system.md` says 320 px; Figma 152:104 is 290 px. Built at 290.
+- [ ] **Pop-up dim:** the colour isn't in Figma. Using plum-700 at 45 %.
+- [ ] **Treatment row "Zarezerwuj":** the Figma component note says it links to Booksy; `website.md` says every booking button opens the general chooser. Built as the chooser (the newer decision).
+
 ## Decided (for reference)
 - Lowest price stays **"od 80 zł"** (the client's old site said 64 zł; ignore it).
 - Names: **Anastazja** and **Ina** everywhere. The privacy policy keeps the legal name Anastasiia Zhelezniak.

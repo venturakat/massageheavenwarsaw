@@ -1,0 +1,212 @@
+---
+/**
+ * Component preview (dev server only: /dev/components). Every component from
+ * build step 2 with real Polish content, for checking against Figma.
+ */
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import Button from '../components/Button.astro';
+import TextLink from '../components/TextLink.astro';
+import IconLink from '../components/IconLink.astro';
+import PricePill from '../components/PricePill.astro';
+import FilterChip from '../components/FilterChip.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import TreatmentRow from '../components/TreatmentRow.astro';
+import FaqItem from '../components/FaqItem.astro';
+import TeamCard from '../components/TeamCard.astro';
+import BookingOption from '../components/BookingOption.astro';
+import Toggle from '../components/Toggle.astro';
+import FormField from '../components/FormField.astro';
+import Modal from '../components/Modal.astro';
+import LanguageSwitch from '../components/LanguageSwitch.astro';
+import { getContent } from '../data';
+import { fill, lowestPrice } from '../data/format';
+import { generalBookingGroups } from '../data/booking';
+
+const content = getContent('pl');
+const { site, services, faq, team, ui } = content;
+const price = (amount: number) => fill(ui.price, { amount, currency: services.currency });
+const cats = services.categories;
+const total = String(cats.length).padStart(2, '0');
+const options = (t: (typeof cats)[number]['treatments'][number]) =>
+  t.options.map((o) => ({ duration: o.duration, price: price(o.price) }));
+const booking = generalBookingGroups(content);
+const allTreatments = cats.flatMap((c) => c.treatments.map((t) => ({ value: t.name, label: t.name })));
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Components — Massage Heaven</title>
+  </head>
+  <body>
+    <main class="container preview">
+      <h1 class="preview__title">Components <em>(step 2)</em></h1>
+
+      <section id="button">
+        <h2 class="label">Button · 352:1681</h2>
+        <div class="row">
+          <Button>{ui.bookVisit}</Button>
+          <Button variant="secondary">{site.hero.actions[1]}</Button>
+          <Button size="sm">{ui.bookVisit}</Button>
+          <Button variant="secondary" size="sm">{site.services.bookButton}</Button>
+        </div>
+        <div class="row on-plum"><Button variant="inverse">{ui.bookVisit}</Button></div>
+      </section>
+
+      <section id="text-link">
+        <h2 class="label">Text link · 352:1726 / Icon link · 352:1709</h2>
+        <div class="row">
+          <TextLink href="#text-link">{site.nav[0].label}</TextLink>
+          <TextLink kind="contact" href="#text-link">{site.contact.details[0].value}</TextLink>
+          <IconLink>{site.services.collapse}</IconLink>
+          <IconLink kind="clear">{site.services.clearSearch}</IconLink>
+        </div>
+        <div class="row on-footer">
+          <TextLink kind="footer" href="#text-link">{site.nav[0].label}</TextLink>
+          <TextLink kind="legal">{site.footer.legal[0]}</TextLink>
+          <IconLink kind="arrow">{team.people[0].bookingLabel}</IconLink>
+        </div>
+      </section>
+
+      <section id="pills">
+        <h2 class="label">Price pill · 163:123 / Filter chip · 152:89 / Language switch · 207:1062</h2>
+        <div class="row on-mist">
+          <PricePill duration="60 min" price={price(230)} />
+          <FilterChip active>{cats[0].name}</FilterChip>
+          <FilterChip>{cats[1].name}</FilterChip>
+          <LanguageSwitch locale="pl" label={ui.languageSwitch} names={ui.languages} />
+        </div>
+      </section>
+
+      <section id="service-card">
+        <h2 class="label">Service card · 163:122</h2>
+        <div class="grid-3">
+          {
+            cats.slice(0, 3).map((c, i) => (
+              <ServiceCard
+                number={fill(ui.cardNumber, { number: c.number, total })}
+                name={c.name}
+                tagline={c.tagline}
+                list={c.cardList}
+                price={fill(ui.priceFrom, { price: price(lowestPrice(c.treatments)) })}
+                controls={`panel-${c.id}`}
+                expanded={i === 1}
+              />
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="treatment-row">
+        <h2 class="label">Treatment row · 163:126 (wide) / 241:1194 (narrow)</h2>
+        <div class="panel">
+          {cats[0].treatments.slice(0, 2).map((t) => <TreatmentRow name={t.name} options={options(t)} bookLabel={site.services.bookButton} />)}
+          <TreatmentRow name={cats[1].treatments[0].name} options={options(cats[1].treatments[0])} bookLabel={site.services.bookButton} category={cats[1].name} />
+        </div>
+        <div class="panel panel--narrow">
+          <TreatmentRow name={cats[0].treatments[0].name} options={options(cats[0].treatments[0])} bookLabel={site.services.bookButton} />
+        </div>
+      </section>
+
+      <section id="faq-item">
+        <h2 class="label">FAQ item · 152:103</h2>
+        <div class="faq">
+          {faq.items.slice(0, 3).map((item, i) => <FaqItem id={`faq-${i + 1}`} question={item.q} answer={item.a} open={i === 0} />)}
+        </div>
+      </section>
+
+      <section id="team-card">
+        <h2 class="label">Team card · 152:104</h2>
+        <div class="row on-team">
+          {
+            team.people.map((p) => (
+              <TeamCard id={p.id} name={p.name} bookingLabel={p.bookingLabel} chooser={p.chooser} photoAlt={`${p.name}, ${p.role}`} />
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="booking-option">
+        <h2 class="label">Booking option · 354:3566 / Modal · 293:1219</h2>
+        <div class="booking">
+          {booking[0].options.map((o) => <BookingOption {...o} newTabLabel={ui.newTab} />)}
+        </div>
+        <div class="row">
+          <Button data-open-dialog="demo-booking" aria-haspopup="dialog">{ui.bookVisit}</Button>
+          <Button variant="secondary" data-open-dialog="demo-full" aria-haspopup="dialog">Pełny ekran (mobile)</Button>
+        </div>
+      </section>
+
+      <section id="toggle">
+        <h2 class="label">Toggle · 232:1061</h2>
+        <div class="row">
+          <Toggle aria-label="Funkcjonalne" />
+          <Toggle aria-label="Analityczne" checked />
+        </div>
+      </section>
+
+      <section id="form-field">
+        <h2 class="label">Form field · 152:125</h2>
+        <div class="form on-highlight">
+          <FormField id="f-massage" type="select" label={site.gift.form.fields.massage} placeholder={site.gift.form.fields.massagePlaceholder} options={allTreatments} />
+          <FormField id="f-recipient" label={site.gift.form.fields.recipient} placeholder={site.gift.form.fields.recipientPlaceholder} maxlength={40} />
+          <FormField id="f-phone" type="tel" label={site.gift.form.fields.phone} error="Wpisz poprawny numer telefonu." />
+          <FormField id="f-message" type="textarea" label={site.gift.form.fields.message} placeholder={site.gift.form.fields.messagePlaceholder} />
+        </div>
+      </section>
+    </main>
+
+    <Modal id="demo-booking" title={site.booking.general.title} closeLabel={ui.close}>
+      <p class="intro">{site.booking.general.intro}</p>
+      <div class="groups">
+        {
+          booking.map((g) => (
+            <div class="group">
+              <p class="label group__label">{g.label}</p>
+              <div>{g.options.map((o) => <BookingOption {...o} newTabLabel={ui.newTab} />)}</div>
+            </div>
+          ))
+        }
+      </div>
+    </Modal>
+
+    <Modal id="demo-full" title={['Polityka', 'prywatności']} closeLabel={ui.close} width={720} mobile="fullscreen">
+      <p>Treść pop-upu przewija się w środku.</p>
+    </Modal>
+  </body>
+</html>
+
+<style>
+  .preview { padding-block: 48px 120px; }
+  .preview__title { font: var(--type-h2); margin-bottom: 32px; }
+  .preview__title em { color: var(--text-highlight); }
+  section { margin-bottom: 56px; }
+  section > .label { color: var(--text-secondary); margin-bottom: 16px; }
+
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .on-plum, .on-highlight { background: var(--bg-highlight); }
+  .on-footer { background: var(--bg-footer); }
+  .on-team { background: var(--plum-600); align-items: flex-start; gap: 100px; }
+  .on-mist { background: var(--bg-nav); }
+  .on-plum, .on-footer, .on-team, .on-mist { padding: 24px; border-radius: 16px; }
+
+  .grid-3 { display: grid; gap: 20px; }
+  @media (min-width: 1024px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+  .panel { padding: 36px 40px; border-radius: 28px; background: var(--bg-nav); margin-bottom: 16px; }
+  .panel--narrow { max-width: 390px; padding: 24px 20px; }
+
+  .faq { max-width: 768px; }
+  .booking { max-width: 392px; }
+  .form { display: grid; gap: 24px; max-width: 448px; padding: 24px; border-radius: 16px; }
+
+  .intro { font: 400 14px/1.5 var(--font-sans); color: var(--text-secondary); }
+  .groups { display: flex; flex-direction: column; gap: 18px; }
+  .group { display: flex; flex-direction: column; gap: 6px; }
+  .group__label { color: var(--text-secondary); line-height: 15px; }
+</style>

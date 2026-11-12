@@ -1,0 +1,46 @@
+---
+/**
+ * Category chip (Figma 152:89) shown in the "no results" search state.
+ * A button; `active` sets aria-pressed and the plum fill.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = { active?: boolean; class?: string } & Omit<HTMLAttributes<'button'>, 'class' | 'type'>;
+const { active = false, class: className, ...rest } = Astro.props;
+---
+
+<button type="button" class:list={['chip', className]} aria-pressed={active ? 'true' : 'false'} {...rest}>
+  <slot />
+</button>
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    background: var(--bg-default);
+    color: var(--text-primary);
+    font: var(--type-nav);
+    line-height: 17px;
+    white-space: nowrap;
+    transition:
+      background-color var(--dur-hover) var(--ease-out),
+      border-color var(--dur-hover) var(--ease-out),
+      color var(--dur-hover) var(--ease-out);
+  }
+  .chip[aria-pressed='true'] {
+    border-color: var(--bg-highlight);
+    background: var(--bg-highlight);
+    color: var(--text-inverse);
+  }
+
+  /* Not designed: light hover, consistent with the secondary button. */
+  @media (hover: hover) {
+    .chip[aria-pressed='false']:hover {
+      border-color: var(--border-highlight);
+      background: var(--periwinkle-100);
+    }
+  }
+</style>

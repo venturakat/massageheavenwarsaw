@@ -1,0 +1,121 @@
+---
+/**
+ * Service category card (Figma 163:122 desktop, 240:1091 mobile).
+ * A <button> that opens its treatment panel: aria-expanded="true" = Active (plum).
+ * The services section (step 3) owns the open/close behaviour; the card only styles both states.
+ * Mobile hides the tagline, as in Figma.
+ */
+import arrow from '../assets/icons/card-arrow.svg';
+import arrowActive from '../assets/icons/card-arrow-active.svg';
+
+type Props = {
+  number: string;   // "01 / 06"
+  name: string;
+  tagline: string;
+  list: string;     // short treatment list
+  price: string;    // "od 130 zł"
+  controls: string; // id of the panel this card opens
+  expanded?: boolean;
+  class?: string;
+};
+
+const { number, name, tagline, list, price, controls, expanded = false, class: className } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={['service-card', className]}
+  aria-expanded={expanded ? 'true' : 'false'}
+  aria-controls={controls}
+  data-service-card
+>
+  <span class="service-card__top">
+    <span class="label service-card__number">{number}</span>
+    <span class="service-card__name">{name}</span>
+    <span class="service-card__tagline">{tagline}</span>
+    <span class="service-card__list">{list}</span>
+  </span>
+  <span class="service-card__bottom">
+    <span class="service-card__price">{price}</span>
+    <img class="service-card__arrow" src={arrow.src} width="44" height="44" alt="" />
+    <img class="service-card__arrow service-card__arrow--active" src={arrowActive.src} width="44" height="44" alt="" />
+  </span>
+</button>
+
+<style>
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    padding: 22px 24px;
+    border-radius: 28px;
+    background: var(--bg-nav);
+    text-align: left;
+    transition: background-color var(--dur-hover) var(--ease-out);
+  }
+
+  .service-card__top {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .service-card__number {
+    color: var(--text-highlight);
+    line-height: 15px;
+  }
+  .service-card__name {
+    font: var(--type-h3);
+    letter-spacing: var(--tracking-h3);
+    color: var(--text-primary);
+  }
+  .service-card__tagline {
+    display: none;
+    color: var(--text-secondary);
+  }
+  .service-card__list { color: var(--text-primary); }
+
+  .service-card__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--periwinkle-300);
+  }
+  .service-card__price {
+    font: var(--type-price);
+    color: var(--text-primary);
+  }
+  .service-card__arrow { width: 44px; height: 44px; }
+  .service-card__arrow--active {
+    display: none;
+    transform: rotate(-90deg);
+  }
+
+  /* Active: panel open. */
+  .service-card[aria-expanded='true'] { background: var(--bg-highlight); }
+  .service-card[aria-expanded='true'] .service-card__number { color: var(--plum-200); }
+  .service-card[aria-expanded='true'] .service-card__name,
+  .service-card[aria-expanded='true'] .service-card__list,
+  .service-card[aria-expanded='true'] .service-card__price { color: var(--text-inverse); }
+  .service-card[aria-expanded='true'] .service-card__tagline { color: var(--text-inverse-subtle); }
+  .service-card[aria-expanded='true'] .service-card__bottom { border-color: var(--plum-200); }
+  .service-card[aria-expanded='true'] .service-card__arrow { display: none; }
+  .service-card[aria-expanded='true'] .service-card__arrow--active { display: block; }
+
+  /* Not designed: a light hover on the default card. */
+  @media (hover: hover) {
+    .service-card[aria-expanded='false']:hover { background: var(--bg-accent-subtle); }
+  }
+
+  @media (min-width: 768px) {
+    .service-card {
+      min-height: 356px;
+      padding: 28px;
+    }
+    .service-card__top { gap: 16px; }
+    .service-card__tagline { display: block; }
+    .service-card__bottom { padding-top: 20px; }
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+/**
+ * Single-colour icon from src/assets/icons. The Figma SVG is used as a CSS mask
+ * and painted with currentColor, so one asset covers every colour state
+ * (default / hover / on dark). Decorative by default.
+ */
+import arrowRight from '../assets/icons/arrow-right.svg';
+import arrowUpRight from '../assets/icons/arrow-up-right.svg';
+import at from '../assets/icons/at.svg';
+import calendar from '../assets/icons/calendar.svg';
+import chat from '../assets/icons/chat.svg';
+import chevronDown from '../assets/icons/chevron-down.svg';
+import chevronUp from '../assets/icons/chevron-up.svg';
+import close from '../assets/icons/close.svg';
+import closeSmall from '../assets/icons/close-small.svg';
+import minus from '../assets/icons/minus.svg';
+import plus from '../assets/icons/plus.svg';
+
+const icons = {
+  'arrow-right': arrowRight,
+  'arrow-up-right': arrowUpRight,
+  at,
+  calendar,
+  chat,
+  'chevron-down': chevronDown,
+  'chevron-up': chevronUp,
+  close,
+  'close-small': closeSmall,
+  minus,
+  plus,
+};
+
+export type IconName = keyof typeof icons;
+
+type Props = { name: IconName; class?: string };
+const { name, class: className } = Astro.props;
+const icon = icons[name];
+---
+
+<span
+  class:list={['icon', className]}
+  style={`--icon: url("${icon.src}"); width: ${icon.width}px; height: ${icon.height}px;`}
+  aria-hidden="true"></span>
+
+<style>
+  .icon {
+    display: inline-block;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask: var(--icon) center / contain no-repeat;
+    mask: var(--icon) center / contain no-repeat;
+  }
+</style>

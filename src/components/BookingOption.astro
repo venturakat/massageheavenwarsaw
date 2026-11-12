@@ -1,0 +1,84 @@
+---
+/**
+ * Booking option row (Figma 354:3566) for the reservation choosers.
+ * The whole row is a link that opens in a new tab.
+ * `hrefTouch`: alternative URL used on touch phones (Instagram DM link);
+ * picked at click time by the shared touch-link script.
+ */
+import Icon from './Icon.astro';
+
+type Props = {
+  icon: 'calendar' | 'chat' | 'at';
+  title: string;
+  hint: string;
+  href: string;
+  hrefTouch?: string;
+  note?: string;
+  newTabLabel: string;
+};
+
+const { icon, title, hint, href, hrefTouch, note, newTabLabel } = Astro.props;
+---
+
+<a class="booking-option" href={href} target="_blank" rel="noopener" data-href-touch={hrefTouch}>
+  <span class="booking-option__icon"><Icon name={icon} /></span>
+  <span class="booking-option__text">
+    <span class="booking-option__title">{title}</span>
+    <span class="booking-option__hint">{hint}</span>
+    {note && <span class="booking-option__note">{note}</span>}
+  </span>
+  <Icon name="arrow-up-right" class="booking-option__arrow" />
+  <span class="visually-hidden">{newTabLabel}</span>
+</a>
+
+<script>
+  import '../scripts/touch-links';
+</script>
+
+<style>
+  .booking-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 72px;
+    padding: 14px 5px;
+    border-top: 1px solid var(--border-default);
+    transition: background-color var(--dur-hover) var(--ease-out);
+  }
+
+  .booking-option__icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--bg-accent-subtle);
+    color: var(--text-highlight);
+  }
+
+  .booking-option__text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .booking-option__title {
+    font: var(--type-price);
+    color: var(--text-primary);
+  }
+  .booking-option__hint,
+  .booking-option__note {
+    font: 400 14px/1.5 var(--font-sans);
+    color: var(--text-secondary);
+  }
+  .booking-option__note { color: var(--text-highlight); }
+
+  .booking-option :global(.booking-option__arrow) { color: var(--text-secondary); }
+
+  /* Figma 354:3558 hover. */
+  @media (hover: hover) {
+    .booking-option:hover { background: var(--periwinkle-100); }
+  }
+</style>
