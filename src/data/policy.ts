@@ -4,7 +4,13 @@
  * with paragraphs and bullet lists, and the "last updated" line.
  * [Bracketed placeholders] become <span class="policy-placeholder"> (shown in plum).
  */
-import rawPl from '../../docs/content/privacy-policy.pl.md?raw';
+import type { Locale } from './index';
+
+const sources = import.meta.glob<string>('../../docs/content/privacy-policy.*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
 
 export type Block = { type: 'p' | 'ul'; items: string[] };
 export type Section = { title: string; blocks: Block[] };
@@ -59,4 +65,7 @@ export function parsePolicy(markdown: string, updatedPrefix: string): Policy {
   return policy;
 }
 
-export const policySources = { pl: rawPl };
+/** The policy for a locale, or the Polish one until it's translated. */
+export function policySource(locale: Locale): string {
+  return sources[`../../docs/content/privacy-policy.${locale}.md`] ?? sources['../../docs/content/privacy-policy.pl.md'];
+}

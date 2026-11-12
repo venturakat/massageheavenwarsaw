@@ -6,13 +6,12 @@
  * (data-open-dialog="privacy-policy").
  */
 import Modal from '../Modal.astro';
-import { inline, parsePolicy, policySources } from '../../data/policy';
+import { inline, parsePolicy, policySource } from '../../data/policy';
 import type { Content } from '../../data';
 
 type Props = { content: Content };
-const { ui } = Astro.props.content;
-// Only the Polish policy exists; other languages show it until translated.
-const policy = parsePolicy(policySources.pl, ui.policyUpdatedPrefix);
+const { ui, locale } = Astro.props.content;
+const policy = parsePolicy(policySource(locale), ui.policyUpdatedPrefix);
 const words = policy.title.split(' ');
 const title = [words[0], words.slice(1).join(' ')];
 ---
