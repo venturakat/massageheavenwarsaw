@@ -3,17 +3,12 @@
 Build around these with the placeholder shown. Don't invent answers. Strike an item out when it's resolved, and note the decision.
 
 ## To confirm with the client
-- [ ] **Cancellation notice:** FAQ 08 says 24 h (placeholder). It also names only Booksy; should it say Booksy, Fresha or a message?
-- [ ] **Walking time** from metro Centrum (FAQ 10 says 10 min).
-- [ ] **Opening hours:** taken from the door sign draft. Confirm before they go into the JSON-LD and footer.
-- [ ] **Privacy policy:** publication date, the analytics tool (or none), and 12-month retention for unanswered voucher enquiries. Needs client/legal sign-off. (Data-protection e-mail filled in: anastaziya111@gmail.com, 2026-11-13.)
-- [ ] **Fresha links** use the en-GB locale. Is there a Polish URL?
+- [ ] **Privacy policy — the developer updates it (2026-11-13):** publication date, the analytics tool (or none), and 12-month retention for unanswered voucher enquiries, in all three languages (`privacy-policy.pl.md`, `.en.md`, `.ua.md`; the UA one keeps the legal name in Latin letters). Data-protection e-mail already filled in: anastaziya111@gmail.com.
 
 ## Copy
 - [ ] **About feature** says "20+ zabiegów". There are 24 now; fine as is unless the client wants the exact number.
 
 ## Not designed yet (use a sensible, consistent default)
-- [ ] **English review:** the whole English version (`docs/content/*.en.json`, `src/data/ui.en.json`, `privacy-policy.en.md`) was translated by Claude. Please have it read; the privacy policy needs the same legal sign-off as the Polish one.
 - [ ] **Names in English:** kept as **Anastazja** and **Ina**, as on the Polish site and the booking platforms. Alternatives would be "Anastasia" or the legal "Anastasiia".
 - [ ] Hover states for close buttons, the Contact Instagram block, the map, inline links, service cards, FAQ items, filter chips and the language switch.
 - [ ] The map placeholder shown before cookie consent.
@@ -54,17 +49,22 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 ## Found in the final checks (step 6)
 - [ ] **Grey text on lavender:** the hero lead and the gift text use neutral-600 instead of Figma's text-secondary, which was below the 4.5:1 contrast minimum there (4.0–4.3:1). Update Figma to match, or pick another colour that passes.
 - [ ] **Open Graph image:** none yet (link previews on WhatsApp/Facebook show no picture). Needs a 1200 × 630 image; not designed.
-- [ ] **JSON-LD (LocalBusiness):** not added yet; it needs the confirmed opening hours.
 
 ## Ukrainian version (2026-11-13)
-- [ ] **Native-speaker review:** texts in Figma 540:61 were used as they are; everything else (treatment names, FAQ answers 2–10, team bios, pop-ups, form errors, cookie texts, privacy policy) was translated by Claude. Please have a native speaker read `docs/content/*.ua.json`, `src/data/ui.ua.json` and `privacy-policy.ua.md`.
 - [ ] **«ти» vs «ви»:** Figma's hero lead said «Позбавимо вас…» while every other line uses «ти». Built as «Позбавимо тебе…» to match the rest (and the Polish «Cię»).
-- [ ] **Privacy policy (UA):** a translation of the Polish draft; it needs the same client/legal sign-off. The legal name stays in Latin letters (Anastasiia Zhelezniak).
 - [ ] **Mobile type sizes (UA):** there is no Ukrainian mobile frame. Headings use the Polish mobile sizes scaled by the same ratio as desktop (Display 43, H2 33, H3 22).
 - [ ] **Voucher card:** stays Polish/English («Bon podarunkowy / Gift certificate») in Instrument fonts, as in Figma 540:252 — it is the printed design.
 - [ ] **Performance (UA, mobile):** Lighthouse 90 vs 96 for Polish, because Ukrainian text needs the Cyrillic and Latin files of both fonts (digits, dashes and brand names are Latin). Fine for now; a merged font subset would close the gap.
 
 ## Decided (for reference)
+- Client answers (2026-11-13):
+  - **Opening hours** in `site.json` → `studio.hours` are confirmed. Shown in a new footer column **Godziny / Hours / Години** (the designer's choice, not in Figma yet; see `docs/design/figma-todo.md`) and in the Google business info (JSON-LD) on every homepage.
+  - **Cancellation notice** 24 h (FAQ 08) is fine; the wording stays as it is.
+  - **Walking time** from metro Centrum, 10 min (FAQ 10), is fine.
+  - **Fresha:** Polish links (`fresha.com/pl/…`). The general one is the client's link; the two therapist links are the same pages with `pl` instead of `en-GB`.
+  - **Native-speaker review** of the English and Ukrainian texts is done.
+- Privacy policy: the developer updates it in phase 2 (see "To confirm with the client").
+- JSON-LD: `HealthAndBeautyBusiness` built from `site.json` (`src/data/structured-data.ts`), on the PL/EN/UA homepages, not on the 404 page (2026-11-13).
 - Client e-mail: anastaziya111@gmail.com — the data-protection contact in all three privacy policies, and `studio.email` in `site.json` (2026-11-13).
 - English (`/en/`): same layout and Instrument fonts as Polish, text from the `*.en.json` files; British spelling; «zł» kept in prices (2026-11-13).
 - Ukrainian fonts: Playfair Display (Regular + Italic) and Onest (400/500/600), from the Figma «Cyrillic test» page (540:61), self-hosted and loaded only on `/ua/`. Ukrainian sizes: Display 75, H2 48, H3 25, H4 20, headings tracked −5 % / −3 % (2026-11-13).

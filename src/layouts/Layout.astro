@@ -17,6 +17,7 @@ import uaSans from '@fontsource/onest/files/onest-cyrillic-400-normal.woff2?url'
 // Onest keeps digits and punctuation (— · /) in its Latin file, used by the hero text too.
 import uaSansLatin from '@fontsource/onest/files/onest-latin-400-normal.woff2?url';
 import uaSansSemibold from '@fontsource/onest/files/onest-cyrillic-600-normal.woff2?url';
+import { localBusiness } from '../data/structured-data';
 import { getContent, htmlLang, ogLocale, localePath, locales, defaultLocale, isTranslated, type Locale } from '../data';
 
 /** notFound: the 404 page. No canonical/hreflang, kept out of search, and header/footer links point back to the homepage. */
@@ -62,6 +63,7 @@ const alternates = locales.filter(isTranslated);
     {!notFound && <meta property="og:url" content={canonical} />}
     <meta property="og:locale" content={ogLocale[content.contentLocale]} />
     <meta name="generator" content={Astro.generator} />
+    {!notFound && <script type="application/ld+json" set:html={JSON.stringify(localBusiness(content, canonical, Astro.site!))} />}
   </head>
   <body id="top">
     <a class="skip-link" href="#content">{content.ui.skipToContent}</a>

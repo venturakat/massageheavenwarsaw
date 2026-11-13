@@ -33,5 +33,7 @@ These are in code but may already be in Figma.
 ## Public website: known to be missing
 - [ ] **404 page** (desktop + mobile; PL is enough). Code: `src/components/NotFoundPage.astro`. See it with `npm run build && npm run preview` → any unknown URL.
 
+- [ ] **Footer with the opening-hours column** (desktop 1440, 1024–1279 with the logo above the columns, and mobile). Code: `src/components/Footer.astro`. Columns: **Godziny**, Menu, Studio, Online (mobile: Godziny + Menu, then Studio + Online). Footer-only short labels: "Bon", "Warszawa". Days with the same hours are joined ("Czw–Pt 8:30–23:00"); day names in the muted footer colour. Figma footer: desktop 97:151, mobile 240:1334.
+
 ## Public website: check first
 - [ ] **Team section** after the redesign with bios and square portraits (PR #11, #12). Figma 151:135 and the team card 152:104 may still show the old cards. Code: `src/components/sections/Team.astro`, `TeamCard.astro`.

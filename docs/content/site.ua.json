@@ -1,5 +1,5 @@
 {
-  "_note": "Ukrainian translation of site.json. Only text; links, phone and other data come from the Polish file. Texts from Figma 540:61 where it has them (header, hero, sections, footer); the rest translated by Claude — please review. Informal «ти» throughout, like the Polish «Ty».",
+  "_note": "Ukrainian translation of site.json. Only text; links, phone and other data come from the Polish file. Texts from Figma 540:61 where it has them (header, hero, sections, footer); the rest translated by Claude, reviewed by a native speaker (2026-11-13). Informal «ти» throughout, like the Polish «Ty».",
   "studio": {
     "address": "Krucza 16/22",
     "addressTopBar": "Krucza 16/22, 3-й поверх",
@@ -152,12 +152,49 @@
   "footer": {
     "columns": {
       "menu": "Меню",
+      "menuShort": {
+        "bon": "Сертифікат"
+      },
       "studio": {
         "title": "Студія",
         "lines": [
           "Krucza 16/22",
-          "Центр Варшави"
+          "Варшава"
         ]
+      },
+      "hours": {
+        "title": "Години",
+        "closed": "зачинено",
+        "days": {
+          "mon": [
+            "Пн",
+            "понеділок"
+          ],
+          "tue": [
+            "Вт",
+            "вівторок"
+          ],
+          "wed": [
+            "Ср",
+            "середа"
+          ],
+          "thu": [
+            "Чт",
+            "четвер"
+          ],
+          "fri": [
+            "Пт",
+            "пʼятниця"
+          ],
+          "sat": [
+            "Сб",
+            "субота"
+          ],
+          "sun": [
+            "Нд",
+            "неділя"
+          ]
+        }
       },
       "online": {
         "title": "Онлайн"

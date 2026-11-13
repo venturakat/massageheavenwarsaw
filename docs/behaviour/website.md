@@ -13,7 +13,7 @@ A single page. Nothing navigates away except external links (which open in a new
 Chooser content (title "Zarezerwuj *wizytę*"):
 - Group **"Rezerwacja online"**:
   - Booksy → https://massageheaven68.booksy.com/a
-  - Fresha → https://www.fresha.com/en-GB/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/all-offer?pId=2749004
+  - Fresha → https://www.fresha.com/pl/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/all-offer?venue=true&entryPoint=book_now_link&pId=2749004
 - Group **"Napisz do nas"**:
   - WhatsApp → `https://wa.me/48731711509?text=` + a prefilled message
   - Instagram → see "Instagram links" below
@@ -96,6 +96,13 @@ Submit → validate → the form swaps to the success screen "Bon wysłany" (165
   - "Napisz na Instagramie" follows the Instagram rule.
   - The "Instagram" detail links to the profile.
   - The "Rezerwacje" value (Booksy · Fresha · WhatsApp) opens the chooser.
+
+## Footer opening hours
+- Column order: **Godziny** (EN "Hours", UA "Години"), Menu, Studio, Online. Times come from `site.json` → `studio.hours`, which the admin panel edits ("Godziny otwarcia").
+- Neighbouring days with the same times share a row ("Czw–Pt 8:30–23:00"). A day without a time range shows "nieczynne" / "closed" / "зачинено".
+- Short day names on screen; screen readers hear the full name (e.g. "czwartek–piątek"). Labels in `site*.json` → `footer.columns.hours`.
+- Shorter labels in the footer only (the header and the mobile menu keep the full ones): "Bon" for "Bon podarunkowy" (`footer.columns.menuShort`, by section anchor), and "Warszawa" under the address (EN "Voucher", "Warsaw"; UA "Сертифікат", "Варшава").
+- Layout: mobile two columns (Godziny + Menu, both 6 lines, then Studio + Online); from 768 px four columns in one row; 1024–1279 px the logo sits above the columns; from 1280 px logo and columns side by side.
 
 ## SEO basics
 - Title: "Massage Heaven — masaż w centrum Warszawy".

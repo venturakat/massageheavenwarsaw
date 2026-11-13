@@ -23,6 +23,29 @@ const online = [
   { label: columns.online.links[3], href: site.studio.instagramProfile },
 ];
 const [privacyLabel, cookiesLabel] = legal;
+
+// The footer menu may use shorter labels than the header ("Bon" for "Bon podarunkowy").
+const menuShort = (columns.menuShort ?? {}) as Record<string, string>;
+const footerLabel = (item: { label: string; anchor: string }) => menuShort[item.anchor] ?? item.label;
+
+// Opening hours: one row per run of neighbouring days with the same times (Czw–Pt 8:30–23:00).
+const hoursCopy = columns.hours;
+const dayKeys = Object.keys(hoursCopy.days) as (keyof typeof hoursCopy.days)[];
+const studioHours = site.studio.hours as Record<string, string>;
+const isOpen = (value: string | undefined) => Boolean(value && /\d/.test(value));
+const hourRows: { short: string; long: string; time: string }[] = [];
+for (let i = 0; i < dayKeys.length; ) {
+  const time = studioHours[dayKeys[i]] ?? '';
+  let j = i;
+  while (j + 1 < dayKeys.length && (studioHours[dayKeys[j + 1]] ?? '') === time) j++;
+  const [first, last] = [hoursCopy.days[dayKeys[i]], hoursCopy.days[dayKeys[j]]];
+  hourRows.push({
+    short: i === j ? first[0] : `${first[0]}–${last[0]}`,
+    long: i === j ? first[1] : `${first[1]}–${last[1]}`,
+    time: isOpen(time) ? time : hoursCopy.closed,
+  });
+  i = j + 1;
+}
 ---
 
 <footer class="site-footer">
@@ -36,10 +59,27 @@ const [privacyLabel, cookiesLabel] = legal;
       </div>
 
       <div class="footer__columns">
+        <div class="footer__col">
+          <p class="label footer__label" id="footer-hours">{hoursCopy.title}</p>
+          <ul role="list" class="footer__hours" aria-labelledby="footer-hours">
+            {
+              hourRows.map((row) => (
+                <li class="footer__text">
+                  <span class="footer__day">
+                    <span aria-hidden="true">{row.short}</span>
+                    <span class="visually-hidden">{row.long}</span>
+                  </span>
+                  <span>{row.time}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
         <nav class="footer__col" aria-labelledby="footer-menu">
           <p class="label footer__label" id="footer-menu">{columns.menu}</p>
           <ul role="list">
-            {site.nav.map((item) => <li><TextLink kind="footer" href={`${linkBase}#${item.anchor}`}>{item.label}</TextLink></li>)}
+            {site.nav.map((item) => <li><TextLink kind="footer" href={`${linkBase}#${item.anchor}`}>{footerLabel(item)}</TextLink></li>)}
           </ul>
         </nav>
 
@@ -116,8 +156,25 @@ const [privacyLabel, cookiesLabel] = legal;
     flex-wrap: wrap;
     gap: 32px 48px;
   }
-  /* Mobile: Menu + Studio share the first row, Online wraps below (Figma 240:1340). */
+  /* Order: Godziny, Menu, Studio, Online. Mobile: a two-column grid, so Godziny + Menu
+     (6 lines each) share the first row and Studio + Online the second. */
   .footer__col { min-width: 118px; }
+  @media (max-width: 767px) {
+    .footer__columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer__col { min-width: 0; }
+  }
+  /* Tablet: all four columns in one row across the full width. */
+  @media (min-width: 768px) {
+    .footer__columns {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .footer__col { min-width: 0; }
+  }
 
   .footer__col ul {
     display: flex;
@@ -137,6 +194,13 @@ const [privacyLabel, cookiesLabel] = legal;
     font: var(--type-nav);
     line-height: var(--lh-nav);
     white-space: nowrap;
+  }
+
+  /* Opening hours: day names in a narrow column, times lined up beside them. */
+  .footer__hours li { gap: 12px; }
+  .footer__day {
+    min-width: 52px;
+    color: var(--text-inverse-subtle);
   }
 
   .footer__bottom {
@@ -159,14 +223,12 @@ const [privacyLabel, cookiesLabel] = legal;
   @media (min-width: 1024px) {
     .site-footer { padding-block: 64px 32px; }
     .footer__inner { gap: 51px; }
-    .footer__top {
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 48px;
-    }
+    /* 1024–1279: the logo sits above the four columns (Menu, Studio, Godziny, Online),
+       which spread across the full width; side by side they don't fit (UA menu is long). */
     .footer__columns {
       flex-wrap: nowrap;
-      gap: 96px;
+      justify-content: space-between;
+      gap: 48px;
     }
     .footer__col { min-width: 0; }
     .footer__bottom {
@@ -177,6 +239,19 @@ const [privacyLabel, cookiesLabel] = legal;
     .footer__legal {
       flex-direction: row;
       gap: 24px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .footer__top {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 48px;
+    }
+    .footer__brand { flex-shrink: 0; }
+    .footer__columns {
+      justify-content: flex-start;
+      gap: clamp(48px, 5vw, 96px);
     }
   }
 </style>

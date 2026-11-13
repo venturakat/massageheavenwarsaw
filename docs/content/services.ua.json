@@ -1,5 +1,5 @@
 {
-  "_note": "Ukrainian translation of services.json. Only text: prices, ids and the order of items come from the Polish file (merged item by item). Category names, taglines and card lists from Figma 540:84; treatment names translated by Claude — please review.",
+  "_note": "Ukrainian translation of services.json. Only text: prices, ids and the order of items come from the Polish file (merged item by item). Category names, taglines and card lists from Figma 540:84; treatment names translated by Claude, reviewed by a native speaker (2026-11-13).",
   "categories": [
     {
       "name": "Класичний і лікувальний масаж",
