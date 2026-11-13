@@ -11,14 +11,15 @@ import Button from '../Button.astro';
 import LanguageSwitch from '../LanguageSwitch.astro';
 import type { Content, Locale } from '../../data';
 
-type Props = { locale: Locale; content: Content };
-const { locale, content } = Astro.props;
+/** linkBase: see Header.astro. */
+type Props = { locale: Locale; content: Content; linkBase?: string };
+const { locale, content, linkBase = '' } = Astro.props;
 const { site, ui } = content;
 ---
 
 <dialog id="menu" class="menu" aria-label={ui.menu} data-dialog>
   <div class="menu__top">
-    <a class="menu__logo" href="#top" aria-label={ui.logoHome} data-menu-link>
+    <a class="menu__logo" href={`${linkBase}#top`} aria-label={ui.logoHome} data-menu-link>
       <img src={logo.src} width="150" height="28" alt="" />
     </a>
     <button class="menu__close" type="button" aria-label={ui.close} data-close-dialog>
@@ -31,7 +32,7 @@ const { site, ui } = content;
       {
         site.nav.map((item) => (
           <li>
-            <a class="menu__link" href={`#${item.anchor}`} data-menu-link>
+            <a class="menu__link" href={`${linkBase}#${item.anchor}`} data-menu-link>
               <span>{item.label}</span>
               <Icon name="arrow-right" />
             </a>
@@ -56,6 +57,8 @@ const { site, ui } = content;
     const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('[data-menu-link]');
     const menu = document.getElementById('menu');
     if (!link || !(menu instanceof HTMLDialogElement)) return;
+    // A link to another page (e.g. from the 404 page to the homepage) just navigates.
+    if (link.pathname !== location.pathname) return;
     event.preventDefault();
     closeDialog(menu, false);
     const hash = link.hash;

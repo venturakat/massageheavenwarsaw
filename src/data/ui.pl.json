@@ -104,5 +104,16 @@
     "save": "Zapisz wybór"
   },
   "seoTitle": "Massage Heaven — masaż w centrum Warszawy",
-  "openInMaps": "Otwórz Massage Heaven w Mapach Google"
+  "openInMaps": "Otwórz Massage Heaven w Mapach Google",
+  "notFound": {
+    "_note": "404 page (not designed in Figma; see docs/open-questions.md).",
+    "seoTitle": "Nie znaleziono strony — Massage Heaven",
+    "eyebrow": "Błąd 404",
+    "title": [
+      "Tej strony",
+      "tu nie ma"
+    ],
+    "lead": "Link mógł się zmienić albo strona została przeniesiona. Cennik, rezerwacja i bony podarunkowe są na stronie głównej.",
+    "home": "Wróć na stronę główną"
+  }
 }

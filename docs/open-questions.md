@@ -19,7 +19,7 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] The map placeholder shown before cookie consent.
 - [ ] Gift form "Kwota" state: an amount field (min/max? preset amounts?).
 - [ ] Form error states and messages.
-- [ ] A 404 page.
+- [ ] **404 page** (built 2026-11-13, not in Figma): in the hero's style — eyebrow "Błąd 404", title "Tej strony / *tu nie ma*", a short line, "Wróć na stronę główną" + "Zarezerwuj wizytę" (opens the chooser), no photo. PL/EN/UA. Copy in `src/data/ui.*.json` → `notFound`; please review the wording. Listed in `docs/design/figma-todo.md`.
 
 ## Found while building (step 1, header + footer)
 - [ ] **Mobile logo size:** `design-system.md` says 150 px wide; Figma 240:1368 is 218 × 40. Built at 218 to match Figma.

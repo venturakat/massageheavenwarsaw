@@ -102,3 +102,9 @@ Submit → validate → the form swaps to the success screen "Bon wysłany" (165
 - Meta description from the hero lead text.
 - Open Graph image.
 - LocalBusiness / HealthAndBeautyBusiness JSON-LD with the address, phone, opening hours and a link to Booksy.
+
+## 404 page
+- Three files: `/404.html` (Polish), `/en/404.html`, `/ua/404.html` (`src/pages/**/404.astro` → `NotFoundPage.astro`). A small step in `astro.config.mjs` writes the EN/UA ones as `404.html` files.
+- The page has the normal header, footer and pop-ups. Its section links go back to the homepage of the same language (`/#cennik`, `/en/#cennik`…), and "Zarezerwuj wizytę" opens the chooser.
+- Not indexed (`noindex`), no canonical or hreflang.
+- **Developer:** the server must return status 404 with the right file: unknown `/en/…` → `/en/404.html`, unknown `/ua/…` → `/ua/404.html`, everything else → `/404.html`. E.g. Netlify `_redirects`: `/en/* /en/404.html 404` and `/ua/* /ua/404.html 404`; nginx: `error_page 404` per `location`.

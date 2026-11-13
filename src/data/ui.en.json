@@ -86,5 +86,15 @@
       "text": "Help us understand how you use the site and improve it."
     },
     "save": "Save choices"
+  },
+  "notFound": {
+    "seoTitle": "Page not found — Massage Heaven",
+    "eyebrow": "Error 404",
+    "title": [
+      "This page",
+      "isn’t here"
+    ],
+    "lead": "The link may have changed, or the page has moved. Prices, booking and gift certificates are on the homepage.",
+    "home": "Back to the homepage"
   }
 }
