@@ -51,5 +51,5 @@ Not needed (decided): moving the pop-up copy into the content files, and a small
 - Opening hours, cancellation notice (24 h), the Polish Fresha links: confirmed 2026-11-13.
 
 ## Still open
-- **Figma** is behind the code in a few places (admin dialogs, 404 page, footer hours, team with bios). The designer will draw them when the Figma connector works again: [`docs/design/figma-todo.md`](design/figma-todo.md). The code is the reference until then.
+- **Figma** matches the code again (2026-11-13): the admin dialogs and drawers, Info & teksty, the 404 page, the footer with opening hours and the team section with bios are all drawn. Node ids: [`docs/design/figma-todo.md`](design/figma-todo.md).
 - Contact: the designer (repo owner). The studio owner is Anastazja (client e-mail in `site.json` → `studio.email`).

@@ -10,15 +10,15 @@ New questions: build around them with a sensible default, don't invent answers, 
 - [ ] **"Usuń tło" in the photo crop pop-up** (2026-11-13): appears when an uploaded photo has its own background. Runs in the browser (MODNet model via transformers.js, both Apache-2.0); about 5–10 s per photo, "Cofnij — przywróć tło" to undo. On first use it downloads the model (~26 MB) from huggingface.co and the ONNX runtime from cdn.jsdelivr.net (admin only, only after the click; the public site is unaffected). Developer: self-host these files before launch so the admin makes no third-party requests. Edges are good on one person against a calm background; busy backgrounds may need a manual cut-out.
 
 ## Figma
-- [ ] Screens and states built in code but not drawn in Figma yet (admin dialogs and drawers, the 404 page, the footer with opening hours, the team section with bios, the photo crop pop-up): see `docs/design/figma-todo.md`. Paused until the Figma connector works.
-- [ ] Small Figma text/colour updates to match the site: the darker grey on lavender (neutral-600, hero lead and gift text) and the admin photo hint text (Zespół). Also listed in `docs/design/figma-todo.md`.
+- [x] Screens and states built in code but not drawn in Figma (admin dialogs and drawers, Info & teksty, the 404 page, the footer with opening hours, the team section with bios, the photo crop pop-up): all drawn on 2026-11-13, see `docs/design/figma-todo.md`.
+- [x] Small Figma text/colour updates to match the site: neutral-600 for the hero lead and gift text, and the new Zespół photo hint. Done 2026-11-13.
 
 ## Decided (for reference)
 - Client answers (2026-11-13):
   - **WhatsApp text for amount vouchers** (designer's pick, 2026-11-13): "Dzień dobry! Przesyłam bon podarunkowy Massage Heaven o wartości 300 zł, do wykorzystania na dowolny zabieg z naszego cennika. Kod MH-XXXX, ważny do <data>. / Bon w PDF: <link> / Przy rezerwacji wystarczy podać kod. Do zobaczenia na Kruczej 16/22!" (`src/admin/format.ts` → `whatsappMessage`).
   - **Open Graph image:** `public/og-image.png` (1200 × 630), exported by the designer from the Figma page Booksy / Google / Facebook / WhatsApp. Same image on every language; also the JSON-LD `image`.
   - **Voucher rules:** an amount voucher is at least the **lowest price in the price list** (now 80 zł; read from the prices, so it follows price changes), with **no maximum**. Every voucher is **valid for 12 months**. Website form: label "Kwota (od 80 zł)" and the error "Najniższa kwota bonu to 80 zł."; admin "Dodaj / Edytuj bon": the same minimum, and "Ważny" is fixed at 12 months. The sample voucher of Anna Wiśniewska now runs to 9 Nov 2027.
-  - **Opening hours** in `site.json` → `studio.hours` are confirmed. Shown in a new footer column **Godziny / Hours / Години** (the designer's choice, not in Figma yet; see `docs/design/figma-todo.md`) and in the Google business info (JSON-LD) on every homepage.
+  - **Opening hours** in `site.json` → `studio.hours` are confirmed. Shown in a new footer column **Godziny / Hours / Години** (the designer's choice; Figma 97:151, 240:1334, 583:1730) and in the Google business info (JSON-LD) on every homepage.
   - **Cancellation notice** 24 h (FAQ 08) is fine; the wording stays as it is.
   - **Walking time** from metro Centrum, 10 min (FAQ 10), is fine.
   - **Fresha:** Polish links (`fresha.com/pl/…`). The general one is the client's link; the two therapist links are the same pages with `pl` instead of `en-GB`.
@@ -50,7 +50,7 @@ Built in code where Figma or the docs were silent or disagreed; the designer kep
 - Hover states for close buttons, the Contact Instagram block, the map, inline links, service cards, FAQ items, filter chips and the language switch.
 - The map placeholder shown before cookie consent.
 - Form error states and messages.
-- **404 page** (built 2026-11-13, not in Figma): in the hero's style — eyebrow "Błąd 404", title "Tej strony / *tu nie ma*", a short line, "Wróć na stronę główną" + "Zarezerwuj wizytę" (opens the chooser), no photo. PL/EN/UA. Copy in `src/data/ui.*.json` → `notFound`; please review the wording. Listed in `docs/design/figma-todo.md`.
+- **404 page** (built 2026-11-13): in the hero's style — eyebrow "Błąd 404", title "Tej strony / *tu nie ma*", a short line, "Wróć na stronę główną" + "Zarezerwuj wizytę" (opens the chooser), no photo. PL/EN/UA. Copy in `src/data/ui.*.json` → `notFound`; please review the wording. Figma 583:1794 / 583:2104.
 - **Mobile logo size:** `design-system.md` says 150 px wide; Figma 240:1368 is 218 × 40. Built at 218 to match Figma.
 - **Header between 1024 and 1179 px:** the full desktop nav (logo + 6 links + language switch + button) needs about 1180 px and doesn't fit at 1024. Below 1180 the header keeps the mobile layout (logo + menu button). Confirm or design a compact nav.
 - **Tablet gutter (768–1023):** not specified. Using 40 px side padding.

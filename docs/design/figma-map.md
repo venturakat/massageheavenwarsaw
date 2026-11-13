@@ -7,6 +7,8 @@ File key `J7HQH69jG2BbPrzjCWG5dx`. Link to a node: `https://www.figma.com/design
 |---|---|
 | Homepage — Desktop | **95:14** |
 | Homepage — Mobile (390) | **240:1064** |
+| 404 — Desktop / Mobile | **583:1794** / **583:2104** |
+| Footer at 1024–1279 (1100 wide) | **583:1730** |
 
 ### Desktop homepage sections (95:14)
 | Section | Node | Anchor |
@@ -67,7 +69,7 @@ Suggested anchor ids are in the right column (Polish, no diacritics). The nav or
 | Treatment row / Mobile | 241:1194 |
 | Price pill | 163:123 |
 | FAQ item | 152:103 |
-| Team card | 152:104 |
+| Team card (bio), Desktop/Mobile | 582:1719 (old card without bio: 152:104, not used) |
 | Filter chip | 152:89 |
 | Form field | 152:125 |
 | Language switch | 207:1062 |
@@ -80,7 +82,7 @@ Suggested anchor ids are in the right column (Polish, no diacritics). The nav or
 | Components (logo set, brand icons, colours) | page 0:1; logo set 47:75, brand icon set 45:1912 |
 | Printables: gift certificate front / back | 520:83 / 520:82 |
 | Printables: filled certificate examples | 520:86 |
-| Landing back end (admin panel, developer's part) | page 353:4297; desktop section 397:87, mobile section 429:1594, components 393:11 |
+| Landing back end (admin panel, developer's part) | page 353:4297; desktop section 397:87, mobile section 429:1594 (rows in menu order, lined up with desktop), components 393:11 (incl. Admin/Info item 575:10094). Node ids of the screens added on 2026-11-13: `figma-todo.md` |
 | Instagram stories (price lists, FAQ, team) | page 43:1452 |
 
 ## Assets to export from Figma

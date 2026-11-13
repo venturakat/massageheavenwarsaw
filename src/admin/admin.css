@@ -1935,7 +1935,7 @@ img {
   }
 }
 
-/* ── Info & teksty (was Gabinet i rezerwacje, 404:1238) ──
+/* ── Info & teksty (was Gabinet i rezerwacje; Figma 576:10068) ──
    Same list + editor layout as Zespół: reuses .team, .person-item and .person-editor. */
 .info-item__num {
   display: grid;
