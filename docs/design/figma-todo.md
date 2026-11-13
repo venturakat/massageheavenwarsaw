@@ -8,7 +8,7 @@ If a new screen is built in code before it's drawn, add it here under "Still to 
 - (nothing)
 
 ## Admin panel (page "Landing back end" 353:4297)
-The frames are in rows that follow the menu order: 01 Logowanie, 02 Bony podarunkowe, 03 Bon przed płatnością, 04 Bon po płatności, 05 Cennik, 06 Zespół, 07 FAQ, 08 Info & teksty, 09 old screens. Desktop section 397:87 and mobile section 429:1594 sit side by side, with the rows lined up.
+The frames are in rows that follow the menu order: 01 Logowanie, 02 Bony podarunkowe, 03 Bon przed płatnością, 04 Bon po płatności, 05 Cennik, 06 Zespół, 07 FAQ, 08 Info & teksty. Desktop section 397:87 and mobile section 429:1594 sit side by side, with the rows lined up.
 
 | Screen | Desktop | Mobile |
 |---|---|---|
@@ -40,7 +40,7 @@ Also changed:
 - Sidebar item renamed to **Info & teksty**, mobile tab to **Info**, in the components and on every screen.
 - **Usuń osobę** link added to the Zespół editor footer (403:889, 435:2466).
 - Zespół photo hint updated to the new wording on all 9 screens.
-- The old "Gabinet i rezerwacje" screens (404:1238, 494:5456, 436:2841, 505:6184) are kept for reference in row 09 and renamed "… — stare, zastąpione przez Info & teksty".
+- The old "Gabinet i rezerwacje" screens and their channel drawers were deleted (they were replaced by Info & teksty). Their prototype links now go to the new frames: the sidebar "Info & teksty" opens 577:10447 (first item open), the mobile "Info" tab opens the list 578:11108, the channel pencil opens the new drawer. The Info list items and the mobile "← Info & teksty" links are clickable in the prototype too.
 
 These were already in Figma (nothing to draw): password reset 410:1426 / 410:1461 (mobile 429:1643 / 429:1661), add person 454:3160 / 456:4251, edit category 485:5312 / 486:5215, "Wysłałaś bon?" 464:4614 / 464:4752, PDF toast 472:4802 / 472:4914 (component 472:4795).
 
