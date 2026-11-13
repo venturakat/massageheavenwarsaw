@@ -54,8 +54,8 @@ Nowy → W kontakcie → Opłacony → **Przekazany** → Zrealizowany (+ Wygas�
   - Status + Płatność (Gotówka, …)
   - Ważny ("12 miesięcy · do …"): always 12 months, not editable (client rule, 2026-11-13)
   - The code is generated automatically (format `MH-XXXX`).
-- **Edit order ("Edytuj" on the Zamówienie card):** only while the voucher is **Nowy** or **W kontakcie**, so the client can change the massage, duration or amount before paying. Opens the same drawer as "Dodaj bon" (title "Edytuj bon") with Rodzaj bonu, Masaż/Czas/Wartość or Kwota, Kupujący, Telefon and Dla kogo. Status, payment and validity are not in it (they're set by "Oznacz jako opłacony"). Once paid, the code and PDF are fixed and the button disappears. Not designed in Figma yet.
-- **Delete request ("Usuń zgłoszenie" at the bottom of the Zamówienie card):** same rule, only while **Nowy** or **W kontakcie**, for when the client changed their mind. Asks first ("Usunąć zgłoszenie?", "Tak, usuń"), then removes the voucher completely and goes back to the list. Paid vouchers can't be deleted: they stay in the list until they're realised or expire. API: `AdminApi.deleteVoucher(id)`; the back end should refuse it for paid vouchers too. Not designed in Figma yet.
+- **Edit order ("Edytuj" on the Zamówienie card):** only while the voucher is **Nowy** or **W kontakcie**, so the client can change the massage, duration or amount before paying. Opens the same drawer as "Dodaj bon" (title "Edytuj bon") with Rodzaj bonu, Masaż/Czas/Wartość or Kwota, Kupujący, Telefon and Dla kogo. Status, payment and validity are not in it (they're set by "Oznacz jako opłacony"). Once paid, the code and PDF are fixed and the button disappears. Figma: 572:8651 (mobile 572:8816).
+- **Delete request ("Usuń zgłoszenie" at the bottom of the Zamówienie card):** same rule, only while **Nowy** or **W kontakcie**, for when the client changed their mind. Asks first ("Usunąć zgłoszenie?", "Tak, usuń"), then removes the voucher completely and goes back to the list. Paid vouchers can't be deleted: they stay in the list until they're realised or expire. API: `AdminApi.deleteVoucher(id)`; the back end should refuse it for paid vouchers too. Figma: 571:7015 (mobile 571:8208).
 
 ## Gift voucher PDF
 Figma page "Printables" (132:6):
@@ -80,15 +80,10 @@ Figma page "Printables" (132:6):
   - EN: "Redeemable at Massage Heaven, Krucza 16/22, Warsaw. Book via Booksy, Fresha, WhatsApp or Instagram and quote the certificate number. Not exchangeable for cash."
 
 ## Not designed yet
-The full list, with where each screen is in the code, is in `docs/design/figma-todo.md`.
+Every screen that's in the code is now drawn in Figma (2026-11-13; node ids in `docs/design/figma-todo.md`). Still not designed:
 
-- empty states
 - voucher pricing rules
-- delete confirmations (Usuń pytanie / Usuń zabieg)
-- the "Kwota" state of Dodaj bon
-- the "Edytuj bon" drawer (built as a copy of Dodaj bon) and the "Usunąć zgłoszenie?" dialog (built like "Usunąć zabieg?")
-- edit forms for the WhatsApp and Instagram channels
+- edit forms for the WhatsApp and Instagram channels (the channel drawer is drawn for Booksy)
 - reordering categories
-- the "Info & teksty" screen and its drawers (built in code only)
 
 Also undecided: whether the admin should be available in Ukrainian.

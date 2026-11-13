@@ -12,7 +12,7 @@ Website for **Massage Heaven**, a massage studio at ul. Krucza 16/22, Warsaw. Th
 | Colours, type, spacing (CSS variables) | `docs/design/tokens.css` |
 | Layout rules, type scale, components, hover states | `docs/design/design-system.md` |
 | Figma node ids for every section, overlay and component | `docs/design/figma-map.md` |
-| Screens in code that still need drawing in Figma (on pause) | `docs/design/figma-todo.md` |
+| Screens added to Figma after the code (node ids), and anything still to draw | `docs/design/figma-todo.md` |
 | How the website behaves (booking chooser, services, FAQ, gift form, cookies, links) | `docs/behaviour/website.md` |
 | Admin panel and gift voucher PDF (developer's part) | `docs/behaviour/admin-and-vouchers.md` |
 | All Polish copy and data | `docs/content/*.json`, `docs/content/privacy-policy.pl.md` |

@@ -1,41 +1,60 @@
-# Figma to-do: screens that are in code but not in Figma
+# Figma catch-up: screens that were in code but not in Figma
 
-**Status (2026-11-13): on pause.** The Figma connector stopped working, so nothing below has been drawn yet. When it works again, start a new session and ask: *"build in Figma the screens in docs/design/figma-todo.md"*.
+**Status (2026-11-13): done.** Every screen that existed only in code has been drawn in Figma, and the Figma file was tidied up. Node ids are below and in `figma-map.md`. Only the prototype-only "Przywrócić…?" dialog (`App.tsx`) was skipped on purpose: it won't exist in the real panel.
 
-How to work through the list:
-1. For every item marked **check**, look in Figma first (page "Landing back end" 353:4297, desktop section 397:87, mobile section 429:1594). It may already be drawn. If it is, write its node id in `figma-map.md` and tick it off here.
-2. Build what's missing in the style of the existing admin screens: use the admin components (393:11) and the colour/type variables. Desktop 1440 × 900 goes in 397:87, mobile 390 × 844 in 429:1594.
-3. Compare each new frame with the running prototype: `npm run dev` → `http://localhost:4321/admin`, password `demo`.
-4. Add the new node ids to `figma-map.md` and remove the item from "Not designed yet" in `docs/behaviour/admin-and-vouchers.md`.
+If a new screen is built in code before it's drawn, add it here under "Still to draw".
 
-## Admin panel: known to be missing
-The docs say these aren't designed yet.
+## Still to draw
+- (nothing)
 
-- [ ] **Edytuj bon** drawer (desktop + mobile). Code: `src/admin/screens/VoucherForm.tsx` in edit mode. It's the "Dodaj bon" drawer titled "Edytuj bon", without Status, Płatność and Ważny, and the button says "Zapisz zmiany". Open it from a voucher that is *Nowy* or *W kontakcie* → "Edytuj" on the Zamówienie card.
-- [ ] **Usunąć zgłoszenie?** confirmation (desktop + mobile). Code: `VoucherDetail.tsx` (ConfirmDialog, "Tak, usuń"). Also draw the "Usuń zgłoszenie" link at the bottom of the Zamówienie card. From branch `feat/voucher-delete`.
-- [ ] **Dodaj bon in the "Kwota" state**: Rodzaj bonu = Kwota. Code: `VoucherForm.tsx`.
-- [ ] **Delete confirmations:** "Usunąć pytanie?" (`Faq.tsx`), "Usunąć zabieg?" (`Pricing.tsx`) and deleting a person (`Team.tsx`). They all use the same ConfirmDialog as the voucher one.
-- [ ] **Info & teksty** screen (desktop + mobile), which replaced "Gabinet i rezerwacje" (404:1238 / 436:2841). Code: `src/admin/screens/Info.tsx`. It uses the Zespół layout (403:889 desktop, 435:2354 / 435:2466 mobile): a list of 8 numbered items on the left and an editor card on the right. Draw the list and the editors: section texts (Start, O nas, Bon, Kontakt) with the heading preview, character counter and the over-limit warning; Pasek na górze strony; Dane kontaktowe; Godziny otwarcia; Okienko rezerwacji. Rename the sidebar item to "Info & teksty" and the mobile tab to "Info" in the admin components (393:11).
-- [ ] **Empty states:** "Nie ma jeszcze pytań." (FAQ), "W tej kategorii nie ma jeszcze zabiegów." (Cennik), and "voucher not found" (`VoucherDetail.tsx`, `.empty-state`).
+## Admin panel (page "Landing back end" 353:4297)
+The frames are in rows that follow the menu order: 01 Logowanie, 02 Bony podarunkowe, 03 Bon przed płatnością, 04 Bon po płatności, 05 Cennik, 06 Zespół, 07 FAQ, 08 Info & teksty, 09 old screens. Desktop section 397:87 and mobile section 429:1594 sit side by side, with the rows lined up.
 
-## Admin panel: check first
-These are in code but may already be in Figma.
+| Screen | Desktop | Mobile |
+|---|---|---|
+| Bon (nowy): background for the dialogs below, with "Edytuj" and "Usuń zgłoszenie" on the Zamówienie card | 569:6768 | 570:7109 |
+| Edytuj bon drawer | 572:8651 | 572:8816 |
+| Usunąć zgłoszenie? | 571:7015 | 571:8208 |
+| Bon opłacony? (choose Płatność) | 572:9839 | 572:10056 |
+| Voucher not found | 572:11328 | 572:11488 |
+| Dodaj bon, "Kwota" state | 572:8986 | 572:9324 |
+| Usunąć zabieg? | 571:7138 | 571:8336 |
+| Cennik: empty category | 572:10877 | 572:11136 |
+| Usunąć pytanie? | 571:7244 | 571:8431 |
+| FAQ: empty | 572:10367 | 572:10637 |
+| Usunąć osobę? | 571:7316 | 571:8504 |
+| Kadruj zdjęcie (photo has its own background) | 580:11816 | 580:12026 |
+| Kadruj zdjęcie (background removed) | 580:11918 | — |
+| Info & teksty: list | (in every desktop frame) | 578:11108 |
+| Info & teksty: Pasek na górze strony | 577:10447 | 578:11474 |
+| Info & teksty: Start strony (same editor as O nas, Bon, Kontakt) | 576:10068 | 578:11294 |
+| Info & teksty: text too long (over-limit warning, "Cofnij zmiany") | 577:10217 | — |
+| Info & teksty: O nas (paragraphs and 3 feature boxes) | 577:10663 | — |
+| Info & teksty: Dane kontaktowe | 577:11178 | 578:11643 |
+| Info & teksty: Godziny otwarcia | 577:11412 | 578:11821 |
+| Info & teksty: Okienko rezerwacji | 577:11680 | 578:12033 |
+| Info & teksty: channel drawer | 580:11630 | 580:11730 |
 
-- [ ] **Kadruj zdjęcie** (photo crop pop-up, square crop, optional background removal). Code: `src/admin/PhotoCropper.tsx`. Opens when you upload a photo in Zespół.
-- [ ] **Zespół: add / edit person form** and the photo placeholder. Code: `Team.tsx`.
-- [ ] **Edit category** drawer (Cennik → edit category name and tagline). Code: `Pricing.tsx` → `CategoryDrawer`.
-- [ ] **Booking channel** drawer (now in Info & teksty). Code: `Info.tsx` → `ChannelDrawer`.
-- [ ] **Oznacz jako opłacony** dialog (choose Płatność) and the **Wysłałaś bon?** dialog with the message preview. Code: `VoucherDetail.tsx`.
-- [ ] **Toast** "PDF pobrany…" with the link "Oznacz teraz". Code: `ui.tsx` → `Toast`.
-- [ ] **Login: password reset** screens (3 states). Code: `Login.tsx`.
-- [ ] **"Przywrócić…?"** dialog (reset prototype data). Code: `App.tsx`. Prototype only, so it can be skipped.
+Also changed:
+- New component **Admin/Info item** (575:10094, Default/Active) in the admin components (393:11).
+- Sidebar item renamed to **Info & teksty**, mobile tab to **Info**, in the components and on every screen.
+- **Usuń osobę** link added to the Zespół editor footer (403:889, 435:2466).
+- Zespół photo hint updated to the new wording on all 9 screens.
+- The old "Gabinet i rezerwacje" screens (404:1238, 494:5456, 436:2841, 505:6184) are kept for reference in row 09 and renamed "… — stare, zastąpione przez Info & teksty".
 
-## Public website: known to be missing
-- [ ] **404 page** (desktop + mobile; PL is enough). Code: `src/components/NotFoundPage.astro`. See it with `npm run build && npm run preview` → any unknown URL.
+These were already in Figma (nothing to draw): password reset 410:1426 / 410:1461 (mobile 429:1643 / 429:1661), add person 454:3160 / 456:4251, edit category 485:5312 / 486:5215, "Wysłałaś bon?" 464:4614 / 464:4752, PDF toast 472:4802 / 472:4914 (component 472:4795).
 
-- [ ] **Footer with the opening-hours column** (desktop 1440, 1024–1279 with the logo above the columns, and mobile). Code: `src/components/Footer.astro`. Columns: **Godziny**, Menu, Studio, Online (mobile: Godziny + Menu, then Studio + Online). Footer-only short labels: "Bon", "Warszawa". Days with the same hours are joined ("Czw–Pt 8:30–23:00"); day names in the muted footer colour. Figma footer: desktop 97:151, mobile 240:1334.
+## Website (page "Landing front end" 85:2646)
+| Screen | Node |
+|---|---|
+| 404 page, desktop / mobile | 583:1794 / 583:2104 |
+| Footer with the Godziny column: desktop / mobile | 97:151 / 240:1334 (updated) |
+| Footer at 1024–1279 (1100 wide, logo above the columns) | 583:1730 |
+| Team section with bios and round portraits: desktop / mobile | 151:135 / 240:1299 (updated) |
+| New component **Team card (bio)**, Desktop/Mobile | 582:1719 (the old Team card 152:104 is marked as replaced) |
 
-- [ ] **Small updates to match the site:** the hero lead and the gift text use neutral-600 (Figma's text-secondary is below the 4.5:1 contrast minimum on lavender); the admin photo hint (Zespół, Figma 403:889) should read "Zdjęcie z usuniętym tłem (wycięta sylwetka, przezroczyste tło), PNG lub WebP, min. 800 × 800 px. Śliwkowe tło pod spodem dodamy sami."
+Also changed: the hero lead and the gift text use neutral-600 on both homepages.
 
-## Public website: check first
-- [ ] **Team section** after the redesign with bios and square portraits (PR #11, #12). Figma 151:135 and the team card 152:104 may still show the old cards. Code: `src/components/sections/Team.astro`, `TeamCard.astro`.
+The page is arranged as one row of page frames with labels (homepage desktop, homepage mobile, 404 desktop, 404 mobile, footer 1024–1279), then the overlay sections (desktop, mobile, in the same order: menu, booking chooser, voucher form, success, privacy policy, cookies), then the services block and components.
+
+Also on the website page: the header top bar (homepages and 404s, 203:1043, 240:1365) and the mobile menu (242:1254) now say "Krucza 16/22, piętro 3" without "ul.", like the site (`site.json` → `studio.addressTopBar`).

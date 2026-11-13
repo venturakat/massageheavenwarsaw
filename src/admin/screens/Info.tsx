@@ -3,7 +3,7 @@
  * on the left, in the order they appear on the page, and an editor for the selected one on
  * the right (#/info/<id>). On mobile the list and the editor are separate screens.
  * Replaces "Gabinet i rezerwacje" (Figma 404:1238, channel drawer 494:5456; mobile 436:2841).
- * Not drawn in Figma yet (docs/design/figma-todo.md); the layout follows Zespół (403:889).
+ * Figma: desktop 576:10068 and the other "Info & teksty" frames in 397:87, mobile 578:11108 (list) in 429:1594.
  */
 import type { ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
@@ -45,7 +45,7 @@ type Path = (string | number)[];
 /**
  * One editable text. `max` is a soft limit: going over shows a warning, it doesn't block saving.
  * Limits are estimates from the current copy (about 25% longer than the longest of PL/EN/UA);
- * check them against the Figma layout when the Figma sync is back.
+ * check them against the Figma layout.
  */
 type FieldSpec = {
   path: Path;
