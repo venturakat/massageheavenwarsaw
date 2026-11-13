@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'preact/hooks';
 import { api, resetPrototypeData } from './api';
 import { Icon, type IconName } from './icons';
 import { statusOf } from './format';
-import type { AdminData, Category, FaqItem, Person, Studio, Voucher } from './types';
+import type { AdminData, Category, FaqItem, Person, SiteTexts, Studio, Voucher } from './types';
 import { ConfirmDialog, Toast, type ToastData } from './ui';
 import logoWhite from '../assets/brand/logo-white.svg?url';
 import { Login } from './screens/Login';
@@ -13,7 +13,7 @@ import { VoucherDetail } from './screens/VoucherDetail';
 import { Pricing } from './screens/Pricing';
 import { Team } from './screens/Team';
 import { Faq } from './screens/Faq';
-import { StudioScreen } from './screens/Studio';
+import { InfoScreen } from './screens/Info';
 
 // ── Routing ───────────────────────────────────────────────
 
@@ -44,6 +44,7 @@ type Ctx = {
   saveTeam: (t: Person[]) => Promise<void>;
   saveFaq: (f: FaqItem[]) => Promise<void>;
   saveStudio: (s: Studio) => Promise<void>;
+  saveTexts: (t: SiteTexts) => Promise<void>;
   toast: (message: string, action?: ToastData['action']) => void;
 };
 const AdminContext = createContext<Ctx>(null as unknown as Ctx);
@@ -54,7 +55,7 @@ const NAV: { route: string; label: string; short: string; icon: IconName }[] = [
   { route: 'cennik', label: 'Cennik', short: 'Cennik', icon: 'list' },
   { route: 'zespol', label: 'Zespół', short: 'Zespół', icon: 'users' },
   { route: 'faq', label: 'FAQ', short: 'FAQ', icon: 'help' },
-  { route: 'gabinet', label: 'Gabinet i rezerwacje', short: 'Gabinet', icon: 'pin' },
+  { route: 'info', label: 'Info & teksty', short: 'Info', icon: 'pin' },
 ];
 
 export function App() {
@@ -104,9 +105,11 @@ export function App() {
     saveTeam: saver('team', api.saveTeam),
     saveFaq: saver('faq', api.saveFaq),
     saveStudio: saver('studio', api.saveStudio),
+    saveTexts: saver('texts', api.saveTexts),
   };
 
-  const [section, sub] = route.split('/');
+  const [rawSection, sub] = route.split('/');
+  const section = rawSection === 'gabinet' ? 'info' : rawSection; // old address of "Info & teksty"
   const newCount = data.vouchers.filter((v) => statusOf(v) === 'nowy').length;
   const logout = async () => {
     await api.logout();
@@ -125,8 +128,8 @@ export function App() {
     case 'faq':
       screen = <Faq />;
       break;
-    case 'gabinet':
-      screen = <StudioScreen />;
+    case 'info':
+      screen = <InfoScreen itemId={sub} />;
       break;
     default:
       screen = sub ? <VoucherDetail id={sub} /> : <Vouchers />;

@@ -31,6 +31,7 @@ import type {
   Hours,
   Localized,
   Person,
+  SiteTexts,
   Studio,
   Voucher,
 } from './types';
@@ -52,6 +53,7 @@ export interface AdminApi {
   saveTeam(t: Person[]): Promise<void>;
   saveFaq(f: FaqItem[]): Promise<void>;
   saveStudio(s: Studio): Promise<void>;
+  saveTexts(t: SiteTexts): Promise<void>;
 
   /**
    * Stores the voucher PDF at a hard-to-guess public URL that works until the voucher
@@ -160,6 +162,19 @@ function seedStudio(): Studio {
   };
 }
 
+function seedTexts(): SiteTexts {
+  const at = (src: J, path: (string | number)[]) => path.reduce<J | undefined>((o, k) => o?.[k], src) as string | undefined;
+  const L = (...path: (string | number)[]): Localized => loc(at(sitePl as J, path) ?? '', at(siteEn as J, path), at(siteUa as J, path));
+  const two = (section: string) => [L(section, 'title', 0), L(section, 'title', 1)] as SiteTexts['hero']['title'];
+  const feature = (i: number) => ({ title: L('about', 'features', i, 'title'), text: L('about', 'features', i, 'text') });
+  return {
+    hero: { eyebrow: L('hero', 'eyebrow'), title: two('hero'), lead: L('hero', 'lead') },
+    about: { eyebrow: L('about', 'eyebrow'), title: two('about'), text: L('about', 'text'), features: [feature(0), feature(1), feature(2)] },
+    gift: { eyebrow: L('gift', 'eyebrow'), title: two('gift'), text: L('gift', 'text') },
+    contact: { eyebrow: L('contact', 'eyebrow'), title: two('contact') },
+  };
+}
+
 /** Sample voucher requests (the ones drawn in Figma, plus a few older ones). */
 function seedVouchers(): Voucher[] {
   const v = (x: Partial<Voucher> & Pick<Voucher, 'id' | 'createdAt' | 'buyer' | 'phone' | 'status' | 'value'>): Voucher => ({
@@ -206,7 +221,7 @@ function seedVouchers(): Voucher[] {
 }
 
 export function seedData(): AdminData {
-  return { vouchers: seedVouchers(), categories: seedCategories(), team: seedTeam(), faq: seedFaq(), studio: seedStudio() };
+  return { vouchers: seedVouchers(), categories: seedCategories(), team: seedTeam(), faq: seedFaq(), studio: seedStudio(), texts: seedTexts() };
 }
 
 // ── Prototype implementation (localStorage) ───────────────
@@ -241,6 +256,14 @@ const current = (): AdminData => (memory ??= migrate(store.read()) ?? seedData()
 function migrate(d: AdminData | null): AdminData | null {
   if (!d) return d;
   for (const p of d.team) if (!isStoredPhoto(p.photo)) delete p.photo;
+  d.texts ??= seedTexts(); // added with "Info i teksty"
+  // O nas used to be two paragraph fields; now one text with a blank line between paragraphs.
+  const about = d.texts.about as unknown as { text: Localized | Localized[] };
+  if (Array.isArray(about.text)) {
+    const [a, b] = about.text;
+    const join = (x?: string, y?: string) => [x, y].filter((v) => v?.trim()).join('\n\n');
+    about.text = { pl: join(a?.pl, b?.pl), ...(a?.en || b?.en ? { en: join(a?.en, b?.en) } : {}), ...(a?.ua || b?.ua ? { ua: join(a?.ua, b?.ua) } : {}) };
+  }
   return d;
 }
 const update = async (fn: (d: AdminData) => void) => {
@@ -299,6 +322,7 @@ export const mockApi: AdminApi = {
   saveTeam: (t) => update((d) => void (d.team = t)),
   saveFaq: (f) => update((d) => void (d.faq = f)),
   saveStudio: (s) => update((d) => void (d.studio = s)),
+  saveTexts: (t) => update((d) => void (d.texts = t)),
   async publishVoucherPdf(v) {
     const token = `${(v.code ?? 'mh').slice(3).toLowerCase()}-${Math.random().toString(36).slice(2, 7)}`;
     return `${(sitePl as J).studio.website.replace('https://', '')}/bon/${token}`;

@@ -15,6 +15,7 @@ The docs say these aren't designed yet.
 - [ ] **Usunąć zgłoszenie?** confirmation (desktop + mobile). Code: `VoucherDetail.tsx` (ConfirmDialog, "Tak, usuń"). Also draw the "Usuń zgłoszenie" link at the bottom of the Zamówienie card. From branch `feat/voucher-delete`.
 - [ ] **Dodaj bon in the "Kwota" state**: Rodzaj bonu = Kwota. Code: `VoucherForm.tsx`.
 - [ ] **Delete confirmations:** "Usunąć pytanie?" (`Faq.tsx`), "Usunąć zabieg?" (`Pricing.tsx`) and deleting a person (`Team.tsx`). They all use the same ConfirmDialog as the voucher one.
+- [ ] **Info & teksty** screen (desktop + mobile), which replaced "Gabinet i rezerwacje" (404:1238 / 436:2841). Code: `src/admin/screens/Info.tsx`. It uses the Zespół layout (403:889 desktop, 435:2354 / 435:2466 mobile): a list of 8 numbered items on the left and an editor card on the right. Draw the list and the editors: section texts (Start, O nas, Bon, Kontakt) with the heading preview, character counter and the over-limit warning; Pasek na górze strony; Dane kontaktowe; Godziny otwarcia; Okienko rezerwacji. Rename the sidebar item to "Info & teksty" and the mobile tab to "Info" in the admin components (393:11).
 - [ ] **Empty states:** "Nie ma jeszcze pytań." (FAQ), "W tej kategorii nie ma jeszcze zabiegów." (Cennik), and "voucher not found" (`VoucherDetail.tsx`, `.empty-state`).
 
 ## Admin panel: check first
@@ -23,7 +24,7 @@ These are in code but may already be in Figma.
 - [ ] **Kadruj zdjęcie** (photo crop pop-up, square crop, optional background removal). Code: `src/admin/PhotoCropper.tsx`. Opens when you upload a photo in Zespół.
 - [ ] **Zespół: add / edit person form** and the photo placeholder. Code: `Team.tsx`.
 - [ ] **Edit category** drawer (Cennik → edit category name and tagline). Code: `Pricing.tsx` → `CategoryDrawer`.
-- [ ] **Booking channel** drawer (Gabinet i rezerwacje). Code: `Studio.tsx` → `ChannelDrawer`.
+- [ ] **Booking channel** drawer (now in Info & teksty). Code: `Info.tsx` → `ChannelDrawer`.
 - [ ] **Oznacz jako opłacony** dialog (choose Płatność) and the **Wysłałaś bon?** dialog with the message preview. Code: `VoucherDetail.tsx`.
 - [ ] **Toast** "PDF pobrany…" with the link "Oznacz teraz". Code: `ui.tsx` → `Toast`.
 - [ ] **Login: password reset** screens (3 states). Code: `Login.tsx`.
