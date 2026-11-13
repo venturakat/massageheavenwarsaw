@@ -122,7 +122,7 @@ export function Vouchers() {
                     <span class="small muted">{v.phone}</span>
                   </span>
                   <span class="col-voucher">
-                    <span>{voucherTitle(v)}</span>
+                    <span title={voucherTitle(v)}>{voucherTitle(v)}</span>
                     <span class="small muted">{voucherSubtitle(v)}</span>
                   </span>
                   <span class="col-code small-medium">{v.code ?? '—'}</span>
