@@ -4,7 +4,7 @@ Website for **Massage Heaven**, a massage studio at ul. Krucza 16/22, Warsaw. Th
 
 - **Stack:** Astro, static output. Plain CSS with custom properties: no Tailwind and no UI kit, unless the developer decides otherwise.
 - **Design source:** Figma file `J7HQH69jG2BbPrzjCWG5dx` ("Massage Heaven"), https://www.figma.com/design/J7HQH69jG2BbPrzjCWG5dx/Massage-Heaven
-- **Languages:** PL (default, at `/`), EN (`/en/`), UA (`/ua/`). Polish and Ukrainian exist; EN shows the Polish text until its translation arrives. See `docs/content/translations.md`.
+- **Languages:** PL (default, at `/`), EN (`/en/`), UA (`/ua/`). All three exist (Polish is the base; EN/UA files hold only translated text). See `docs/content/translations.md`.
 
 ## Where things are
 | What | File |

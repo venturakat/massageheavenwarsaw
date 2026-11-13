@@ -1,0 +1,225 @@
+{
+  "_note": "English translation of site.json (text only; links and data come from the Polish file). Translated by Claude — please review.",
+  "studio": {
+    "addressTopBar": "ul. Krucza 16/22, 3rd floor",
+    "addressLong": "ul. Krucza 16/22, Warsaw city centre",
+    "city": "Warsaw",
+    "floor": "3rd floor, lift"
+  },
+  "taglines": {
+    "hero": "A moment just for you",
+    "about": "We’ll free you from pain and tension",
+    "footer": "The best massage in central Warsaw."
+  },
+  "nav": [
+    {
+      "label": "Prices"
+    },
+    {
+      "label": "About"
+    },
+    {
+      "label": "FAQ"
+    },
+    {
+      "label": "Gift voucher"
+    },
+    {
+      "label": "Team"
+    },
+    {
+      "label": "Contact"
+    }
+  ],
+  "hero": {
+    "eyebrow": "Massage studio · Warsaw city centre",
+    "title": [
+      "A moment",
+      "just for you"
+    ],
+    "lead": "We’ll relieve your pain and tension. Classic, relaxing and facial massage and reflexology — in a calm studio right in the centre of Warsaw.",
+    "actions": [
+      "Book a visit",
+      "See prices",
+      "See on the map"
+    ]
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": [
+      "Massages tailored",
+      "to your needs"
+    ],
+    "searchPlaceholder": "Search treatments…",
+    "panelFooter": "Not sure which to choose? Message us — we’ll help.",
+    "resultsTitle": "{count} {treatment|treatments|treatments} for “{query}”",
+    "clearSearch": "Clear search",
+    "collapse": "Collapse",
+    "emptyTitle": "No results for “{query}”",
+    "emptyText": "Check the spelling or choose a category. You can also message us — we’ll help you find the right massage.",
+    "bookButton": "Book"
+  },
+  "about": {
+    "eyebrow": "meet the studio",
+    "title": [
+      "We’ll free you",
+      "from pain and tension"
+    ],
+    "text": [
+      "Massage Heaven is a massage studio in the heart of Warsaw, on Krucza Street. Before we begin, we talk for a moment — about what’s bothering you, what you expect and how firm the pressure should be. Only then do we choose the technique.",
+      "We combine therapeutic techniques with relaxing rituals, so that every visit is time just for you — unhurried, quiet and warm."
+    ],
+    "features": [
+      {
+        "title": "Warsaw city centre",
+        "text": "ul. Krucza 16/22 — easy to reach from anywhere in the city."
+      },
+      {
+        "title": "20+ treatments",
+        "text": "Six categories, from therapy to facial care."
+      },
+      {
+        "title": "Online booking",
+        "text": "Pick a time on Booksy or Fresha in seconds."
+      }
+    ]
+  },
+  "faqSection": {
+    "eyebrow": "FAQ",
+    "title": [
+      "Before your",
+      "first visit"
+    ],
+    "intro": "Can’t find your question? Message us on Instagram — we’re happy to help."
+  },
+  "gift": {
+    "eyebrow": "Gift voucher",
+    "title": [
+      "Give someone",
+      "a moment of calm"
+    ],
+    "text": "A voucher for a chosen amount or a specific massage — an elegant gift for a birthday, the holidays or just because. It can be redeemed by booking a visit via Booksy, Fresha, WhatsApp or Instagram.",
+    "button": "Order a voucher",
+    "form": {
+      "voucherTypes": [
+        "Specific massage",
+        "Amount"
+      ],
+      "fields": {
+        "massage": "Massage",
+        "massagePlaceholder": "Choose a massage",
+        "duration": "Duration",
+        "recipient": "For (optional)",
+        "recipientPlaceholder": "Name — we’ll write it on the voucher",
+        "name": "Your name",
+        "phone": "Phone",
+        "message": "Message (optional)",
+        "messagePlaceholder": "Any questions or requests? Write them here."
+      }
+    }
+  },
+  "teamSection": {
+    "eyebrow": "Team",
+    "title": [
+      "Behind every massage",
+      "there’s a person"
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": [
+      "Book",
+      "your moment"
+    ],
+    "details": [
+      {
+        "label": "Address",
+        "value": "ul. Krucza 16/22, Warsaw city centre"
+      },
+      {
+        "label": "Bookings",
+        "value": "Booksy · Fresha · WhatsApp"
+      },
+      {
+        "label": "Instagram",
+        "value": "@massage_heaven_warsaw"
+      }
+    ],
+    "actions": [
+      "Book a visit",
+      "Message us on Instagram"
+    ]
+  },
+  "footer": {
+    "columns": {
+      "menu": "Menu",
+      "studio": {
+        "title": "Studio",
+        "lines": [
+          "ul. Krucza 16/22",
+          "Warsaw city centre"
+        ]
+      },
+      "online": {
+        "title": "Online"
+      }
+    },
+    "legal": [
+      "Privacy policy",
+      "Cookie settings"
+    ]
+  },
+  "booking": {
+    "general": {
+      "title": [
+        "Book",
+        "a visit"
+      ],
+      "intro": "Book online or send us a message.",
+      "groups": [
+        {
+          "label": "Book online",
+          "options": [
+            {
+              "hint": "Live availability"
+            },
+            {
+              "hint": "Live availability"
+            }
+          ]
+        },
+        {
+          "label": "Message us",
+          "options": [
+            {
+              "url": "https://wa.me/48731711509?text=Hello%21%20I%E2%80%99d%20like%20to%20book%20a%20visit%20at%20Massage%20Heaven."
+            },
+            {}
+          ]
+        }
+      ]
+    },
+    "therapists": {
+      "anastazja": {
+        "title": [
+          "Massage with",
+          "Anastazja"
+        ],
+        "intro": "Pick a time with Anastazja online or message us.",
+        "hint": "Anastazja’s availability online",
+        "note": "Mention the name in your message: Anastazja",
+        "whatsapp": "https://wa.me/48731711509?text=Hello%21%20I%E2%80%99d%20like%20to%20book%20a%20visit%20with%20Anastazja."
+      },
+      "ina": {
+        "title": [
+          "Massage with",
+          "Ina"
+        ],
+        "intro": "Pick a time with Ina online or message us.",
+        "hint": "Ina’s availability online",
+        "note": "Mention the name in your message: Ina",
+        "whatsapp": "https://wa.me/48731711509?text=Hello%21%20I%E2%80%99d%20like%20to%20book%20a%20visit%20with%20Ina."
+      }
+    }
+  }
+}

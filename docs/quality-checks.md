@@ -8,12 +8,12 @@ Chrome headless, Lighthouse 12.6.1. Re-run after any larger change.
 |---|---|---|---|---|
 | `/` mobile | 96 | 100 | 100 | 100 |
 | `/` desktop | 100 | 100 | 100 | 100 |
-| `/en/` mobile | 96 | 100 | 100 | 63 * |
+| `/en/` mobile | 97 | 100 | 100 | 100 |
+| `/en/` desktop | 100 | 100 | 100 | 100 |
 | `/ua/` mobile | 90 | 100 | 100 | 100 |
 | `/ua/` desktop | 100 | 100 | 100 | 100 |
 
-\* `/en/` carries `noindex` until it's translated (`/ua/` is translated since 2026-11-13) (see `docs/content/translations.md`).
-Lighthouse marks that down on purpose; the score returns to 100 once the language exists.
+All three languages are translated (2026-11-13), so none carries `noindex` any more.
 
 Mobile: LCP 2.6–2.7 s, CLS 0. Desktop: LCP 0.6 s, CLS 0.
 

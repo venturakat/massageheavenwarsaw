@@ -13,7 +13,8 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **About feature** says "20+ zabiegów". There are 24 now; fine as is unless the client wants the exact number.
 
 ## Not designed yet (use a sensible, consistent default)
-- [ ] EN translation. The structure is ready (see `docs/content/translations.md`); until `site.en.json` exists, `/en/` shows Polish with `noindex`. UA is done (2026-11-13).
+- [ ] **English review:** the whole English version (`docs/content/*.en.json`, `src/data/ui.en.json`, `privacy-policy.en.md`) was translated by Claude. Please have it read; the privacy policy needs the same legal sign-off as the Polish one.
+- [ ] **Names in English:** kept as **Anastazja** and **Ina**, as on the Polish site and the booking platforms. Alternatives would be "Anastasia" or the legal "Anastasiia".
 - [ ] Hover states for close buttons, the Contact Instagram block, the map, inline links, service cards, FAQ items, filter chips and the language switch.
 - [ ] The map placeholder shown before cookie consent.
 - [ ] Gift form "Kwota" state: an amount field (min/max? preset amounts?).
@@ -64,6 +65,7 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Performance (UA, mobile):** Lighthouse 90 vs 96 for Polish, because Ukrainian text needs the Cyrillic and Latin files of both fonts (digits, dashes and brand names are Latin). Fine for now; a merged font subset would close the gap.
 
 ## Decided (for reference)
+- English (`/en/`): same layout and Instrument fonts as Polish, text from the `*.en.json` files; British spelling; «zł» kept in prices (2026-11-13).
 - Ukrainian fonts: Playfair Display (Regular + Italic) and Onest (400/500/600), from the Figma «Cyrillic test» page (540:61), self-hosted and loaded only on `/ua/`. Ukrainian sizes: Display 75, H2 48, H3 25, H4 20, headings tracked −5 % / −3 % (2026-11-13).
 - Mobile booking choosers and cookie settings: a card centred on screen, 12 px from the sides, all corners rounded, instead of Figma's edge-to-edge bottom sheet (2026-11-13).
 - Map: the live map embeds the Massage Heaven place itself (`site.json` → `studio.googleMapsEmbed`, same place as the `googleMaps` link), with the Figma rings and brand pin on top (2026-11-13).

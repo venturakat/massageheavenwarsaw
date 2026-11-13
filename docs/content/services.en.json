@@ -1,0 +1,127 @@
+{
+  "_note": "English translation of services.json (text only; prices and order come from the Polish file). Translated by Claude — please review.",
+  "categories": [
+    {
+      "name": "Classic and therapeutic massage",
+      "tagline": "Release tension. Feel relief.",
+      "cardList": "Classic · Sports · Therapeutic · Deep tissue",
+      "treatments": [
+        {
+          "name": "Classic massage"
+        },
+        {
+          "name": "Sports massage"
+        },
+        {
+          "name": "Therapeutic massage"
+        },
+        {
+          "name": "Deep tissue massage + trigger point therapy"
+        }
+      ]
+    },
+    {
+      "name": "Targeted massage",
+      "tagline": "Precise care for selected areas of the body.",
+      "cardList": "Neck and shoulders · Head and neck · Back and spine · Feet",
+      "treatments": [
+        {
+          "name": "Neck and shoulder massage"
+        },
+        {
+          "name": "Head and neck massage"
+        },
+        {
+          "name": "Back and spine massage"
+        },
+        {
+          "name": "Foot massage"
+        }
+      ]
+    },
+    {
+      "name": "Relaxing massage and rituals",
+      "tagline": "Stop. Breathe. Rest.",
+      "cardList": "Relaxing · Aromatherapy · Hot candle · Lomi Lomi · Thai Mix · Balinese",
+      "treatments": [
+        {
+          "name": "Relaxing massage"
+        },
+        {
+          "name": "Aromatherapy massage",
+          "options": [
+            {
+              "duration": "30 min · back"
+            },
+            {
+              "duration": "60 min · full body"
+            }
+          ]
+        },
+        {
+          "name": "Hot candle massage"
+        },
+        {
+          "name": "Head massage with oil"
+        },
+        {
+          "name": "Lomi Lomi massage"
+        },
+        {
+          "name": "Thai Mix massage"
+        },
+        {
+          "name": "Balinese massage"
+        }
+      ]
+    },
+    {
+      "name": "Facial massage and care",
+      "tagline": "Natural beauty and a moment for yourself.",
+      "cardList": "Kobido · Lift · Buccal massage · Thalgo treatment",
+      "treatments": [
+        {
+          "name": "Kobido massage"
+        },
+        {
+          "name": "Lifting facial massage with Kobido elements"
+        },
+        {
+          "name": "Buccal (intraoral) massage — natural lifting"
+        },
+        {
+          "name": "Thalgo rejuvenating treatment — luxury care"
+        }
+      ]
+    },
+    {
+      "name": "Body contouring and drainage",
+      "tagline": "Lightness, relaxation, mindful care.",
+      "cardList": "Anti-cellulite · Lymphatic drainage · Cupping",
+      "treatments": [
+        {
+          "name": "Anti-cellulite massage"
+        },
+        {
+          "name": "Lymphatic drainage"
+        },
+        {
+          "name": "Cupping massage"
+        }
+      ]
+    },
+    {
+      "name": "Reflexology",
+      "tagline": "Small gestures. Deep relaxation.",
+      "cardList": "Hands and forearms · Feet and legs",
+      "treatments": [
+        {
+          "name": "Hand and forearm reflexology"
+        },
+        {
+          "name": "Foot and leg reflexology"
+        }
+      ]
+    }
+  ]
+}

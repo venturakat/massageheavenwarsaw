@@ -1,0 +1,90 @@
+{
+  "_note": "English interface strings. Translated by Claude — please review. The voucher card text stays Polish/English (printed design).",
+  "skipToContent": "Skip to content",
+  "logoHome": "Massage Heaven — back to the top",
+  "mainNav": "Main menu",
+  "footerNav": "Footer menu",
+  "languageSwitch": "Choose language",
+  "openMenu": "Open menu",
+  "close": "Close",
+  "bookVisit": "Book a visit",
+  "newTab": "(opens in a new tab)",
+  "priceFrom": "from {price}",
+  "searchLabel": "Search treatments",
+  "alt": {
+    "heroLarge": "A therapist’s hands during a back massage",
+    "heroSmall": "A massage at the Massage Heaven studio",
+    "studio": "The Massage Heaven treatment room: massage table, warm light and plants",
+    "certificate": "Preview of a Massage Heaven gift voucher",
+    "map": "Map of the area around ul. Krucza 16/22 in Warsaw"
+  },
+  "faqIntroLink": "Instagram",
+  "showMap": "Show map",
+  "mapTitle": "Map: Massage Heaven, ul. Krucza 16/22, Warsaw",
+  "openInMaps": "Open Massage Heaven in Google Maps",
+  "menu": "Menu",
+  "policyUpdatedPrefix": "Last updated:",
+  "seoTitle": "Massage Heaven — massage in central Warsaw",
+  "giftForm": {
+    "intro": "We’ll get in touch to arrange the details, payment and collection of the voucher.",
+    "typeLabel": "Voucher type",
+    "amount": "Amount (zł)",
+    "amountPlaceholder": "e.g. 300",
+    "durationPlaceholder": "Choose a massage first",
+    "durationChoose": "Choose a duration",
+    "namePlaceholder": "First and last name",
+    "phonePlaceholder": "+48",
+    "consent": "I agree to be contacted about my voucher order.",
+    "consentLink": "Privacy policy",
+    "submit": "Send request",
+    "submitHint": "This is a request, not an order — you don’t pay anything yet.",
+    "sending": "Sending…",
+    "errors": {
+      "massage": "Choose a massage.",
+      "duration": "Choose a duration.",
+      "amount": "Enter the voucher amount.",
+      "name": "Enter your name.",
+      "phone": "Enter a valid phone number, e.g. 600 123 456.",
+      "consent": "Tick the box so we can contact you.",
+      "send": "We couldn’t send your request. Please try again or message us on WhatsApp."
+    },
+    "sent": {
+      "title": [
+        "Thank you,",
+        "request sent"
+      ],
+      "text": "We’ll get in touch to confirm the voucher details, payment and collection.",
+      "close": "Close"
+    }
+  },
+  "cookies": {
+    "bannerTitle": [
+      "We use",
+      "cookies"
+    ],
+    "bannerText": "We use essential cookies to make the site work. With your consent we’ll also turn on Google Maps and visit statistics. Read more in our {link}.",
+    "bannerLink": "privacy policy",
+    "rejectAll": "Essential only",
+    "acceptAll": "Accept all",
+    "settingsLink": "Cookie settings",
+    "settingsTitle": [
+      "Cookie",
+      "settings"
+    ],
+    "settingsIntro": "Choose which cookies you agree to. You can change your choice at any time in the site footer.",
+    "necessary": {
+      "title": "Essential",
+      "text": "Needed for the site to work, e.g. to remember your language and cookie choice.",
+      "status": "Always on"
+    },
+    "functional": {
+      "title": "Functional",
+      "text": "Show a Google map with directions to the studio."
+    },
+    "analytics": {
+      "title": "Analytics",
+      "text": "Help us understand how you use the site and improve it."
+    },
+    "save": "Save choices"
+  }
+}
