@@ -7,7 +7,7 @@ If a new screen is built in code before it's drawn, add it here under "Still to 
 ## Still to draw
 - (nothing)
 
-## Admin panel (page "Landing back end" 353:4297)
+## Admin panel (page "Landing admin" 353:4297)
 The frames are in rows that follow the menu order: 01 Logowanie, 02 Bony podarunkowe, 03 Bon przed płatnością, 04 Bon po płatności, 05 Cennik, 06 Zespół, 07 FAQ, 08 Info & teksty. Desktop section 397:87 and mobile section 429:1594 sit side by side, with the rows lined up.
 
 | Screen | Desktop | Mobile |
@@ -44,7 +44,7 @@ Also changed:
 
 These were already in Figma (nothing to draw): password reset 410:1426 / 410:1461 (mobile 429:1643 / 429:1661), add person 454:3160 / 456:4251, edit category 485:5312 / 486:5215, "Wysłałaś bon?" 464:4614 / 464:4752, PDF toast 472:4802 / 472:4914 (component 472:4795).
 
-## Website (page "Landing front end" 85:2646)
+## Website (page "Landing front" 85:2646)
 | Screen | Node |
 |---|---|
 | 404 page, desktop / mobile | 583:1794 / 583:2104 |
@@ -55,6 +55,6 @@ These were already in Figma (nothing to draw): password reset 410:1426 / 410:146
 
 Also changed: the hero lead and the gift text use neutral-600 on both homepages.
 
-The page is arranged as one row of page frames with labels (homepage desktop, homepage mobile, 404 desktop, 404 mobile, footer 1024–1279), then the overlay sections (desktop, mobile, in the same order: menu, booking chooser, voucher form, success, privacy policy, cookies), then the services block and components.
+The page frames (homepage desktop, homepage mobile, 404 desktop, 404 mobile, footer 1024–1279) are in one labelled row in section 574:14198 "Pages (desktop, mobile)", then the overlay sections (desktop, mobile, in the same order: menu, booking chooser, voucher form, success, privacy policy, cookies), then the services block and components.
 
 Also on the website page: the header top bar (homepages and 404s, 203:1043, 240:1365) and the mobile menu (242:1254) now say "Krucza 16/22, piętro 3" without "ul.", like the site (`site.json` → `studio.addressTopBar`).

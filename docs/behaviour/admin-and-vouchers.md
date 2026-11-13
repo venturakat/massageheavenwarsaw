@@ -9,7 +9,7 @@
 > - **Team photos:** uploads go through a crop pop-up (`src/admin/PhotoCropper.tsx`, square 800 × 800 WebP) with optional in-browser background removal (`src/admin/bg-removal.ts`). Self-host the model and ONNX runtime files before launch (see the comment in that file).
 > - **Not in the prototype:** the website doesn't read admin data yet; the `/bon/…` PDF link isn't hosted; password reset doesn't send e-mail; nothing is sent by SMS.
 
-Designed in Figma, page **"Landing back end" (353:4297)**: desktop 1440×900 screens in section 397:87, mobile 390×844 screens in section 429:1594, components in 393:11. There are prototype flows "Panel administracyjny" (desktop, starting at 410:1353) and "Panel administracyjny (mobile)" (starting at 429:1595). The admin UI is in Polish. The user is the owner, Anastazja.
+Designed in Figma, page **"Landing admin" (353:4297)**: desktop 1440×900 screens in section 397:87, mobile 390×844 screens in section 429:1594, components in 393:11. There are prototype flows "Panel administracyjny" (desktop, starting at 410:1353) and "Panel administracyjny (mobile)" (starting at 429:1595). The admin UI is in Polish. The user is the owner, Anastazja.
 
 ## Scope
 Booking stays in Booksy / Fresha / WhatsApp / Instagram, so there is **no calendar and no client database**. The admin panel covers:

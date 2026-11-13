@@ -43,7 +43,7 @@ So add `site.<lang>.json` last, or together with the rest, once the translation 
 
 ## Ukrainian fonts
 Instrument Serif and Instrument Sans have no Cyrillic letters, so `/ua/` uses Playfair Display
-and Onest (Figma «Cyrillic test», 540:61). They are imported only by `src/pages/ua/index.astro`
+and Onest (Figma page «Landing cyrillic», 540:61). They are imported only by `src/pages/ua/index.astro`
 (`src/styles/fonts-ua.css`) and switched on by `:root:lang(uk)` in `src/styles/base.css`, which
 also holds the Ukrainian type sizes. The printed voucher card keeps the Instrument fonts.
 

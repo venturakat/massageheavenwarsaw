@@ -1,4 +1,4 @@
-/* Ukrainian fonts (Figma "Cyrillic test", 540:61): Instrument has no Cyrillic.
+/* Ukrainian fonts (Figma page "Landing cyrillic", 540:61): Instrument has no Cyrillic.
    Imported only by the /ua/ page, so Polish and English pages never load them.
    Playfair Display Regular + Italic for headings, Onest 400/500/600 for text. */
 @import '@fontsource/playfair-display/400.css';

@@ -2,7 +2,9 @@
 
 File key `J7HQH69jG2BbPrzjCWG5dx`. Link to a node: `https://www.figma.com/design/J7HQH69jG2BbPrzjCWG5dx/Massage-Heaven?node-id=<id with - instead of :>`
 
-## Page "Landing front end" (85:2646) — the website
+## Page "Landing front" (85:2646) — the website
+The page frames are in section **574:14198** "Pages (desktop, mobile)". Prototype flows: "Homepage — desktop", "Homepage — mobile", "404 — desktop", "404 — mobile".
+
 | Frame | Node |
 |---|---|
 | Homepage — Desktop | **95:14** |
@@ -82,8 +84,9 @@ Suggested anchor ids are in the right column (Polish, no diacritics). The nav or
 | Components (logo set, brand icons, colours) | page 0:1; logo set 47:75, brand icon set 45:1912 |
 | Printables: gift certificate front / back | 520:83 / 520:82 |
 | Printables: filled certificate examples | 520:86 |
-| Landing back end (admin panel, developer's part) | page 353:4297; desktop section 397:87, mobile section 429:1594 (rows in menu order, lined up with desktop), components 393:11 (incl. Admin/Info item 575:10094). Node ids of the screens added on 2026-11-13: `figma-todo.md` |
+| Landing admin (admin panel, developer's part) | page 353:4297; prototype flows "Panel administracyjny" (desktop) and "Panel administracyjny (mobile)"; desktop section 397:87, mobile section 429:1594 (rows in menu order, lined up with desktop), components 393:11 (incl. Admin/Info item 575:10094). Node ids of the screens added on 2026-11-13: `figma-todo.md` |
 | Instagram stories (price lists, FAQ, team) | page 43:1452 |
+| Landing cyrillic (Ukrainian homepage, desktop: Playfair Display + Onest) | page 532:8966; section 574:14199 "Pages (UA)"; frame 540:61; prototype flow "Homepage UA — desktop" |
 
 ## Assets to export from Figma
 - Logo SVGs (all colour versions) and the brand icon/favicon from Components 0:1.

@@ -27,7 +27,7 @@ New questions: build around them with a sensible default, don't invent answers, 
 - JSON-LD: `HealthAndBeautyBusiness` built from `site.json` (`src/data/structured-data.ts`), on the PL/EN/UA homepages, not on the 404 page (2026-11-13).
 - Client e-mail: anastaziya111@gmail.com — the data-protection contact in all three privacy policies, and `studio.email` in `site.json` (2026-11-13).
 - English (`/en/`): same layout and Instrument fonts as Polish, text from the `*.en.json` files; British spelling; «zł» kept in prices (2026-11-13).
-- Ukrainian fonts: Playfair Display (Regular + Italic) and Onest (400/500/600), from the Figma «Cyrillic test» page (540:61), self-hosted and loaded only on `/ua/`. Ukrainian sizes: Display 75, H2 48, H3 25, H4 20, headings tracked −5 % / −3 % (2026-11-13).
+- Ukrainian fonts: Playfair Display (Regular + Italic) and Onest (400/500/600), from the Figma «Landing cyrillic» page (540:61), self-hosted and loaded only on `/ua/`. Ukrainian sizes: Display 75, H2 48, H3 25, H4 20, headings tracked −5 % / −3 % (2026-11-13).
 - Mobile booking choosers and cookie settings: a card centred on screen, 12 px from the sides, all corners rounded, instead of Figma's edge-to-edge bottom sheet (2026-11-13).
 - Map: the live map embeds the Massage Heaven place itself (`site.json` → `studio.googleMapsEmbed`, same place as the `googleMaps` link), with the Figma rings and brand pin on top (2026-11-13).
 - Hero and team photos: shown exactly as in Figma, which stretches each photo to its arch/circle. When the client supplies new photos, export them already cropped to the shape (342 × 420, 263 × 323, 290 × 290 at 2×) so nothing is distorted.
