@@ -1,0 +1,21 @@
+{
+  "_note": "English translation of team.json. Names kept as Anastazja and Ina, as on the Polish site and the booking platforms. Translated by Claude — please review.",
+  "people": [
+    {
+      "role": "massage therapist",
+      "bookingLabel": "Book a massage with Anastazja",
+      "bio": [
+        "Anastazja is a qualified massage therapist with more than 5 years of experience and a real passion for bodywork. She completed two years of training as a massage technician, gaining a solid medical and anatomical foundation.",
+        "In her daily practice, Anastazja focuses on an individual approach. She smoothly blends different massage techniques into a signature treatment tailored to each person’s needs."
+      ]
+    },
+    {
+      "role": "massage therapist and yoga therapist",
+      "bookingLabel": "Book a massage with Ina",
+      "bio": [
+        "Ina is an experienced massage therapist, a long-time yoga teacher, an aromatherapist and a yoga therapist.",
+        "She specialises in working with people who experience stress, deep muscle tension, back and neck pain, overload and psychosomatic fatigue."
+      ]
+    }
+  ]
+}

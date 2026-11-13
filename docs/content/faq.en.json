@@ -1,0 +1,45 @@
+{
+  "_note": "English translation of faq.json. Translated by Claude — please review.",
+  "items": [
+    {
+      "q": "How do I book a visit?",
+      "a": "The easiest way is online — the “Book a visit” button takes you to Booksy or Fresha, where you can see live availability. You can also message us on WhatsApp or Instagram."
+    },
+    {
+      "q": "How should I prepare for my first massage?",
+      "a": "Arrive 5–10 minutes early and have your last bigger meal at least an hour before your visit. Before the treatment, tell your therapist about any pain, injuries and areas to avoid."
+    },
+    {
+      "q": "Do I need to bring anything?",
+      "a": "Nothing! Fresh towels, disposable underwear and slippers are waiting for you. Just come and relax."
+    },
+    {
+      "q": "Is there a shower at the studio?",
+      "a": "Yes. After an oil massage you can take a refreshing shower at our studio."
+    },
+    {
+      "q": "Do I have to undress completely?",
+      "a": "No. You undress only as much as you feel comfortable with, and we’ll give you disposable underwear. During the massage your body is covered with a towel — we uncover only the area being massaged."
+    },
+    {
+      "q": "Can I choose the pressure?",
+      "a": "Yes. Tell us before the treatment what pressure you like, and let us know during the massage if anything feels too strong or too light."
+    },
+    {
+      "q": "Are there any contraindications?",
+      "a": "The main ones are fever, infections, skin inflammation, fresh injuries and the first trimester of pregnancy. If you’re unsure or have a chronic condition, message us before your visit — we’re happy to advise."
+    },
+    {
+      "q": "How do I cancel or reschedule?",
+      "a": "Do it in Booksy or message us at least 24 hours before your visit — we’ll gladly offer the free slot to someone else."
+    },
+    {
+      "q": "Which payment methods do you accept?",
+      "a": "At the studio you can pay by cash, card or BLIK. When booking through Booksy, you can also pay online."
+    },
+    {
+      "q": "How do I find you?",
+      "a": "ul. Krucza 16/22, 3rd floor — there’s a lift in the building. It’s right in the city centre, a 10-minute walk from Centrum metro station."
+    }
+  ]
+}
