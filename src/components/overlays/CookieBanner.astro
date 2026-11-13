@@ -58,7 +58,10 @@ const [before, after] = c.bannerText.split('{link}');
     .cookie-banner { animation: none; }
   }
 
-  .cookie-banner__title { font: var(--type-h4); }
+  .cookie-banner__title {
+    font: var(--type-h4);
+    letter-spacing: var(--tracking-h4);
+  }
   .cookie-banner__title em {
     font-style: italic;
     color: var(--text-highlight);

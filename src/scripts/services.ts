@@ -3,8 +3,9 @@
  * - Card click: open its panel (closing any other); the page scrolls so the panel
  *   sits just under the header. Click the card again or "Zwiń" to close; the page
  *   scrolls back to the card.
- * - Search: filters treatment names, ignoring case and Polish diacritics.
- *   Results title uses Polish plurals (1 zabieg, 2–4 zabiegi, 5+ zabiegów).
+ * - Search: filters treatment names, ignoring case and diacritics (Polish and Ukrainian).
+ *   Results title uses the page language's plurals (1 zabieg, 2–4 zabiegi, 5+ zabiegów;
+ *   1/21 процедура, 2–4 процедури, 5+ процедур).
  * - "No results" chips clear the search and open that category.
  */
 
@@ -17,19 +18,21 @@ export function normalise(text: string): string {
     .replace(/[̀-ͯ]/g, '');
 }
 
-/** Polish plural form index: 0 = one, 1 = few (2–4, not 12–14), 2 = many. */
-export function polishPlural(n: number): 0 | 1 | 2 {
-  if (n === 1) return 0;
-  const lastDigit = n % 10;
-  const lastTwo = n % 100;
-  if (lastDigit >= 2 && lastDigit <= 4 && !(lastTwo >= 12 && lastTwo <= 14)) return 1;
-  return 2;
+/**
+ * Plural form index for the page language: 0 = one, 1 = few, 2 = many/other.
+ * Templates list the forms in that order, e.g. {zabieg|zabiegi|zabiegów} or
+ * {процедура|процедури|процедур}. Polish and Ukrainian differ (21 → "zabiegów" but
+ * "процедура"), so this uses the browser's plural rules for <html lang>.
+ */
+export function pluralIndex(n: number, lang = document.documentElement.lang || 'pl'): 0 | 1 | 2 {
+  const category = new Intl.PluralRules(lang).select(n);
+  return category === 'one' ? 0 : category === 'few' ? 1 : 2;
 }
 
 /** Fill "{count} {zabieg|zabiegi|zabiegów} dla „{query}”". */
 export function fillTemplate(template: string, values: { count?: number; query: string }): string {
   return template
-    .replace(/\{([^{}|]+\|[^{}]+)\}/g, (_, forms: string) => forms.split('|')[polishPlural(values.count ?? 0)] ?? '')
+    .replace(/\{([^{}|]+\|[^{}]+)\}/g, (_, forms: string) => forms.split('|')[pluralIndex(values.count ?? 0)] ?? '')
     .replace(/\{count\}/g, String(values.count ?? ''))
     .replace(/\{query\}/g, values.query);
 }

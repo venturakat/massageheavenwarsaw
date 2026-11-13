@@ -4,7 +4,7 @@ Website for **Massage Heaven**, a massage studio at ul. Krucza 16/22, Warsaw. Th
 
 - **Stack:** Astro, static output. Plain CSS with custom properties: no Tailwind and no UI kit, unless the developer decides otherwise.
 - **Design source:** Figma file `J7HQH69jG2BbPrzjCWG5dx` ("Massage Heaven"), https://www.figma.com/design/J7HQH69jG2BbPrzjCWG5dx/Massage-Heaven
-- **Languages:** PL (default, at `/`), EN (`/en/`), UA (`/ua/`). Only the Polish copy exists so far. EN and UA show the Polish text until translations arrive.
+- **Languages:** PL (default, at `/`), EN (`/en/`), UA (`/ua/`). Polish and Ukrainian exist; EN shows the Polish text until its translation arrives. See `docs/content/translations.md`.
 
 ## Where things are
 | What | File |
@@ -23,12 +23,12 @@ Website for **Massage Heaven**, a massage studio at ul. Krucza 16/22, Warsaw. Th
 - **Figma is the source of truth for the look; `docs/content/` is the source of truth for text and prices.** When they disagree, follow `docs/content/` and add the mismatch to `docs/open-questions.md`.
 - Read the Figma node with the Figma MCP (`get_design_context`, `get_screenshot`) before building or changing a section. Node ids are in `docs/design/figma-map.md`. After building, compare a screenshot of the page with the Figma screenshot of the same node.
 - Use the CSS variables from `tokens.css` (semantic ones first, like `--text-primary` and `--bg-highlight`). Never hard-code hex values in components.
-- Fonts: Instrument Serif (Regular + Italic) and Instrument Sans (400/500/600). Self-host them from `@fontsource`. Do not load them from Google Fonts: the site needs no third-party requests before cookie consent.
+- Fonts: Instrument Serif (Regular + Italic) and Instrument Sans (400/500/600); on the Ukrainian pages Playfair Display (Regular + Italic) and Onest (400/500/600), because Instrument has no Cyrillic. Self-host them from `@fontsource`. Do not load them from Google Fonts: the site needs no third-party requests before cookie consent.
 - Keep all copy in content files (`src/content/` or `src/data/`), never hard-coded in components. The admin panel will edit these later, so every service, FAQ item, team member and contact detail must come from data.
 - Mobile first. Breakpoints: mobile layout below 768 px, desktop layout from 1024 px. Between those two, stack the mobile layout inside a wider container. The desktop container is max 1280 px wide with at least 64 px of side padding; mobile has 20 px side padding.
 - Accessibility: real `<button>` and `<a>` elements, visible focus styles, `aria-expanded` on FAQ items and category cards, focus trapped in pop-ups, Esc closes pop-ups, and every image has alt text.
 - Third-party content (Google Map, analytics) loads **only after cookie consent**. See `docs/behaviour/website.md`.
-- Spelling of names: **Anastazja** and **Ina**, with Polish declension (z Anastazją / z Iną, u Anastazji / u Iny). The legal name "Anastasiia Zhelezniak" appears only in the privacy policy.
+- Spelling of names: **Anastazja** and **Ina**, with Polish declension (z Anastazją / z Iną, u Anastazji / u Iny). In Ukrainian: **Анастасія** and **Іна** (з Анастасією / з Іною, до Анастасії / до Іни). The legal name "Anastasiia Zhelezniak" appears only in the privacy policy, in Latin letters in every language.
 
 ## Scope split
 **Designer + Claude Code (this repo, phase 1):** the full public one-page site, desktop and mobile:

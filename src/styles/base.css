@@ -15,6 +15,42 @@
   --header-h: var(--header-h-mobile);
 }
 
+/* Brand fonts that never change with the language (the printed voucher card). */
+:root {
+  --font-brand-serif: "Instrument Serif", Georgia, serif;
+  --font-brand-sans: "Instrument Sans", system-ui, sans-serif;
+  --tracking-h4: 0;
+  --lh-nav: 17px; /* nav and footer links: 17 px with Instrument Sans */
+  --hero-copy-width: 465px;
+  --nav-gap: 30px;
+}
+
+/* ── Ukrainian (Figma 540:61): Playfair Display + Onest, slightly smaller, tighter headings.
+   <html lang="uk"> is set once docs/content/site.ua.json exists. ── */
+:root:lang(uk) {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Onest", system-ui, sans-serif;
+  --type-display: 400 75px/0.94 var(--font-serif);
+  --type-h2: 400 48px/1 var(--font-serif);
+  --type-h3: 400 25px/1.12 var(--font-serif);
+  --type-h4: 400 20px/1.15 var(--font-serif);
+  --tracking-display: -0.05em;
+  --tracking-h2: -0.05em;
+  --tracking-h3: -0.03em;
+  --tracking-h4: -0.03em;
+  --lh-nav: 18px; /* Onest is a touch taller (Figma UA links are 18 px) */
+  --hero-copy-width: 485px;
+  --nav-gap: 22px;
+}
+/* No Ukrainian mobile frame: the Polish mobile sizes scaled by the same ratio. */
+@media (max-width: 767px) {
+  :root:lang(uk) {
+    --type-display: 400 43px/0.94 var(--font-serif);
+    --type-h2: 400 33px/1 var(--font-serif);
+    --type-h3: 400 22px/1.12 var(--font-serif);
+  }
+}
+
 /* Between the mobile and desktop layouts the mobile layout sits in a wider gutter. */
 @media (min-width: 768px) {
   :root { --gutter: 40px; }
