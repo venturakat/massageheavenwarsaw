@@ -856,6 +856,11 @@ img {
   flex-direction: column;
   gap: 2px;
 }
+.card-foot {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-default);
+}
 .card-head--row {
   flex-direction: row;
   align-items: center;

@@ -1,7 +1,7 @@
 /** Bon — detail (Figma 399:289, handed over 413:1378, dialogs 464:4614, toast 472:4802). */
 import { useState } from 'preact/hooks';
 import { api } from '../api';
-import { useAdmin } from '../App';
+import { go, useAdmin } from '../App';
 import { Icon } from '../icons';
 import {
   FLOW,
@@ -25,7 +25,7 @@ import {
 } from '../format';
 import { downloadPdf, generateVoucherPdf } from '../pdf/voucher-pdf';
 import { PAYMENTS, type Payment, type Voucher } from '../types';
-import { Button, Dialog, LinkButton, Select, StatusBadge, TextInput } from '../ui';
+import { Button, ConfirmDialog, Dialog, LinkButton, Select, StatusBadge, TextInput } from '../ui';
 import { VoucherPreview } from '../VoucherPreview';
 import { VoucherForm } from './VoucherForm';
 
@@ -37,7 +37,7 @@ const NEXT_LABEL: Partial<Record<Voucher['status'], string>> = {
 };
 
 export function VoucherDetail({ id }: { id: string }) {
-  const { data, saveVoucher, toast } = useAdmin();
+  const { data, saveVoucher, deleteVoucher, toast } = useAdmin();
   const v = data.vouchers.find((x) => x.id === id);
   const [payOpen, setPayOpen] = useState(false);
   const [payment, setPayment] = useState<Payment>('BLIK');
@@ -45,6 +45,7 @@ export function VoucherDetail({ id }: { id: string }) {
   const [note, setNote] = useState(v?.note ?? '');
   const [busy, setBusy] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   if (!v) {
     return (
@@ -123,6 +124,13 @@ export function VoucherDetail({ id }: { id: string }) {
     } finally {
       setBusy(false);
     }
+  };
+
+  const remove = async () => {
+    setConfirmDelete(false);
+    go('bony');
+    await deleteVoucher(v.id);
+    toast(`Zgłoszenie ${v.buyer} usunięte.`);
   };
 
   const saveNote = () => {
@@ -218,6 +226,13 @@ export function VoucherDetail({ id }: { id: string }) {
                 <dd class="body-medium">{v.consentAt ? `Tak · ${fullDateTime(v.consentAt)}` : 'Bon dodany ręcznie'}</dd>
               </div>
             </dl>
+            {editable && (
+              <div class="card-foot">
+                <LinkButton icon="trash" muted onClick={() => setConfirmDelete(true)}>
+                  Usuń zgłoszenie
+                </LinkButton>
+              </div>
+            )}
           </section>
 
           <section class="card card--pad stack-16">
@@ -292,6 +307,21 @@ export function VoucherDetail({ id }: { id: string }) {
       </div>
 
       {editable && <VoucherForm open={editOpen} onClose={() => setEditOpen(false)} voucher={v} />}
+
+      <ConfirmDialog
+        open={confirmDelete}
+        onClose={() => setConfirmDelete(false)}
+        onConfirm={remove}
+        title="Usunąć"
+        em="zgłoszenie?"
+        message={
+          <>
+            Zgłoszenie <strong>{v.buyer}</strong> ({voucherService(v)}) zniknie z listy bonów razem z historią i notatką. Tego nie da się cofnąć.
+          </>
+        }
+        hint="Usuwaj tylko, gdy klient zrezygnował. Gdy chce coś zmienić, użyj „Edytuj”."
+        confirmLabel="Tak, usuń"
+      />
 
       <Dialog
         open={payOpen}
