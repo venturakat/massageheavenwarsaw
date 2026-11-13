@@ -1,8 +1,10 @@
 ---
 /**
  * Team card (Figma 152:104, instances 156:836 / 156:837).
- * Circular cut-out portrait on a plum gradient, name, arrow link that opens
- * the therapist's booking chooser. Sits on the plum-600 team section.
+ * Circular cut-out portrait on a plum gradient, name, role, bio ("O mnie") and the arrow
+ * link that opens the therapist's booking chooser. Sits on the plum-600 team section.
+ * Mobile: stacked. From 768 px: one row, photo on the left, text beside it.
+ * Role and bio aren't in Figma yet (added 2026-11-13, see docs/open-questions.md).
  */
 import { Image } from 'astro:assets';
 import IconLink from './IconLink.astro';
@@ -11,12 +13,14 @@ import { teamPhotos } from '../data/team-photos';
 type Props = {
   id: string;
   name: string;
+  role: string;
+  bio: string[];
   bookingLabel: string;
   chooser: string;
   photoAlt: string;
 };
 
-const { id, name, bookingLabel, chooser, photoAlt } = Astro.props;
+const { id, name, role, bio, bookingLabel, chooser, photoAlt } = Astro.props;
 const photo = teamPhotos[id];
 ---
 
@@ -24,37 +28,104 @@ const photo = teamPhotos[id];
   <div class="team-card__photo">
     {photo && <Image src={photo} alt={photoAlt} width={290} height={290} fit="fill" densities={[1, 2]} loading="lazy" />}
   </div>
-  <h3 class="team-card__name">{name}</h3>
-  <IconLink kind="arrow" data-booking={chooser} aria-haspopup="dialog">{bookingLabel}</IconLink>
+  <div class="team-card__body">
+    <div class="team-card__heading">
+      <h3 class="team-card__name">{name}</h3>
+      {role && <p class="team-card__role">{role}</p>}
+    </div>
+    {bio.length > 0 && (
+      <div class="team-card__bio">
+        {bio.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    )}
+    <IconLink kind="arrow" data-booking={chooser} aria-haspopup="dialog">{bookingLabel}</IconLink>
+  </div>
 </article>
 
 <style>
+  /* Mobile: photo, then the text, stacked. */
   .team-card {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    width: 290px;
+    gap: 24px;
+    width: 100%;
+    max-width: 290px;
+  }
+
+  /* From 768 px: one row per person, photo on the left, text centred on the photo. */
+  @media (min-width: 768px) {
+    .team-card {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      grid-template-areas: 'photo body';
+      align-items: center;
+      gap: 48px;
+      max-width: none;
+    }
+  }
+  @media (min-width: 1024px) {
+    .team-card {
+      grid-template-columns: 290px minmax(0, 1fr);
+      gap: 72px;
+    }
   }
 
   .team-card__photo {
-    width: 290px;
-    height: 290px;
+    grid-area: photo;
+    width: 100%;
+    aspect-ratio: 1;
     overflow: hidden;
     border-radius: 50%;
     background: linear-gradient(to bottom, var(--bg-highlight), var(--plum-700));
   }
-  /* As in Figma 156:836: the whole cut-out photo fills the circle (not cropped);
-     generated at 290 × 290 with fit="fill", 1× and 2×. */
+  /* As in Figma 156:836: the whole photo fills the circle (generated at 290 × 290, fit="fill").
+     The portraits must be square crops (cut-out on a plain background, head near the top):
+     a non-square file gets stretched here, exactly as it does in Figma. */
   .team-card__photo :global(img) {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: fill;
   }
 
+  .team-card__body {
+    grid-area: body;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .team-card__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
   .team-card__name {
+    margin: 0;
     font: var(--type-h3);
     letter-spacing: var(--tracking-h3);
     color: var(--text-inverse);
+  }
+
+  .team-card__role {
+    margin: 0;
+    font: var(--type-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--periwinkle-300);
+  }
+
+  .team-card__bio {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 520px;
+    font: var(--type-body);
+    color: var(--text-inverse-subtle);
+  }
+  .team-card__bio p {
+    margin: 0;
   }
 </style>

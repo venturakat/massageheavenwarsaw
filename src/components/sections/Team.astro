@@ -1,7 +1,7 @@
 ---
 /**
  * Team — "Za każdym masażem stoi człowiek" (Figma desktop 151:135, mobile 240:1299). Anchor #zespol.
- * Plum-600 background, centred title, one TeamCard per person in team.json.
+ * Plum-600 background, centred title, one TeamCard per person in team.json (photo, name, role, bio).
  * Figma uses a white eyebrow and a periwinkle-300 italic line here.
  */
 import SectionTitle from '../SectionTitle.astro';
@@ -19,7 +19,7 @@ const { site, team } = Astro.props.content;
       {
         team.people.map((p) => (
           <li>
-            <TeamCard id={p.id} name={p.name} bookingLabel={p.bookingLabel} chooser={p.chooser} photoAlt={`${p.name}, ${p.role}`} />
+            <TeamCard id={p.id} name={p.name} role={p.role} bio={p.bio ?? []} bookingLabel={p.bookingLabel} chooser={p.chooser} photoAlt={`${p.name}, ${p.role}`} />
           </li>
         ))
       }
@@ -45,20 +45,27 @@ const { site, team } = Astro.props.content;
   .team__cards {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    align-items: center;
+    gap: 56px;
+    width: 100%;
+  }
+  .team__cards > li {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
+  /* One row per person, rows as wide as the text needs (photo + up to 520 px of text). */
   @media (min-width: 768px) {
     .team__cards {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px 100px;
+      gap: 64px;
+      max-width: 880px;
     }
   }
 
   @media (min-width: 1024px) {
     .team { padding-block: var(--section-pad-desktop); }
-    .team__inner { gap: 30px; }
+    .team__inner { gap: 56px; }
+    .team__cards { gap: 80px; }
   }
 </style>
