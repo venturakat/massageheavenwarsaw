@@ -11,8 +11,9 @@ import TextLink from './TextLink.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
 import type { Content, Locale } from '../data';
 
-type Props = { locale: Locale; content: Content };
-const { locale, content } = Astro.props;
+/** linkBase: '' on the homepage (links are #anchors); the locale's home path elsewhere, e.g. on the 404 page. */
+type Props = { locale: Locale; content: Content; linkBase?: string };
+const { locale, content, linkBase = '' } = Astro.props;
 const { site, ui } = content;
 ---
 
@@ -25,7 +26,7 @@ const { site, ui } = content;
 
   <div class="navbar">
     <div class="container navbar__inner">
-      <a class="navbar__logo" href="#top" aria-label={ui.logoHome}>
+      <a class="navbar__logo" href={`${linkBase}#top`} aria-label={ui.logoHome}>
         <img src={logo.src} width="218" height="40" alt="" />
       </a>
 
@@ -34,7 +35,7 @@ const { site, ui } = content;
           {
             site.nav.map((item) => (
               <li>
-                <TextLink href={`#${item.anchor}`}>{item.label}</TextLink>
+                <TextLink href={`${linkBase}#${item.anchor}`}>{item.label}</TextLink>
               </li>
             ))
           }

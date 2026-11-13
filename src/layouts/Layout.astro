@@ -19,16 +19,18 @@ import uaSansLatin from '@fontsource/onest/files/onest-latin-400-normal.woff2?ur
 import uaSansSemibold from '@fontsource/onest/files/onest-cyrillic-600-normal.woff2?url';
 import { getContent, htmlLang, ogLocale, localePath, locales, defaultLocale, isTranslated, type Locale } from '../data';
 
-type Props = { locale: Locale; title?: string; description?: string };
+/** notFound: the 404 page. No canonical/hreflang, kept out of search, and header/footer links point back to the homepage. */
+type Props = { locale: Locale; title?: string; description?: string; notFound?: boolean };
 
-const { locale } = Astro.props;
+const { locale, notFound = false } = Astro.props;
 const content = getContent(locale);
 const title = Astro.props.title ?? content.ui.seoTitle;
 const description = Astro.props.description ?? content.site.hero.lead;
 const canonical = new URL(localePath[locale], Astro.site);
 // Until a language is translated its page shows Polish text: say so in <html lang>,
 // keep the copy out of search results and out of the hreflang alternates.
-const translated = isTranslated(locale);
+const translated = isTranslated(locale) && !notFound;
+const linkBase = notFound ? localePath[locale] : '';
 const alternates = locales.filter(isTranslated);
 ---
 
@@ -57,17 +59,17 @@ const alternates = locales.filter(isTranslated);
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!notFound && <meta property="og:url" content={canonical} />}
     <meta property="og:locale" content={ogLocale[content.contentLocale]} />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body id="top">
     <a class="skip-link" href="#content">{content.ui.skipToContent}</a>
-    <Header locale={locale} content={content} />
+    <Header locale={locale} content={content} linkBase={linkBase} />
     <main id="content" tabindex="-1">
       <slot />
     </main>
-    <Footer content={content} />
-    <Overlays locale={locale} content={content} />
+    <Footer content={content} linkBase={linkBase} />
+    <Overlays locale={locale} content={content} linkBase={linkBase} />
   </body>
 </html>

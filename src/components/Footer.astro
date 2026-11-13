@@ -8,8 +8,9 @@ import logo from '../assets/brand/logo-white.svg';
 import TextLink from './TextLink.astro';
 import type { Content } from '../data';
 
-type Props = { content: Content };
-const { content } = Astro.props;
+/** linkBase: see Header.astro. */
+type Props = { content: Content; linkBase?: string };
+const { content, linkBase = '' } = Astro.props;
 const { site, ui } = content;
 const { columns, copyright, legal } = site.footer;
 
@@ -28,7 +29,7 @@ const [privacyLabel, cookiesLabel] = legal;
   <div class="container footer__inner">
     <div class="footer__top">
       <div class="footer__brand">
-        <a class="footer__logo" href="#top" aria-label={ui.logoHome}>
+        <a class="footer__logo" href={`${linkBase}#top`} aria-label={ui.logoHome}>
           <img src={logo.src} width="240" height="44" alt="" loading="lazy" />
         </a>
         <p class="footer__tagline">{site.taglines.footer}</p>
@@ -38,7 +39,7 @@ const [privacyLabel, cookiesLabel] = legal;
         <nav class="footer__col" aria-labelledby="footer-menu">
           <p class="label footer__label" id="footer-menu">{columns.menu}</p>
           <ul role="list">
-            {site.nav.map((item) => <li><TextLink kind="footer" href={`#${item.anchor}`}>{item.label}</TextLink></li>)}
+            {site.nav.map((item) => <li><TextLink kind="footer" href={`${linkBase}#${item.anchor}`}>{item.label}</TextLink></li>)}
           </ul>
         </nav>
 

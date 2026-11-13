@@ -12,13 +12,13 @@ import CookieBanner from './CookieBanner.astro';
 import { allChoosers } from '../../data/booking';
 import type { Content, Locale } from '../../data';
 
-type Props = { locale: Locale; content: Content };
-const { locale, content } = Astro.props;
+type Props = { locale: Locale; content: Content; linkBase?: string };
+const { locale, content, linkBase } = Astro.props;
 const { ui } = content;
 ---
 
 {allChoosers(content).map((chooser) => <BookingChooser chooser={chooser} closeLabel={ui.close} newTabLabel={ui.newTab} />)}
-<Menu locale={locale} content={content} />
+<Menu locale={locale} content={content} linkBase={linkBase} />
 <GiftForm locale={locale} content={content} />
 <CookieSettings content={content} />
 <PrivacyPolicy content={content} />

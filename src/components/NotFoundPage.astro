@@ -1,0 +1,103 @@
+---
+/**
+ * 404 page, shared by all locales (/404.html, /en/404.html, /ua/404.html).
+ * Not designed in Figma: built in the hero's style (gradient, eyebrow, two-line
+ * title with an italic second line, two buttons). No photo.
+ * Header, footer and menu links point back to the homepage sections (Layout notFound).
+ */
+import Layout from '../layouts/Layout.astro';
+import Button from './Button.astro';
+import dot from '../assets/icons/dot.svg';
+import { getContent, localePath, type Locale } from '../data';
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const content = getContent(locale);
+const { ui } = content;
+const t = ui.notFound;
+---
+
+<Layout locale={locale} title={t.seoTitle} description={t.lead} notFound>
+  <section class="not-found" aria-labelledby="not-found-title">
+    <div class="container not-found__inner">
+      <div class="not-found__copy">
+        <p class="label not-found__eyebrow">
+          <img src={dot.src} width="8" height="8" alt="" />
+          {t.eyebrow}
+        </p>
+        <h1 class="not-found__title" id="not-found-title">
+          {t.title[0]}<br /><em>{t.title[1]}</em>
+        </h1>
+        <p class="not-found__lead">{t.lead}</p>
+        <div class="not-found__actions">
+          <Button href={localePath[locale]}>{t.home}</Button>
+          <Button variant="secondary" data-booking="general" aria-haspopup="dialog">{ui.bookVisit}</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    /* Same spacing as the homepage hero: 32 px on mobile. */
+    padding-block: 32px;
+    background: linear-gradient(to bottom, var(--periwinkle-100), var(--periwinkle-200));
+    overflow: hidden;
+  }
+
+  .not-found__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .not-found__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-accent);
+    line-height: 15px;
+  }
+
+  .not-found__title {
+    font: var(--type-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-primary);
+  }
+  .not-found__title em {
+    font-style: italic;
+    color: var(--text-highlight);
+  }
+
+  .not-found__lead {
+    max-width: 520px;
+    font: var(--type-lead);
+    /* Same as the hero: neutral-600 passes 4.5:1 on the lavender gradient. */
+    color: var(--neutral-600);
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .not-found__actions { flex-direction: row; flex-wrap: wrap; gap: 12px 16px; width: auto; }
+  }
+
+  /* ── Desktop ── */
+  @media (min-width: 1024px) {
+    /* The homepage hero's text starts ~63 px below the header (45 px padding + the
+       bottom-aligned copy) and ends 80 px above the section edge at 1440 px. */
+    .not-found { padding-block: 63px 80px; }
+
+    .not-found__copy {
+      max-width: var(--hero-copy-width);
+      gap: 32px;
+    }
+  }
+</style>

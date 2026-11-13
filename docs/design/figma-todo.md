@@ -29,5 +29,8 @@ These are in code but may already be in Figma.
 - [ ] **Login: password reset** screens (3 states). Code: `Login.tsx`.
 - [ ] **"Przywrócić…?"** dialog (reset prototype data). Code: `App.tsx`. Prototype only, so it can be skipped.
 
+## Public website: known to be missing
+- [ ] **404 page** (desktop + mobile; PL is enough). Code: `src/components/NotFoundPage.astro`. See it with `npm run build && npm run preview` → any unknown URL.
+
 ## Public website: check first
 - [ ] **Team section** after the redesign with bios and square portraits (PR #11, #12). Figma 151:135 and the team card 152:104 may still show the old cards. Code: `src/components/sections/Team.astro`, `TeamCard.astro`.
