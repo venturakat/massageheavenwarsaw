@@ -74,6 +74,8 @@ Figma page "Printables" (132:6):
   - EN: "Redeemable at Massage Heaven, Krucza 16/22, Warsaw. Book via Booksy, Fresha, WhatsApp or Instagram and quote the certificate number. Not exchangeable for cash."
 
 ## Not designed yet
+The full list, with where each screen is in the code, is in `docs/design/figma-todo.md`.
+
 - empty states
 - voucher pricing rules
 - delete confirmations (Usuń pytanie / Usuń zabieg)
