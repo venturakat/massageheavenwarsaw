@@ -11,6 +11,12 @@ import sansRegular from '@fontsource/instrument-sans/files/instrument-sans-latin
 import serifRegular from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
 import sansSemibold from '@fontsource/instrument-sans/files/instrument-sans-latin-600-normal.woff2?url';
 import serifItalic from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
+import uaSerif from '@fontsource/playfair-display/files/playfair-display-cyrillic-400-normal.woff2?url';
+import uaSerifItalic from '@fontsource/playfair-display/files/playfair-display-cyrillic-400-italic.woff2?url';
+import uaSans from '@fontsource/onest/files/onest-cyrillic-400-normal.woff2?url';
+// Onest keeps digits and punctuation (— · /) in its Latin file, used by the hero text too.
+import uaSansLatin from '@fontsource/onest/files/onest-latin-400-normal.woff2?url';
+import uaSansSemibold from '@fontsource/onest/files/onest-cyrillic-600-normal.woff2?url';
 import { getContent, htmlLang, ogLocale, localePath, locales, defaultLocale, isTranslated, type Locale } from '../data';
 
 type Props = { locale: Locale; title?: string; description?: string };
@@ -32,10 +38,12 @@ const alternates = locales.filter(isTranslated);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link rel="preload" href={sansRegular} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={serifRegular} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={serifItalic} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={sansSemibold} as="font" type="font/woff2" crossorigin />
+    {
+      (content.contentLocale === 'ua'
+        ? [uaSans, uaSansLatin, uaSerif, uaSerifItalic, uaSansSemibold]
+        : [sansRegular, serifRegular, serifItalic, sansSemibold]
+      ).map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)
+    }
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

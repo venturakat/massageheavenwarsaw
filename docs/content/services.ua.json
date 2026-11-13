@@ -1,0 +1,350 @@
+{
+  "_note": "Ukrainian translation of services.json. Only text: prices, ids and the order of items come from the Polish file (merged item by item). Category names, taglines and card lists from Figma 540:84; treatment names translated by Claude — please review.",
+  "categories": [
+    {
+      "name": "Класичний і лікувальний масаж",
+      "tagline": "Зніми напруження. Відчуй полегшення.",
+      "cardList": "Класичний · Спортивний · Лікувальний · Глибокотканинний",
+      "treatments": [
+        {
+          "name": "Класичний масаж",
+          "options": [
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "45 хв"
+            },
+            {
+              "duration": "60 хв"
+            },
+            {
+              "duration": "90 хв"
+            }
+          ]
+        },
+        {
+          "name": "Спортивний масаж",
+          "options": [
+            {
+              "duration": "45 хв"
+            },
+            {
+              "duration": "60 хв"
+            },
+            {
+              "duration": "90 хв"
+            }
+          ]
+        },
+        {
+          "name": "Лікувальний масаж",
+          "options": [
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "45 хв"
+            },
+            {
+              "duration": "60 хв"
+            }
+          ]
+        },
+        {
+          "name": "Масаж глибоких тканин + терапія тригерних точок",
+          "options": [
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "45 хв"
+            },
+            {
+              "duration": "60 хв"
+            },
+            {
+              "duration": "90 хв"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Локальний масаж",
+      "tagline": "Прицільний догляд за окремими ділянками тіла.",
+      "cardList": "Комірцева зона · Голова і шия · Спина і хребет · Стопи",
+      "treatments": [
+        {
+          "name": "Масаж комірцевої зони",
+          "options": [
+            {
+              "duration": "15 хв"
+            },
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "45 хв"
+            },
+            {
+              "duration": "60 хв"
+            }
+          ]
+        },
+        {
+          "name": "Масаж голови та шиї",
+          "options": [
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "45 хв"
+            }
+          ]
+        },
+        {
+          "name": "Масаж спини та хребта",
+          "options": [
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "45 хв"
+            },
+            {
+              "duration": "60 хв"
+            }
+          ]
+        },
+        {
+          "name": "Масаж стоп",
+          "options": [
+            {
+              "duration": "30 хв"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Релакс-масажі та ритуали",
+      "tagline": "Зупинись. Дихай. Відпочинь.",
+      "cardList": "Релаксаційний · Ароматичний · Гарячою свічкою · Ломі-Ломі · Thai Mix · Балійський",
+      "treatments": [
+        {
+          "name": "Релаксаційний масаж",
+          "options": [
+            {
+              "duration": "60 хв"
+            },
+            {
+              "duration": "90 хв"
+            },
+            {
+              "duration": "120 хв"
+            }
+          ]
+        },
+        {
+          "name": "Ароматичний масаж",
+          "options": [
+            {
+              "duration": "30 хв · спина"
+            },
+            {
+              "duration": "60 хв · все тіло"
+            }
+          ]
+        },
+        {
+          "name": "Масаж гарячою свічкою",
+          "options": [
+            {
+              "duration": "60 хв"
+            },
+            {
+              "duration": "90 хв"
+            },
+            {
+              "duration": "120 хв"
+            }
+          ]
+        },
+        {
+          "name": "Масаж голови з олією",
+          "options": [
+            {
+              "duration": "45 хв"
+            }
+          ]
+        },
+        {
+          "name": "Масаж Ломі-Ломі",
+          "options": [
+            {
+              "duration": "60 хв"
+            },
+            {
+              "duration": "90 хв"
+            },
+            {
+              "duration": "120 хв"
+            }
+          ]
+        },
+        {
+          "name": "Масаж Thai Mix",
+          "options": [
+            {
+              "duration": "60 хв"
+            },
+            {
+              "duration": "90 хв"
+            },
+            {
+              "duration": "120 хв"
+            }
+          ]
+        },
+        {
+          "name": "Балійський масаж",
+          "options": [
+            {
+              "duration": "60 хв"
+            },
+            {
+              "duration": "90 хв"
+            },
+            {
+              "duration": "120 хв"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Масаж обличчя та догляд",
+      "tagline": "Природна краса та мить для себе.",
+      "cardList": "Кобідо · Ліфтинг · Букальний масаж · Процедура Thalgo",
+      "treatments": [
+        {
+          "name": "Масаж Кобідо",
+          "options": [
+            {
+              "duration": "45 хв"
+            },
+            {
+              "duration": "60 хв"
+            }
+          ]
+        },
+        {
+          "name": "Ліфтинг-масаж обличчя з елементами Кобідо",
+          "options": [
+            {
+              "duration": "45 хв"
+            },
+            {
+              "duration": "60 хв"
+            }
+          ]
+        },
+        {
+          "name": "Букальний (трансбукальний) масаж — природний ліфтинг",
+          "options": [
+            {
+              "duration": "60 хв"
+            }
+          ]
+        },
+        {
+          "name": "Омолоджувальна процедура Thalgo — розкішний догляд",
+          "options": [
+            {
+              "duration": "90 хв"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Корекція фігури та дренаж",
+      "tagline": "Легкість, розслаблення, усвідомлений догляд.",
+      "cardList": "Антицелюлітний · Лімфодренаж · Баночний масаж",
+      "treatments": [
+        {
+          "name": "Антицелюлітний масаж",
+          "options": [
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "45 хв"
+            },
+            {
+              "duration": "60 хв"
+            }
+          ]
+        },
+        {
+          "name": "Лімфодренаж",
+          "options": [
+            {
+              "duration": "60 хв"
+            },
+            {
+              "duration": "90 хв"
+            }
+          ]
+        },
+        {
+          "name": "Баночний масаж",
+          "options": [
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "45 хв"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Рефлексологія",
+      "tagline": "Малі дотики. Глибоке розслаблення.",
+      "cardList": "Кисті та передпліччя · Стопи та ноги",
+      "treatments": [
+        {
+          "name": "Рефлексологія кистей і передпліч",
+          "options": [
+            {
+              "duration": "20 хв"
+            },
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "40 хв"
+            }
+          ]
+        },
+        {
+          "name": "Рефлексологія стоп і ніг",
+          "options": [
+            {
+              "duration": "20 хв"
+            },
+            {
+              "duration": "30 хв"
+            },
+            {
+              "duration": "40 хв"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

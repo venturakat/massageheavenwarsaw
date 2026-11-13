@@ -13,7 +13,7 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **About feature** says "20+ zabiegów". There are 24 now; fine as is unless the client wants the exact number.
 
 ## Not designed yet (use a sensible, consistent default)
-- [ ] EN and UA translations. The structure is ready (see `docs/content/translations.md`); until a language has its own `site.<lang>.json`, its route shows Polish with `noindex`.
+- [ ] EN translation. The structure is ready (see `docs/content/translations.md`); until `site.en.json` exists, `/en/` shows Polish with `noindex`. UA is done (2026-11-13).
 - [ ] Hover states for close buttons, the Contact Instagram block, the map, inline links, service cards, FAQ items, filter chips and the language switch.
 - [ ] The map placeholder shown before cookie consent.
 - [ ] Gift form "Kwota" state: an amount field (min/max? preset amounts?).
@@ -25,7 +25,6 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Header between 1024 and 1179 px:** the full desktop nav (logo + 6 links + language switch + button) needs about 1180 px and doesn't fit at 1024. Below 1180 the header keeps the mobile layout (logo + menu button). Confirm or design a compact nav.
 - [ ] **Tablet gutter (768–1023):** not specified. Using 40 px side padding.
 - [ ] **Language switch font:** Figma 207:1062 uses Inter Regular 12; `design-system.md` says the Label style. Built with Label (Instrument Sans 500, uppercase), so no extra font is loaded.
-- [ ] **Cyrillic:** Instrument Serif and Instrument Sans have no Cyrillic glyphs (only latin + latin-ext). The UA translation will fall back to the system font. Pick a Cyrillic fallback font, or accept it.
 
 ## Found while building (step 2, components)
 - [ ] **Hover colours:** `design-system.md` says secondary/inverse buttons and booking rows get a plum-100 fill on hover. Figma (352:1681, 354:3558) uses periwinkle-100. Built with periwinkle-100 to match Figma.
@@ -56,7 +55,16 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Open Graph image:** none yet (link previews on WhatsApp/Facebook show no picture). Needs a 1200 × 630 image; not designed.
 - [ ] **JSON-LD (LocalBusiness):** not added yet; it needs the confirmed opening hours.
 
+## Ukrainian version (2026-11-13)
+- [ ] **Native-speaker review:** texts in Figma 540:61 were used as they are; everything else (treatment names, FAQ answers 2–10, team bios, pop-ups, form errors, cookie texts, privacy policy) was translated by Claude. Please have a native speaker read `docs/content/*.ua.json`, `src/data/ui.ua.json` and `privacy-policy.ua.md`.
+- [ ] **«ти» vs «ви»:** Figma's hero lead said «Позбавимо вас…» while every other line uses «ти». Built as «Позбавимо тебе…» to match the rest (and the Polish «Cię»).
+- [ ] **Privacy policy (UA):** a translation of the Polish draft; it needs the same client/legal sign-off. The legal name stays in Latin letters (Anastasiia Zhelezniak).
+- [ ] **Mobile type sizes (UA):** there is no Ukrainian mobile frame. Headings use the Polish mobile sizes scaled by the same ratio as desktop (Display 43, H2 33, H3 22).
+- [ ] **Voucher card:** stays Polish/English («Bon podarunkowy / Gift certificate») in Instrument fonts, as in Figma 540:252 — it is the printed design.
+- [ ] **Performance (UA, mobile):** Lighthouse 90 vs 96 for Polish, because Ukrainian text needs the Cyrillic and Latin files of both fonts (digits, dashes and brand names are Latin). Fine for now; a merged font subset would close the gap.
+
 ## Decided (for reference)
+- Ukrainian fonts: Playfair Display (Regular + Italic) and Onest (400/500/600), from the Figma «Cyrillic test» page (540:61), self-hosted and loaded only on `/ua/`. Ukrainian sizes: Display 75, H2 48, H3 25, H4 20, headings tracked −5 % / −3 % (2026-11-13).
 - Mobile booking choosers and cookie settings: a card centred on screen, 12 px from the sides, all corners rounded, instead of Figma's edge-to-edge bottom sheet (2026-11-13).
 - Map: the live map embeds the Massage Heaven place itself (`site.json` → `studio.googleMapsEmbed`, same place as the `googleMaps` link), with the Figma rings and brand pin on top (2026-11-13).
 - Hero and team photos: shown exactly as in Figma, which stretches each photo to its arch/circle. When the client supplies new photos, export them already cropped to the shape (342 × 420, 263 × 323, 290 × 290 at 2×) so nothing is distorted.

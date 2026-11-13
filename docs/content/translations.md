@@ -41,7 +41,13 @@ As soon as `site.<lang>.json` exists. Then that route:
 
 So add `site.<lang>.json` last, or together with the rest, once the translation is complete.
 
-## Ukrainian font
-Instrument Serif and Instrument Sans have no Cyrillic letters. Ukrainian text falls back
-to the system font (Georgia / system sans) until a Cyrillic font is chosen
-(see `docs/open-questions.md`).
+## Ukrainian fonts
+Instrument Serif and Instrument Sans have no Cyrillic letters, so `/ua/` uses Playfair Display
+and Onest (Figma «Cyrillic test», 540:61). They are imported only by `src/pages/ua/index.astro`
+(`src/styles/fonts-ua.css`) and switched on by `:root:lang(uk)` in `src/styles/base.css`, which
+also holds the Ukrainian type sizes. The printed voucher card keeps the Instrument fonts.
+
+## Plurals
+Templates with forms like `{процедура|процедури|процедур}` list them as one | few | many.
+The search uses the browser's plural rules for the page language, so Polish and Ukrainian
+(which differ, e.g. 21) both come out right.

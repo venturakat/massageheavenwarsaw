@@ -1,0 +1,90 @@
+{
+  "_note": "Ukrainian interface strings (screen-reader labels, pop-ups, form). Translated by Claude — please review. The voucher card text stays Polish/English (printed design, Figma 540:252).",
+  "skipToContent": "Перейти до змісту",
+  "logoHome": "Massage Heaven — на початок сторінки",
+  "mainNav": "Головне меню",
+  "footerNav": "Меню у футері",
+  "languageSwitch": "Вибір мови",
+  "openMenu": "Відкрити меню",
+  "close": "Закрити",
+  "bookVisit": "Записатися",
+  "newTab": "(відкривається в новій вкладці)",
+  "priceFrom": "від {price}",
+  "searchLabel": "Знайти процедуру",
+  "alt": {
+    "heroLarge": "Руки масажистки під час масажу спини",
+    "heroSmall": "Масаж у студії Massage Heaven",
+    "studio": "Кабінет Massage Heaven: масажний стіл, тепле світло та рослини",
+    "certificate": "Зразок подарункового сертифіката Massage Heaven",
+    "map": "Мапа околиць вул. Круча 16/22 у Варшаві"
+  },
+  "faqIntroLink": "Instagram",
+  "showMap": "Показати мапу",
+  "mapTitle": "Мапа: Massage Heaven, вул. Круча 16/22, Варшава",
+  "openInMaps": "Відкрити Massage Heaven у Google Картах",
+  "menu": "Меню",
+  "policyUpdatedPrefix": "Останнє оновлення:",
+  "seoTitle": "Massage Heaven — масаж у центрі Варшави",
+  "giftForm": {
+    "intro": "Ми зв’яжемося з тобою, щоб узгодити деталі, оплату та отримання сертифіката.",
+    "typeLabel": "Тип сертифіката",
+    "amount": "Сума (zł)",
+    "amountPlaceholder": "напр. 300",
+    "durationPlaceholder": "Спочатку обери масаж",
+    "durationChoose": "Обери тривалість",
+    "namePlaceholder": "Ім’я та прізвище",
+    "phonePlaceholder": "+48",
+    "consent": "Погоджуюся на контакт щодо замовлення сертифіката.",
+    "consentLink": "Політика конфіденційності",
+    "submit": "Надіслати запит",
+    "submitHint": "Це запит, а не замовлення — поки що ти нічого не платиш.",
+    "sending": "Надсилаємо…",
+    "errors": {
+      "massage": "Обери масаж.",
+      "duration": "Обери тривалість.",
+      "amount": "Вкажи суму сертифіката.",
+      "name": "Вкажи своє ім’я.",
+      "phone": "Вкажи правильний номер телефону, напр. 600 123 456.",
+      "consent": "Познач згоду, щоб ми могли з тобою зв’язатися.",
+      "send": "Не вдалося надіслати запит. Спробуй ще раз або напиши нам у WhatsApp."
+    },
+    "sent": {
+      "title": [
+        "Дякуємо,",
+        "запит надіслано"
+      ],
+      "text": "Ми зв’яжемося з тобою, щоб підтвердити деталі сертифіката, оплату та отримання.",
+      "close": "Закрити"
+    }
+  },
+  "cookies": {
+    "bannerTitle": [
+      "Файли",
+      "cookies"
+    ],
+    "bannerText": "Ми використовуємо необхідні файли cookies, щоб сайт працював. З твоєї згоди також увімкнемо карту Google і статистику відвідувань. Детальніше — у {link}.",
+    "bannerLink": "Політиці конфіденційності",
+    "rejectAll": "Лише необхідні",
+    "acceptAll": "Прийняти всі",
+    "settingsLink": "Налаштування cookies",
+    "settingsTitle": [
+      "Налаштування",
+      "cookies"
+    ],
+    "settingsIntro": "Обери, на які файли cookies ти погоджуєшся. Свій вибір можна змінити будь-коли у футері сайту.",
+    "necessary": {
+      "title": "Необхідні",
+      "text": "Потрібні для роботи сайту, напр. щоб запам’ятати мову та твій вибір cookies.",
+      "status": "Завжди активні"
+    },
+    "functional": {
+      "title": "Функціональні",
+      "text": "Показують карту Google з маршрутом до студії."
+    },
+    "analytics": {
+      "title": "Аналітичні",
+      "text": "Допомагають нам зрозуміти, як ти користуєшся сайтом, і покращувати його."
+    },
+    "save": "Зберегти вибір"
+  }
+}
