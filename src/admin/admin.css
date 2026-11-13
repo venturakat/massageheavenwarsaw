@@ -1053,16 +1053,30 @@ img {
     flex-direction: column;
     gap: 2px;
     white-space: nowrap;
+    min-width: 0;
+  }
+  /* Long names and service titles end in "…" instead of spilling into the next column */
+  .col-date > *,
+  .col-buyer > *,
+  .col-voucher > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .col-date,
+  .col-code,
+  .col-status,
+  .col-arrow {
+    flex-shrink: 0;
   }
   .col-date {
     width: 110px;
   }
+  /* Name and service share the free space; the service gets more of it */
   .col-buyer {
-    flex: 1;
-    min-width: 0;
+    flex: 2 1 0;
   }
   .col-voucher {
-    width: 300px;
+    flex: 3 1 0;
   }
   .col-code {
     width: 120px;
@@ -1076,9 +1090,6 @@ img {
   }
 }
 @media (min-width: 1024px) and (max-width: 1279px) {
-  .col-voucher {
-    width: 220px;
-  }
   .col-code {
     width: 90px;
   }
