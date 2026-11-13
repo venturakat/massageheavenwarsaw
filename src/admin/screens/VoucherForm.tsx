@@ -18,7 +18,8 @@ import {
 import { PAYMENTS, type Payment, type Voucher } from "../types";
 import { Button, Chips, Drawer, Select, TextInput } from "../ui";
 
-const VALIDITY = [12, 6, 3] as const;
+/** Every voucher is valid for 12 months (client rule, 2026-11-13). */
+const VALIDITY_MONTHS = 12;
 type Status = Voucher["status"];
 const STATUSES: { value: Status; label: string }[] = [
   { value: "oplacony", label: "Opłacony" },
@@ -56,16 +57,21 @@ export function VoucherForm({
   const [recipient, setRecipient] = useState("");
   const [status, setStatus] = useState<Status>("oplacony");
   const [payment, setPayment] = useState<Payment>("Gotówka");
-  const [months, setMonths] = useState<string>("12");
   const [tried, setTried] = useState(false);
 
   const value =
     type === "amount"
       ? Number(amount.replace(/[^\d]/g, "")) || 0
       : (option?.price ?? 0);
-  const validUntil = isoDate(addMonths(now(), Number(months)));
+  const validUntil = isoDate(addMonths(now(), VALIDITY_MONTHS));
+  // Amount vouchers start at the lowest visible price in the price list; no maximum.
+  const minAmount = useMemo(
+    () => Math.min(...treatments.flatMap((t) => t.options.map((o) => o.price))),
+    [treatments],
+  );
+  const amountOk = type !== "amount" || value >= minAmount;
   const valid =
-    buyer.trim() && phone.replace(/\D/g, "").length >= 9 && value > 0;
+    buyer.trim() && phone.replace(/\D/g, "").length >= 9 && value > 0 && amountOk;
 
   // Edit mode: fill the form from the voucher each time the drawer opens.
   useEffect(() => {
@@ -202,12 +208,12 @@ export function VoucherForm({
         </>
       ) : (
         <TextInput
-          label="Kwota"
+          label={`Kwota (od ${minAmount} zł)`}
           value={amount}
           onInput={setAmount}
           inputMode="numeric"
           suffix="zł"
-          error={tried && value <= 0}
+          error={tried && !amountOk}
           placeholder="np. 300"
         />
       )}
@@ -251,14 +257,11 @@ export function VoucherForm({
               options={PAYMENTS.map((p) => ({ value: p, label: p }))}
             />
           </div>
-          <Select
+          <TextInput
             label="Ważny"
-            value={months}
-            onChange={setMonths}
-            options={VALIDITY.map((m) => ({
-              value: String(m),
-              label: `${m} ${m < 5 ? "miesiące" : "miesięcy"} · do ${mediumDate(isoDate(addMonths(now(), m)))}`,
-            }))}
+            value={`${VALIDITY_MONTHS} miesięcy · do ${mediumDate(validUntil)}`}
+            onInput={() => {}}
+            ariaLabel="Ważny 12 miesięcy (stała zasada)"
           />
         </>
       )}

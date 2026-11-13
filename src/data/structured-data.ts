@@ -56,7 +56,7 @@ export function localBusiness(content: Content, pageUrl: URL, site: URL) {
     description: hero.lead,
     url: pageUrl.href,
     logo: new URL('/apple-touch-icon.png', site).href,
-    image: new URL('/apple-touch-icon.png', site).href,
+    image: new URL('/og-image.png', site).href,
     telephone: studio.phone.replace(/\s/g, ''),
     email: studio.email,
     address: {

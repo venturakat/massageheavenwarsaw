@@ -7,7 +7,7 @@
  */
 import { submitVoucherRequest, type VoucherRequest } from './voucher';
 
-type Errors = Record<'massage' | 'duration' | 'amount' | 'name' | 'phone' | 'consent' | 'send', string>;
+type Errors = Record<'massage' | 'duration' | 'amount' | 'amountMin' | 'name' | 'phone' | 'consent' | 'send', string>;
 
 /** "+48 600 123 456", "600-123-456", "0048600123456" → "+48600123456"; null if invalid. */
 export function normalisePolishPhone(value: string): string | null {
@@ -20,6 +20,8 @@ export function initGiftForm(form: HTMLFormElement): void {
   const dialog = form.closest('dialog');
   const durations: Record<string, string[]> = JSON.parse(form.dataset.durations ?? '{}');
   const errors: Errors = JSON.parse(form.dataset.errors ?? '{}');
+  // Lowest price in the price list; amount vouchers can't be smaller (no maximum).
+  const minAmount = Number(form.dataset.minAmount) || 1;
   const field = <T extends HTMLElement>(name: string) => form.elements.namedItem(name) as T;
 
   const massage = field<HTMLSelectElement>('massage');
@@ -106,7 +108,8 @@ export function initGiftForm(form: HTMLFormElement): void {
       else if (!duration.value) problems.push([duration, errors.duration]);
     } else {
       const value = Number(amount.value);
-      if (!amount.value || !Number.isFinite(value) || value <= 0) problems.push([amount, errors.amount]);
+      if (!amount.value || !Number.isFinite(value)) problems.push([amount, errors.amount]);
+      else if (value < minAmount || !Number.isInteger(value)) problems.push([amount, errors.amountMin.replace('{min}', String(minAmount))]);
     }
     if (!name.value.trim()) problems.push([name, errors.name]);
     if (!normalisePolishPhone(phone.value)) problems.push([phone, errors.phone]);

@@ -12,7 +12,6 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Names in English:** kept as **Anastazja** and **Ina**, as on the Polish site and the booking platforms. Alternatives would be "Anastasia" or the legal "Anastasiia".
 - [ ] Hover states for close buttons, the Contact Instagram block, the map, inline links, service cards, FAQ items, filter chips and the language switch.
 - [ ] The map placeholder shown before cookie consent.
-- [ ] Gift form "Kwota" state: an amount field (min/max? preset amounts?).
 - [ ] Form error states and messages.
 - [ ] **404 page** (built 2026-11-13, not in Figma): in the hero's style — eyebrow "Błąd 404", title "Tej strony / *tu nie ma*", a short line, "Wróć na stronę główną" + "Zarezerwuj wizytę" (opens the chooser), no photo. PL/EN/UA. Copy in `src/data/ui.*.json` → `notFound`; please review the wording. Listed in `docs/design/figma-todo.md`.
 
@@ -40,7 +39,6 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 ## Found while building (step 4, pop-ups)
 - [ ] **Therapist chooser rows with a note:** in Figma 293:1435 the WhatsApp and Instagram rows stay 72 px and the plum note overlaps the divider. Built so those rows grow to 92 px and nothing overlaps.
 - [ ] **Voucher type label:** Figma 165:887 says "Wybrana kwota"; `site.json` says "Kwota". Built with "Kwota" (content wins).
-- [ ] **Gift form "Kwota" field:** built as a plain number field "Kwota (zł)", any positive amount. Min/max or preset amounts still to decide.
 - [ ] **Form error messages:** written by Claude (`src/data/ui.pl.json` → `giftForm.errors`), shown in plum-100 under each field. Not designed; please review the wording.
 - [ ] **Copy for pop-ups:** the gift form, success screen and cookie texts came from Figma into `src/data/ui.pl.json`. The developer may want to move them into `site.json` so the admin panel can edit them.
 - [ ] **Analytics hook:** no tool yet. The consent script fires a `mh:consent` event on `window` with the choice; start analytics there when one is chosen.
@@ -48,7 +46,6 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 
 ## Found in the final checks (step 6)
 - [ ] **Grey text on lavender:** the hero lead and the gift text use neutral-600 instead of Figma's text-secondary, which was below the 4.5:1 contrast minimum there (4.0–4.3:1). Update Figma to match, or pick another colour that passes.
-- [ ] **Open Graph image:** none yet (link previews on WhatsApp/Facebook show no picture). Needs a 1200 × 630 image; not designed.
 
 ## Ukrainian version (2026-11-13)
 - [ ] **«ти» vs «ви»:** Figma's hero lead said «Позбавимо вас…» while every other line uses «ти». Built as «Позбавимо тебе…» to match the rest (and the Polish «Cię»).
@@ -58,6 +55,9 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 
 ## Decided (for reference)
 - Client answers (2026-11-13):
+  - **WhatsApp text for amount vouchers** (designer's pick, 2026-11-13): "Dzień dobry! Przesyłam bon podarunkowy Massage Heaven o wartości 300 zł, do wykorzystania na dowolny zabieg z naszego cennika. Kod MH-XXXX, ważny do <data>. / Bon w PDF: <link> / Przy rezerwacji wystarczy podać kod. Do zobaczenia na Kruczej 16/22!" (`src/admin/format.ts` → `whatsappMessage`).
+  - **Open Graph image:** `public/og-image.png` (1200 × 630), exported by the designer from the Figma page Booksy / Google / Facebook / WhatsApp. Same image on every language; also the JSON-LD `image`.
+  - **Voucher rules:** an amount voucher is at least the **lowest price in the price list** (now 80 zł; read from the prices, so it follows price changes), with **no maximum**. Every voucher is **valid for 12 months**. Website form: label "Kwota (od 80 zł)" and the error "Najniższa kwota bonu to 80 zł."; admin "Dodaj / Edytuj bon": the same minimum, and "Ważny" is fixed at 12 months. The sample voucher of Anna Wiśniewska now runs to 9 Nov 2027.
   - **Opening hours** in `site.json` → `studio.hours` are confirmed. Shown in a new footer column **Godziny / Hours / Години** (the designer's choice, not in Figma yet; see `docs/design/figma-todo.md`) and in the Google business info (JSON-LD) on every homepage.
   - **Cancellation notice** 24 h (FAQ 08) is fine; the wording stays as it is.
   - **Walking time** from metro Centrum, 10 min (FAQ 10), is fine.
@@ -84,12 +84,10 @@ Built in `src/admin/` where Figma had no design. Confirm or redesign:
 - [ ] **Steps before "Opłacony":** the detail page's main button moves the voucher on one step ("Oznacz jako w kontakcie" → "Oznacz jako opłacony" → "Oznacz jako przekazany" → "Oznacz jako zrealizowany"). Marking as paid opens a small dialog to pick the payment method; the code (MH-XXXX) and the 12-month validity are given at that moment. "Pobierz PDF" and "Wyślij link" are disabled until then.
 - [ ] **Edit an unpaid voucher** (2026-11-13): while a voucher is Nowy or W kontakcie, an "Edytuj" link (pencil icon) at the top right of the "Zamówienie" card opens the "Dodaj bon" drawer as "Edytuj bon", filled in, with "Zapisz zmiany". She can change the type, massage, duration, amount, Kupujący, Telefon and Dla kogo. Status, payment and validity are hidden (they're set when she marks it as paid). The link disappears once the voucher is paid. Not in Figma yet.
 - [ ] **Delete an unpaid request** (2026-11-13): while a voucher is Nowy or W kontakcie, a muted "Usuń zgłoszenie" link (trash icon) at the bottom of the "Zamówienie" card. It asks "Usunąć *zgłoszenie?*" (same style as the other delete confirmations, hint: "Usuwaj tylko, gdy klient zrezygnował. Gdy chce coś zmienić, użyj „Edytuj”."), then removes the voucher and goes back to the list. Paid vouchers can't be deleted. Not in Figma yet.
-- [ ] **"Kwota" state of Dodaj bon:** one "Kwota" field (zł) in place of Masaż / Czas / Wartość. Status choices: Opłacony, Przekazany, W kontakcie. Validity choices: 12, 6 or 3 months.
-- [ ] **WhatsApp text for amount vouchers:** "…Massage Heaven: bon na 300 zł. Kod …" (Figma only has the massage version).
+- [ ] **"Kwota" state of Dodaj bon:** one "Kwota" field (zł) in place of Masaż / Czas / Wartość. Status choices: Opłacony, Przekazany, W kontakcie. Validity is fixed at 12 months (shown, not editable).
 - [ ] **Delete confirmations** (Usuń osobę / zabieg / pytanie, and the prototype's data reset): a pop-up in the same style as "Wysłałaś bon?": title "Usunąć *osobę?*", what disappears, a grey hint suggesting hiding instead, "Anuluj" (focused) + "Tak, usuń". Not in Figma yet.
 - [ ] **Translation pills:** a missing EN/UA translation shows a pink, crossed-out pill (Figma's "Missing" variant).
 - [ ] **Hours:** each day has a toggle; off = "nieczynne".
-- [ ] **Validity in the sample data:** Anna Wiśniewska's voucher keeps Figma's "9 maja 2027" (6 months), while new vouchers default to 12 months. Same open rule as above.
 - [ ] **Team section redesigned to show role and bio ("O mnie")** in all three languages (2026-11-13), not in Figma yet. From 768 px each person is one row: photo (290 px; 240 px on tablet) beside name, role (label style, periwinkle-300), bio (body, periwinkle-200, max 520 px) and the booking link, text centred on the photo, photo on the left in every row. Mobile: stacked. Figma 151:135 / 152:104 still shows the old two-column cards: update it, or tell me what to change.
 - [x] **Team portraits were stretched in Figma** (fixed 2026-11-13): replaced with square cut-outs (1732 × 1732, transparent) in `src/assets/team/`; the site and admin show them undistorted.
 - [ ] **Photo crop pop-up in the admin** ("Dodaj / Zmień zdjęcie" and "Kadruj"): the photo in the website's plum circle, corners veiled; drag to move, slider / mouse wheel / + − to zoom, arrow keys to move. Saves an 800 × 800 square (never stretched); warns when the crop is under 600 px of real image. Not in Figma yet.

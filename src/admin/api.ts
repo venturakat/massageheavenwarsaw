@@ -193,7 +193,7 @@ function seedVouchers(): Voucher[] {
     }),
     v({
       id: 'v4', createdAt: '2026-11-09T12:15', buyer: 'Anna Wiśniewska', phone: '+48 698 441 207', status: 'oplacony', treatment: 'Masaż gorącą świecą', duration: '60 min', value: 250,
-      recipient: 'Kasia', message: 'Proszę o kontakt po 17:00.', code: 'MH-7Q4K', payment: 'BLIK', validUntil: '2027-05-09',
+      recipient: 'Kasia', message: 'Proszę o kontakt po 17:00.', code: 'MH-7Q4K', payment: 'BLIK', validUntil: '2027-11-09',
       note: 'Płatność BLIK 9.11. Odbiór osobisty w gabinecie w piątek po 17:00.',
       history: [{ status: 'nowy', at: '2026-11-09T12:15' }, { status: 'kontakt', at: '2026-11-09T14:02' }, { status: 'oplacony', at: '2026-11-09T14:10', detail: 'BLIK' }],
     }),

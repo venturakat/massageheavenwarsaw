@@ -100,11 +100,22 @@ export function newCode(existing: string[]): string {
 /** Polish dative-free display name for the dialog ("do Anny Wiśniewskiej") is hard to get right; use the name as written. */
 export const firstName = (full: string) => full.split(' ')[0];
 
-/** WhatsApp text from the design (Figma 464:4614). Amount vouchers: wording not written yet (open question). */
+/**
+ * WhatsApp text. Massage vouchers: from the design (Figma 464:4614).
+ * Amount vouchers: wording chosen by the designer (2026-11-13), which also says how to use the voucher.
+ */
 export function whatsappMessage(v: Voucher, link: string): string {
-  const what = v.type === 'amount' ? `bon na ${zl(v.value)}` : `${(v.treatment ?? '').replace(/^Masaż/, 'masaż')}, ${v.duration}`;
+  const until = v.validUntil ? longDate(v.validUntil) : '—';
+  if (v.type === 'amount') {
+    return [
+      `Dzień dobry! Przesyłam bon podarunkowy Massage Heaven o wartości ${zl(v.value)}, do wykorzystania na dowolny zabieg z naszego cennika. Kod ${v.code}, ważny do ${until}.`,
+      `Bon w PDF: ${link}`,
+      'Przy rezerwacji wystarczy podać kod. Do zobaczenia na Kruczej 16/22!',
+    ].join('\n');
+  }
+  const what = `${(v.treatment ?? '').replace(/^Masaż/, 'masaż')}, ${v.duration}`;
   return [
-    `Dzień dobry! Przesyłam bon podarunkowy Massage Heaven: ${what}. Kod ${v.code}, ważny do ${v.validUntil ? longDate(v.validUntil) : '—'}.`,
+    `Dzień dobry! Przesyłam bon podarunkowy Massage Heaven: ${what}. Kod ${v.code}, ważny do ${until}.`,
     `Bon w PDF: ${link}`,
     'Do zobaczenia na Kruczej 16/22!',
   ].join('\n');
