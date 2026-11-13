@@ -49,6 +49,7 @@ Nowy → W kontakcie → Opłacony → **Przekazany** → Zrealizowany (+ Wygas�
   - Ważny ("12 miesięcy · do …")
   - The code is generated automatically (format `MH-XXXX`).
 - **Edit order ("Edytuj" on the Zamówienie card):** only while the voucher is **Nowy** or **W kontakcie**, so the client can change the massage, duration or amount before paying. Opens the same drawer as "Dodaj bon" (title "Edytuj bon") with Rodzaj bonu, Masaż/Czas/Wartość or Kwota, Kupujący, Telefon and Dla kogo. Status, payment and validity are not in it (they're set by "Oznacz jako opłacony"). Once paid, the code and PDF are fixed and the button disappears. Not designed in Figma yet.
+- **Delete request ("Usuń zgłoszenie" at the bottom of the Zamówienie card):** same rule, only while **Nowy** or **W kontakcie**, for when the client changed their mind. Asks first ("Usunąć zgłoszenie?", "Tak, usuń"), then removes the voucher completely and goes back to the list. Paid vouchers can't be deleted: they stay in the list until they're realised or expire. API: `AdminApi.deleteVoucher(id)`; the back end should refuse it for paid vouchers too. Not designed in Figma yet.
 
 ## Gift voucher PDF
 Figma page "Printables" (132:6):
@@ -77,7 +78,7 @@ Figma page "Printables" (132:6):
 - voucher pricing rules
 - delete confirmations (Usuń pytanie / Usuń zabieg)
 - the "Kwota" state of Dodaj bon
-- the "Edytuj bon" drawer (built as a copy of Dodaj bon)
+- the "Edytuj bon" drawer (built as a copy of Dodaj bon) and the "Usunąć zgłoszenie?" dialog (built like "Usunąć zabieg?")
 - edit forms for the WhatsApp and Instagram channels
 - reordering categories
 

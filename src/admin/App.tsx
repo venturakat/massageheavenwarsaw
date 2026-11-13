@@ -39,6 +39,7 @@ function useRoute() {
 type Ctx = {
   data: AdminData;
   saveVoucher: (v: Voucher) => Promise<void>;
+  deleteVoucher: (id: string) => Promise<void>;
   saveCategories: (c: Category[]) => Promise<void>;
   saveTeam: (t: Person[]) => Promise<void>;
   saveFaq: (f: FaqItem[]) => Promise<void>;
@@ -98,6 +99,7 @@ export function App() {
     data,
     toast,
     saveVoucher: saver('vouchers', api.saveVoucher),
+    deleteVoucher: saver('vouchers', api.deleteVoucher),
     saveCategories: saver('categories', api.saveCategories),
     saveTeam: saver('team', api.saveTeam),
     saveFaq: saver('faq', api.saveFaq),

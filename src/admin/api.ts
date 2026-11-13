@@ -46,6 +46,8 @@ export interface AdminApi {
   // Content
   load(): Promise<AdminData>;
   saveVoucher(v: Voucher): Promise<void>;
+  /** Only for requests that aren't paid yet (Nowy / W kontakcie): the client changed their mind. */
+  deleteVoucher(id: string): Promise<void>;
   saveCategories(c: Category[]): Promise<void>;
   saveTeam(t: Person[]): Promise<void>;
   saveFaq(f: FaqItem[]): Promise<void>;
@@ -292,6 +294,7 @@ export const mockApi: AdminApi = {
       if (i >= 0) d.vouchers[i] = v;
       else d.vouchers.unshift(v);
     }),
+  deleteVoucher: (id) => update((d) => void (d.vouchers = d.vouchers.filter((x) => x.id !== id))),
   saveCategories: (c) => update((d) => void (d.categories = c)),
   saveTeam: (t) => update((d) => void (d.team = t)),
   saveFaq: (f) => update((d) => void (d.faq = f)),
