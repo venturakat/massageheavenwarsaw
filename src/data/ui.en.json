@@ -28,7 +28,7 @@
   "giftForm": {
     "intro": "We’ll get in touch to arrange the details, payment and collection of the voucher.",
     "typeLabel": "Voucher type",
-    "amount": "Amount (zł)",
+    "amount": "Amount (from {min} zł)",
     "amountPlaceholder": "e.g. 300",
     "durationPlaceholder": "Choose a massage first",
     "durationChoose": "Choose a duration",
@@ -43,6 +43,7 @@
       "massage": "Choose a massage.",
       "duration": "Choose a duration.",
       "amount": "Enter the voucher amount.",
+      "amountMin": "The lowest voucher amount is {min} zł.",
       "name": "Enter your name.",
       "phone": "Enter a valid phone number, e.g. 600 123 456.",
       "consent": "Tick the box so we can contact you.",
@@ -96,5 +97,6 @@
     ],
     "lead": "The link may have changed, or the page has moved. Prices, booking and gift certificates are on the homepage.",
     "home": "Back to the homepage"
-  }
+  },
+  "ogImageAlt": "Massage Heaven logo with the tagline “Chwila tylko dla Ciebie”"
 }

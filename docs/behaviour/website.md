@@ -52,7 +52,7 @@ The "Zamów bon" button opens the form pop-up (desktop 165:887, mobile full scre
 
 Fields, in order:
 1. **Rodzaj bonu:** segmented control "Konkretny masaż" / "Kwota".
-2. **Masaż** (select of all treatments) + **Czas trwania** (select, filled from the chosen treatment's durations). For "Kwota": an amount field instead.
+2. **Masaż** (select of all treatments) + **Czas trwania** (select, filled from the chosen treatment's durations). For "Kwota": an amount field instead, "Kwota (od 80 zł)": whole złoty, at least the lowest price in the price list, no maximum.
 3. **Dla kogo (opcjonalnie)**, placeholder "Imię — wpiszemy je na bonie". Max 40 characters.
 4. **Twoje imię** (max 40 characters) + **Telefon** (Polish format, +48 optional).
 5. **Wiadomość (opcjonalnie)**, placeholder "Masz pytanie albo prośbę? Napisz tutaj." This is not printed on the voucher.
@@ -107,7 +107,7 @@ Submit → validate → the form swaps to the success screen "Bon wysłany" (165
 ## SEO basics
 - Title: "Massage Heaven — masaż w centrum Warszawy".
 - Meta description from the hero lead text.
-- Open Graph image.
+- Open Graph image: `public/og-image.png` (1200 × 630, from the Figma page Booksy / Google / Facebook / WhatsApp), with `og:image:alt` per language and `twitter:card` = large image.
 - LocalBusiness / HealthAndBeautyBusiness JSON-LD with the address, phone, opening hours and a link to Booksy.
 
 ## 404 page

@@ -10,6 +10,7 @@ import Modal from '../Modal.astro';
 import FormField from '../FormField.astro';
 import Button from '../Button.astro';
 import sign from '../../assets/brand/sign-white.svg';
+import { fill, lowestPrice } from '../../data/format';
 import type { Content, Locale } from '../../data';
 
 type Props = { locale: Locale; content: Content };
@@ -19,6 +20,8 @@ const { gift } = site;
 const f = gift.form.fields;
 const copy = ui.giftForm;
 const [typeMassage, typeAmount] = gift.form.voucherTypes;
+// Amount vouchers start at the lowest price in the price list (client rule, 2026-11-13); no maximum.
+const minAmount = lowestPrice(services.categories.flatMap((c) => c.treatments));
 
 const massageGroups = services.categories.map((c) => ({
   label: c.name,
@@ -37,6 +40,7 @@ const durations = Object.fromEntries(
     data-locale={locale}
     data-durations={JSON.stringify(durations)}
     data-errors={JSON.stringify(copy.errors)}
+    data-min-amount={minAmount}
     data-duration-choose={copy.durationChoose}
   >
     <div class="gift-form__view" data-view="form">
@@ -61,7 +65,7 @@ const durations = Object.fromEntries(
         <FormField id="gift-duration" name="duration" type="select" label={f.duration} placeholder={copy.durationPlaceholder} required disabled />
       </div>
       <div class="gift-form__row" data-for-type="amount" hidden>
-        <FormField id="gift-amount" name="amount" type="number" label={copy.amount} placeholder={copy.amountPlaceholder} inputmode="numeric" min="1" step="1" required disabled />
+        <FormField id="gift-amount" name="amount" type="number" label={fill(copy.amount, { min: minAmount })} placeholder={copy.amountPlaceholder} inputmode="numeric" min={minAmount} step="1" required disabled />
       </div>
 
       <FormField id="gift-recipient" name="recipient" label={f.recipient} placeholder={f.recipientPlaceholder} maxlength={40} autocomplete="off" />

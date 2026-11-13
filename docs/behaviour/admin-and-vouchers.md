@@ -45,14 +45,14 @@ Nowy → W kontakcie → Opłacony → **Przekazany** → Zrealizowany (+ Wygas�
   1. Generates the PDF and stores it at a hard-to-guess URL (e.g. `massageheavenwarsaw.com/bon/7q4k-x8f2m`). The link must keep working until the voucher expires.
   2. Opens `wa.me/<buyer's number>?text=…` in a new tab.
   3. Shows the "Wysłałaś bon?" dialog with the buttons "Jeszcze nie" and "Tak, oznacz jako przekazany". The site can't know whether she pressed Send.
-- **WhatsApp message template:** "Dzień dobry! Przesyłam bon podarunkowy Massage Heaven: <masaż>, <czas>. Kod <kod>, ważny do <data>. / Bon w PDF: <link> / Do zobaczenia na Kruczej 16/22!" The wording for amount vouchers isn't written yet.
+- **WhatsApp message template:** "Dzień dobry! Przesyłam bon podarunkowy Massage Heaven: <masaż>, <czas>. Kod <kod>, ważny do <data>. / Bon w PDF: <link> / Do zobaczenia na Kruczej 16/22!" Amount vouchers: "Dzień dobry! Przesyłam bon podarunkowy Massage Heaven o wartości <kwota>, do wykorzystania na dowolny zabieg z naszego cennika. Kod <kod>, ważny do <data>. / Bon w PDF: <link> / Przy rezerwacji wystarczy podać kod. Do zobaczenia na Kruczej 16/22!"
 - **Manual voucher ("Dodaj bon ręcznie")** fields:
-  - Rodzaj bonu (Konkretny masaż / Kwota)
+  - Rodzaj bonu (Konkretny masaż / Kwota). Kwota: at least the lowest price in the price list (now 80 zł), no maximum. The back end should check this too.
   - Masaż + Czas trwania + Wartość bonu (taken from the price list)
   - Kupujący + Telefon
   - Dla kogo (optional)
   - Status + Płatność (Gotówka, …)
-  - Ważny ("12 miesięcy · do …")
+  - Ważny ("12 miesięcy · do …"): always 12 months, not editable (client rule, 2026-11-13)
   - The code is generated automatically (format `MH-XXXX`).
 - **Edit order ("Edytuj" on the Zamówienie card):** only while the voucher is **Nowy** or **W kontakcie**, so the client can change the massage, duration or amount before paying. Opens the same drawer as "Dodaj bon" (title "Edytuj bon") with Rodzaj bonu, Masaż/Czas/Wartość or Kwota, Kupujący, Telefon and Dla kogo. Status, payment and validity are not in it (they're set by "Oznacz jako opłacony"). Once paid, the code and PDF are fixed and the button disappears. Not designed in Figma yet.
 - **Delete request ("Usuń zgłoszenie" at the bottom of the Zamówienie card):** same rule, only while **Nowy** or **W kontakcie**, for when the client changed their mind. Asks first ("Usunąć zgłoszenie?", "Tak, usuń"), then removes the voucher completely and goes back to the list. Paid vouchers can't be deleted: they stay in the list until they're realised or expire. API: `AdminApi.deleteVoucher(id)`; the back end should refuse it for paid vouchers too. Not designed in Figma yet.
@@ -91,4 +91,4 @@ The full list, with where each screen is in the code, is in `docs/design/figma-t
 - reordering categories
 - the "Info & teksty" screen and its drawers (built in code only)
 
-Also undecided: whether the admin should be available in Ukrainian, and one validity rule (12 months is the default in Dodaj bon).
+Also undecided: whether the admin should be available in Ukrainian.

@@ -43,7 +43,7 @@
     "_note": "Gift voucher form copy not in site.json, taken from Figma 165:887 / 165:947. Error messages and the amount field are not designed yet (see docs/open-questions.md).",
     "intro": "Odezwiemy się, żeby ustalić szczegóły, płatność i odbiór bonu.",
     "typeLabel": "Rodzaj bonu",
-    "amount": "Kwota (zł)",
+    "amount": "Kwota (od {min} zł)",
     "amountPlaceholder": "np. 300",
     "durationPlaceholder": "Najpierw wybierz masaż",
     "namePlaceholder": "Imię i nazwisko",
@@ -57,6 +57,7 @@
       "massage": "Wybierz masaż.",
       "duration": "Wybierz czas trwania.",
       "amount": "Wpisz kwotę bonu.",
+      "amountMin": "Najniższa kwota bonu to {min} zł.",
       "name": "Wpisz swoje imię.",
       "phone": "Wpisz poprawny numer telefonu, np. 600 123 456.",
       "consent": "Zaznacz zgodę, żebyśmy mogli się z Tobą skontaktować.",
@@ -115,5 +116,6 @@
     ],
     "lead": "Link mógł się zmienić albo strona została przeniesiona. Cennik, rezerwacja i bony podarunkowe są na stronie głównej.",
     "home": "Wróć na stronę główną"
-  }
+  },
+  "ogImageAlt": "Logo Massage Heaven i hasło „Chwila tylko dla Ciebie”"
 }
