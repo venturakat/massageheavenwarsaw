@@ -10,6 +10,6 @@
     { "q": "Jakie są przeciwwskazania do masażu?", "a": "Najważniejsze to gorączka, infekcje, stany zapalne skóry, świeże urazy i pierwszy trymestr ciąży. Jeśli masz wątpliwości lub chorujesz przewlekle, napisz do nas przed wizytą — chętnie doradzimy." },
     { "q": "Jak odwołać lub przełożyć wizytę?", "a": "Zrób to w Booksy albo napisz do nas najpóźniej 24 godziny przed wizytą — zwolniony termin chętnie przekażemy komuś innemu.", "_todo": "24 h is a placeholder; only Booksy is named. See open-questions.md." },
     { "q": "Jakie formy płatności akceptujecie?", "a": "Na miejscu zapłacisz gotówką, kartą lub BLIK-iem. Rezerwując przez Booksy, możesz też zapłacić online." },
-    { "q": "Jak do Was trafić?", "a": "ul. Krucza 16/22, 3 piętro — w budynku jest winda. To ścisłe centrum, 10 minut pieszo od stacji metra Centrum.", "_todo": "Confirm the 10-minute walk with the client." }
+    { "q": "Jak do Was trafić?", "a": "Krucza 16/22, 3 piętro — w budynku jest winda. To ścisłe centrum, 10 minut pieszo od stacji metra Centrum.", "_todo": "Confirm the 10-minute walk with the client." }
   ]
 }

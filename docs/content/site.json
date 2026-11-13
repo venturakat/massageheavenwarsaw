@@ -2,15 +2,17 @@
   "_note": "Polish copy. Source: Figma file J7HQH69jG2BbPrzjCWG5dx, exported 2026-11-12. EN/UA translations not written yet.",
   "studio": {
     "name": "Massage Heaven",
-    "address": "ul. Krucza 16/22",
-    "addressTopBar": "ul. Krucza 16/22, piętro 3",
-    "addressLong": "ul. Krucza 16/22, Warszawa Centrum",
+    "address": "Krucza 16/22",
+    "addressTopBar": "Krucza 16/22, piętro 3",
+    "addressLong": "Krucza 16/22, Warszawa Centrum",
     "postcode": "00-526",
     "city": "Warszawa",
     "district": "Śródmieście",
     "floor": "3 piętro, winda",
     "phone": "+48 731 711 509",
     "phoneHref": "tel:+48731711509",
+    "email": "anastaziya111@gmail.com",
+    "emailHref": "mailto:anastaziya111@gmail.com",
     "instagramHandle": "@massage_heaven_warsaw",
     "instagramProfile": "https://www.instagram.com/massage_heaven_warsaw/",
     "instagramDm": "https://ig.me/m/massage_heaven_warsaw",
@@ -94,13 +96,13 @@
       "od bólu i napięć"
     ],
     "text": [
-      "Massage Heaven to studio masażu w sercu Warszawy, przy ul. Kruczej. Zanim zaczniemy, chwilę rozmawiamy — o tym, co Ci dolega, czego oczekujesz i jak mocny ma być nacisk. Dopiero potem dobieramy technikę.",
+      "Massage Heaven to studio masażu w sercu Warszawy, przy Krucza 16/22. Zanim zaczniemy, chwilę rozmawiamy — o tym, co Ci dolega, czego oczekujesz i jak mocny ma być nacisk. Dopiero potem dobieramy technikę.",
       "Łączymy techniki terapeutyczne z rytuałami relaksacyjnymi, żeby każda wizyta była czasem tylko dla Ciebie — bez pośpiechu, w ciszy i cieple."
     ],
     "features": [
       {
         "title": "Centrum Warszawy",
-        "text": "ul. Krucza 16/22 — łatwy dojazd z każdej części miasta."
+        "text": "Krucza 16/22 — łatwy dojazd z każdej części miasta."
       },
       {
         "title": "20+ zabiegów",
@@ -164,7 +166,7 @@
     "details": [
       {
         "label": "Adres",
-        "value": "ul. Krucza 16/22, Warszawa Centrum",
+        "value": "Krucza 16/22, Warszawa Centrum",
         "action": "maps"
       },
       {
@@ -189,7 +191,7 @@
       "studio": {
         "title": "Studio",
         "lines": [
-          "ul. Krucza 16/22",
+          "Krucza 16/22",
           "Warszawa Centrum"
         ]
       },

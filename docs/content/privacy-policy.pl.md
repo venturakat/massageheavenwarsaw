@@ -1,7 +1,6 @@
 <!--
 Polityka prywatności — DRAFT, not legal advice. The client (or their accountant/lawyer) must confirm it before launch.
 Placeholders in [brackets] are shown in plum on the site until filled in. Still to fill in / confirm:
-- contact e-mail for data-protection requests
 - publication date
 - analytics tool name (section 9), or remove the "Analityczne" category if none is used
 - retention for unanswered voucher enquiries (12 months is a proposal)
@@ -13,7 +12,7 @@ Placeholders in [brackets] are shown in plum on the site until filled in. Still 
 Szanujemy Twoją prywatność. Poniżej wyjaśniamy, jakie dane osobowe zbieramy, w jakim celu, jak długo je przechowujemy i jakie masz prawa. Polityka dotyczy strony massageheavenwarsaw.com oraz kontaktu z gabinetem Massage Heaven.
 
 ## 1. Kto jest administratorem danych
-Administratorem Twoich danych osobowych jest Anastasiia Zhelezniak, prowadząca jednoosobową działalność gospodarczą (gabinet Massage Heaven), ul. Krucza 16/22, 00-526 Warszawa, NIP 5253039331, REGON 541191343 („Massage Heaven”, „my”). W sprawach dotyczących danych osobowych napisz do nas na [adres e-mail] lub zadzwoń: +48 731 711 509.
+Administratorem Twoich danych osobowych jest Anastasiia Zhelezniak, prowadząca jednoosobową działalność gospodarczą (gabinet Massage Heaven), Krucza 16/22, 00-526 Warszawa, NIP 5253039331, REGON 541191343 („Massage Heaven”, „my”). W sprawach dotyczących danych osobowych napisz do nas na anastaziya111@gmail.com lub zadzwoń: +48 731 711 509.
 
 ## 2. Jakie dane zbieramy
 - Formularz bonu podarunkowego: imię, numer telefonu, wybrany masaż lub kwota, czas trwania i treść wiadomości.
@@ -40,7 +39,7 @@ Niektórzy dostawcy, np. Meta i Google, mogą przetwarzać dane poza Europejskim
 - Informacje o zdrowiu — do cofnięcia zgody lub zakończenia współpracy.
 
 ## 7. Twoje prawa
-Masz prawo do dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania i przeniesienia, a także do sprzeciwu wobec przetwarzania opartego na naszym uzasadnionym interesie. Zgodę możesz cofnąć w każdej chwili — nie wpływa to na zgodność z prawem przetwarzania sprzed jej cofnięcia. Aby skorzystać ze swoich praw, napisz na [adres e-mail]. Możesz też złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa).
+Masz prawo do dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania i przeniesienia, a także do sprzeciwu wobec przetwarzania opartego na naszym uzasadnionym interesie. Zgodę możesz cofnąć w każdej chwili — nie wpływa to na zgodność z prawem przetwarzania sprzed jej cofnięcia. Aby skorzystać ze swoich praw, napisz na anastaziya111@gmail.com. Możesz też złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa).
 
 ## 8. Czy musisz podać dane
 Podanie danych jest dobrowolne, ale bez nich nie odpowiemy na zapytanie, nie przygotujemy bonu ani nie umówimy wizyty. Nie podejmujemy decyzji w sposób zautomatyzowany i nie profilujemy.
