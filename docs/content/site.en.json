@@ -1,5 +1,5 @@
 {
-  "_note": "English translation of site.json (text only; links and data come from the Polish file). Translated by Claude — please review.",
+  "_note": "English translation of site.json (text only; links and data come from the Polish file). Translated by Claude, reviewed by a native speaker (2026-11-13).",
   "studio": {
     "addressTopBar": "Krucza 16/22, 3rd floor",
     "addressLong": "Krucza 16/22, Warsaw city centre",
@@ -150,12 +150,49 @@
   "footer": {
     "columns": {
       "menu": "Menu",
+      "menuShort": {
+        "bon": "Voucher"
+      },
       "studio": {
         "title": "Studio",
         "lines": [
           "Krucza 16/22",
-          "Warsaw city centre"
+          "Warsaw"
         ]
+      },
+      "hours": {
+        "title": "Hours",
+        "closed": "closed",
+        "days": {
+          "mon": [
+            "Mon",
+            "Monday"
+          ],
+          "tue": [
+            "Tue",
+            "Tuesday"
+          ],
+          "wed": [
+            "Wed",
+            "Wednesday"
+          ],
+          "thu": [
+            "Thu",
+            "Thursday"
+          ],
+          "fri": [
+            "Fri",
+            "Friday"
+          ],
+          "sat": [
+            "Sat",
+            "Saturday"
+          ],
+          "sun": [
+            "Sun",
+            "Sunday"
+          ]
+        }
       },
       "online": {
         "title": "Online"

@@ -20,7 +20,7 @@
     "googleMapsEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1221.7!2d21.0190416!3d52.2261074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecd54a10807e1%3A0x53ee179a5df6ba1d!2sMassage%20Heaven!5e0!3m2!1spl!2spl!4v1",
     "website": "https://massageheavenwarsaw.com",
     "hours": {
-      "_note": "From the door sign DRAFT. Confirm with the client before launch.",
+      "_note": "Confirmed by the client 2026-11-13. Also used in the Google business info (JSON-LD).",
       "mon": "9:00–23:00",
       "tue": "8:30–21:00",
       "wed": "8:30–22:00",
@@ -185,12 +185,51 @@
   "footer": {
     "columns": {
       "menu": "Menu",
+      "menuShort": {
+        "_note": "Shorter labels for the footer menu only, by section anchor; the header and mobile menu keep the full ones.",
+        "bon": "Bon"
+      },
       "studio": {
         "title": "Studio",
         "lines": [
           "Krucza 16/22",
-          "Warszawa Centrum"
+          "Warszawa"
         ]
+      },
+      "hours": {
+        "_note": "Footer opening-hours column. Times come from studio.hours; days with the same times next to each other are joined (Czw–Pt). Short name shown, long name read by screen readers.",
+        "title": "Godziny",
+        "closed": "nieczynne",
+        "days": {
+          "mon": [
+            "Pn",
+            "poniedziałek"
+          ],
+          "tue": [
+            "Wt",
+            "wtorek"
+          ],
+          "wed": [
+            "Śr",
+            "środa"
+          ],
+          "thu": [
+            "Czw",
+            "czwartek"
+          ],
+          "fri": [
+            "Pt",
+            "piątek"
+          ],
+          "sat": [
+            "Sb",
+            "sobota"
+          ],
+          "sun": [
+            "Nd",
+            "niedziela"
+          ]
+        }
       },
       "online": {
         "title": "Online",
@@ -231,7 +270,7 @@
               "icon": "calendar",
               "title": "Fresha",
               "hint": "Wolne terminy na bieżąco",
-              "url": "https://www.fresha.com/en-GB/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/all-offer?pId=2749004"
+              "url": "https://www.fresha.com/pl/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/all-offer?venue=true&entryPoint=book_now_link&pId=2749004"
             }
           ]
         },
@@ -266,7 +305,7 @@
         "hint": "Terminy Anastazji online",
         "note": "W wiadomości podaj imię: Anastazja",
         "booksy": "https://booksy.com/pl-pl/289641_massage-heaven_masaz_3_warszawa/staffer/650120#ba_s=dl_1",
-        "fresha": "https://www.fresha.com/en-GB/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/booking?pId=2749004&modal=employee-profile&employeeId=5027660&back=%2Fa%2Fmassage-heaven-warszawa-krucza-16-22-j9nsos6o",
+        "fresha": "https://www.fresha.com/pl/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/booking?pId=2749004&modal=employee-profile&employeeId=5027660&back=%2Fa%2Fmassage-heaven-warszawa-krucza-16-22-j9nsos6o",
         "whatsapp": "https://wa.me/48731711509?text=Dzie%C5%84%20dobry!%20Chc%C4%99%20um%C3%B3wi%C4%87%20wizyt%C4%99%20u%20Anastazji."
       },
       "ina": {
@@ -278,7 +317,7 @@
         "hint": "Terminy Iny online",
         "note": "W wiadomości podaj imię: Ina",
         "booksy": "https://booksy.com/pl-pl/289641_massage-heaven_masaz_3_warszawa/staffer/866067#ba_s=dl_1",
-        "fresha": "https://www.fresha.com/en-GB/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/booking?pId=2749004&modal=employee-profile&employeeId=5027663&back=%2Fa%2Fmassage-heaven-warszawa-krucza-16-22-j9nsos6o",
+        "fresha": "https://www.fresha.com/pl/a/massage-heaven-warszawa-krucza-16-22-j9nsos6o/booking?pId=2749004&modal=employee-profile&employeeId=5027663&back=%2Fa%2Fmassage-heaven-warszawa-krucza-16-22-j9nsos6o",
         "whatsapp": "https://wa.me/48731711509?text=Dzie%C5%84%20dobry!%20Chc%C4%99%20um%C3%B3wi%C4%87%20wizyt%C4%99%20u%20Iny."
       }
     }
