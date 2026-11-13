@@ -35,5 +35,7 @@ These are in code but may already be in Figma.
 
 - [ ] **Footer with the opening-hours column** (desktop 1440, 1024–1279 with the logo above the columns, and mobile). Code: `src/components/Footer.astro`. Columns: **Godziny**, Menu, Studio, Online (mobile: Godziny + Menu, then Studio + Online). Footer-only short labels: "Bon", "Warszawa". Days with the same hours are joined ("Czw–Pt 8:30–23:00"); day names in the muted footer colour. Figma footer: desktop 97:151, mobile 240:1334.
 
+- [ ] **Small updates to match the site:** the hero lead and the gift text use neutral-600 (Figma's text-secondary is below the 4.5:1 contrast minimum on lavender); the admin photo hint (Zespół, Figma 403:889) should read "Zdjęcie z usuniętym tłem (wycięta sylwetka, przezroczyste tło), PNG lub WebP, min. 800 × 800 px. Śliwkowe tło pod spodem dodamy sami."
+
 ## Public website: check first
 - [ ] **Team section** after the redesign with bios and square portraits (PR #11, #12). Figma 151:135 and the team card 152:104 may still show the old cards. Code: `src/components/sections/Team.astro`, `TeamCard.astro`.

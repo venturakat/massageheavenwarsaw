@@ -1,5 +1,5 @@
 {
-  "_note": "Polish interface strings that are not visible copy in Figma (screen-reader labels, skip link, small formats). EN/UA not written yet.",
+  "_note": "Polish interface strings that are not visible copy in Figma (screen-reader labels, skip link, small formats). EN/UA in ui.en.json / ui.ua.json.",
   "skipToContent": "Przejdź do treści",
   "logoHome": "Massage Heaven — na początek strony",
   "mainNav": "Menu główne",
@@ -19,7 +19,7 @@
   },
   "searchLabel": "Szukaj zabiegu",
   "alt": {
-    "_note": "Image descriptions for screen readers. Written by Claude from the Figma images; please review.",
+    "_note": "Image descriptions for screen readers. Written by Claude from the Figma images; approved by the designer 2026-11-13.",
     "heroLarge": "Dłonie masażystki podczas masażu pleców",
     "heroSmall": "Masaż w studiu Massage Heaven",
     "studio": "Gabinet Massage Heaven: stół do masażu, ciepłe światło i rośliny",
@@ -40,7 +40,7 @@
   "menu": "Menu",
   "policyUpdatedPrefix": "Ostatnia aktualizacja:",
   "giftForm": {
-    "_note": "Gift voucher form copy not in site.json, taken from Figma 165:887 / 165:947. Error messages and the amount field are not designed yet (see docs/open-questions.md).",
+    "_note": "Gift voucher form copy not in site.json, taken from Figma 165:887 / 165:947. Error messages written by Claude, approved by the designer 2026-11-13; not designed in Figma.",
     "intro": "Odezwiemy się, żeby ustalić szczegóły, płatność i odbiór bonu.",
     "typeLabel": "Rodzaj bonu",
     "amount": "Kwota (od {min} zł)",
