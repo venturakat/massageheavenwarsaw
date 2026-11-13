@@ -1924,12 +1924,71 @@ img {
   }
 }
 
-/* ── Gabinet i rezerwacje (404:1238) ───────── */
-.studio,
-.studio__col {
+/* ── Info & teksty (was Gabinet i rezerwacje, 404:1238) ──
+   Same list + editor layout as Zespół: reuses .team, .person-item and .person-editor. */
+.info-item__num {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--plum-100);
+  color: var(--text-highlight);
+  font: 400 20px/1 var(--font-serif);
+}
+.person-item.is-active .info-item__num {
+  background: var(--bg-highlight);
+  color: var(--text-inverse);
+}
+.info-item__sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.info-editor__title {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 200px;
+}
+.info-editor__group {
+  margin-bottom: -6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-default);
+}
+.text-preview {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
+}
+.text-preview__title {
+  font: 400 32px/1.02 var(--font-serif);
+  letter-spacing: -0.01em;
+}
+.text-preview__title em {
+  font-style: italic;
+  color: var(--text-highlight);
+}
+.counted {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.counted__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+}
+.counted__count {
+  margin-left: auto;
+  text-align: right;
+}
+.counted__count.is-over {
+  color: var(--plum-600);
+  font: var(--type-admin-small-medium);
 }
 .field-row--address {
   grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
@@ -1938,22 +1997,10 @@ img {
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
 }
 @media (max-width: 767px) {
-  .studio .field-row {
+  .field-row--address,
+  .field-row--message,
+  .person-editor .field-row {
     grid-template-columns: 1fr;
-  }
-}
-@media (min-width: 1024px) {
-  .studio {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-    gap: 24px;
-  }
-  .studio__col {
-    gap: 24px;
-  }
-  .studio .card--pad {
-    padding: 20px 24px 24px;
   }
 }
 .channel-list,

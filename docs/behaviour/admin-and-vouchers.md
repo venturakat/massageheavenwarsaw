@@ -20,10 +20,16 @@ Booking stays in Booksy / Fresha / WhatsApp / Instagram, so there is **no calend
    - "od X zł" is calculated automatically.
 4. **Zespół:** reorder people; each person has a photo, visible toggle, name, role, bio (PL/EN/UA), their own Booksy/Fresha links and a prefilled WhatsApp message. Add new people.
 5. **FAQ:** reorder, add, edit, delete and show/hide questions, per language.
-6. **Gabinet i rezerwacje:**
-   - contact details and opening hours per day
-   - a top-bar announcement with a preview and a "show until" date
-   - the 4 booking channels: name, link, subtitle, group and visible toggle. The channels can't be deleted, only hidden.
+6. **Info & teksty** (mobile tab: "Info"; replaced "Gabinet i rezerwacje" on 2026-11-13, the old `#/gabinet` address still opens it). It works like Zespół: a list of the parts of the website on the left, in page order, and an editor for the selected one on the right (`#/info/<id>`, e.g. `#/info/o-nas`). On mobile the list and the editor are separate screens with a back link. Each editor has its own "Zapisz zmiany" and "Cofnij zmiany":
+   1. **Pasek na górze strony:** announcement (PL/EN/UA) with a preview and a "show until" date; otherwise the top bar shows the address.
+   2. **Start (hero)**, 3. **O nas**, 4. **Bon podarunkowy**, 5. **Kontakt:** the section texts, per language: small heading, two-line title (line 2 is the italic one), and the description. O nas also has its text (one field; a blank line starts a new paragraph on the site, like a Zespół bio) and 3 feature boxes. Data: `SiteTexts` in `types.ts`, seeded from `site*.json`.
+      - The structure is fixed: no adding or removing boxes or fields.
+      - Each field has a soft character limit with a counter. Going over shows a warning but still saves. The limits are estimates from the current copy (`SECTIONS` in `Info.tsx`); check them against Figma.
+      - An empty EN/UA field falls back to Polish. The list shows "brak EN/UA" when a translation is missing.
+      - Button labels, form labels, menu and footer stay in `src/data/ui.*.json` and aren't editable.
+   6. **Dane kontaktowe:** address, postcode, phone/WhatsApp, Instagram, Google Maps link.
+   7. **Godziny otwarcia** per day.
+   8. **Okienko rezerwacji** (the „Zarezerwuj wizytę” pop-up): the 4 booking channels: name, link, subtitle, group and visible toggle (the toggle saves straight away). The channels can't be deleted, only hidden.
 
 Every change shows on the site right away ("Zmiany widać na stronie od razu"). That means the site has to read content from the admin data source: SSR, on-demand revalidation, or a rebuild hook. The developer chooses.
 
@@ -83,5 +89,6 @@ The full list, with where each screen is in the code, is in `docs/design/figma-t
 - the "Edytuj bon" drawer (built as a copy of Dodaj bon) and the "Usunąć zgłoszenie?" dialog (built like "Usunąć zabieg?")
 - edit forms for the WhatsApp and Instagram channels
 - reordering categories
+- the "Info & teksty" screen and its drawers (built in code only)
 
 Also undecided: whether the admin should be available in Ukrainian, and one validity rule (12 months is the default in Dodaj bon).

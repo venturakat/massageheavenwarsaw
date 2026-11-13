@@ -105,10 +105,30 @@ export type Studio = {
   channels: Channel[];
 };
 
+// ── Site texts (Info i teksty) ────────────────────────────
+
+/** A serif section title: two lines, the second one in italic (the line break is part of the design). */
+export type TwoLines = [Localized, Localized];
+export type Feature = { title: Localized; text: Localized };
+
+/**
+ * Headings and descriptions of the fixed homepage sections. The structure is fixed
+ * (no adding or removing paragraphs or boxes); only the words change.
+ * Button labels, form labels, menu and footer stay in src/data/ui.*.json.
+ */
+export type SiteTexts = {
+  hero: { eyebrow: Localized; title: TwoLines; lead: Localized };
+  /** `text`: paragraphs separated by a blank line, like a person's bio. */
+  about: { eyebrow: Localized; title: TwoLines; text: Localized; features: [Feature, Feature, Feature] };
+  gift: { eyebrow: Localized; title: TwoLines; text: Localized };
+  contact: { eyebrow: Localized; title: TwoLines };
+};
+
 export type AdminData = {
   vouchers: Voucher[];
   categories: Category[];
   team: Person[];
   faq: FaqItem[];
   studio: Studio;
+  texts: SiteTexts;
 };

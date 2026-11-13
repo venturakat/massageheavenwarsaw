@@ -11,6 +11,11 @@ import type { Content } from '../../data';
 type Props = { content: Content };
 const { site, ui } = Astro.props.content;
 const { about } = site;
+// One text, edited in the admin as one field: a blank line starts a new paragraph.
+const paragraphs = about.text
+  .split(/\n\s*\n/)
+  .map((p) => p.trim())
+  .filter(Boolean);
 ---
 
 <section id="o-nas" class="about" aria-labelledby="about-title">
@@ -21,7 +26,7 @@ const { about } = site;
   <div class="container about__inner">
     <SectionTitle eyebrow={about.eyebrow} title={about.title} tone="dark" id="about-title" />
     <div class="about__text">
-      {about.text.map((p) => <p>{p}</p>)}
+      {paragraphs.map((p) => <p>{p}</p>)}
     </div>
     <ul class="about__features" role="list">
       {
