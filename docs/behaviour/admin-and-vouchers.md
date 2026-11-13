@@ -1,5 +1,14 @@
 # Admin panel and gift voucher PDF (developer, phase 2)
 
+> **Prototype built (2026-11-13):** the whole admin UI, desktop and mobile, is in `src/admin/` and runs at `/admin` on the dev server (`npm run dev`; prototype password: `demo`). It starts from the real content in `docs/content/` plus sample vouchers, and saves changes only in the browser (localStorage). It is **not** in the public build (set `ADMIN_PREVIEW=1` to include it in a preview build).
+>
+> For the developer:
+> - **Data:** every screen goes through `src/admin/api.ts` → `AdminApi`. Replace `mockApi` with the real back end (auth, database, photo and PDF storage). The data shapes are in `src/admin/types.ts`.
+> - **Website form:** `src/scripts/voucher.ts` → `submitVoucherRequest()` should create a `Voucher` with status `nowy`.
+> - **PDF:** `src/admin/pdf/voucher-pdf.ts` (pdf-lib) already builds the final 2-page PDF in the browser from `pdf/voucher-layout.ts` (positions measured from Figma 520:83 / 520:82). It also runs in Node if you swap the `fetch` asset loading for file reads, so it can move to the server. Fonts: full static TTFs with Polish characters in `pdf/fonts/` (OFL licences included).
+> - **Team photos:** uploads go through a crop pop-up (`src/admin/PhotoCropper.tsx`, square 800 × 800 WebP) with optional in-browser background removal (`src/admin/bg-removal.ts`). Self-host the model and ONNX runtime files before launch (see the comment in that file).
+> - **Not in the prototype:** the website doesn't read admin data yet; the `/bon/…` PDF link isn't hosted; password reset doesn't send e-mail; nothing is sent by SMS.
+
 Designed in Figma, page **"Landing back end" (353:4297)**: desktop 1440×900 screens in section 397:87, mobile 390×844 screens in section 429:1594, components in 393:11. There are prototype flows "Panel administracyjny" (desktop, starting at 410:1353) and "Panel administracyjny (mobile)" (starting at 429:1595). The admin UI is in Polish. The user is the owner, Anastazja.
 
 ## Scope
@@ -39,6 +48,7 @@ Nowy → W kontakcie → Opłacony → **Przekazany** → Zrealizowany (+ Wygas�
   - Status + Płatność (Gotówka, …)
   - Ważny ("12 miesięcy · do …")
   - The code is generated automatically (format `MH-XXXX`).
+- **Edit order ("Edytuj" on the Zamówienie card):** only while the voucher is **Nowy** or **W kontakcie**, so the client can change the massage, duration or amount before paying. Opens the same drawer as "Dodaj bon" (title "Edytuj bon") with Rodzaj bonu, Masaż/Czas/Wartość or Kwota, Kupujący, Telefon and Dla kogo. Status, payment and validity are not in it (they're set by "Oznacz jako opłacony"). Once paid, the code and PDF are fixed and the button disappears. Not designed in Figma yet.
 
 ## Gift voucher PDF
 Figma page "Printables" (132:6):
@@ -47,7 +57,7 @@ Figma page "Printables" (132:6):
 - Filled examples: section 520:86
 - Rules card: 520:235
 
-- **One PDF** for print and WhatsApp: 2 pages (front, back), each **216×105 mm** (210×99 mm trim + 3 mm bleed), CMYK, fonts embedded (Instrument Serif/Sans, OFL), no crop marks. Figma exports RGB only, so the CMYK conversion happens in the generator. Provisional CMYK values: Plum 45·95·25·15, Periwinkle 60·47·0·0, Ink 75·68·60·80.
+- **One PDF** for print and WhatsApp: 2 pages (front, back), each **216×105 mm** (210×99 mm trim + 3 mm bleed), **RGB** (no CMYK conversion, decided 2026-11-13), fonts embedded (Instrument Serif/Sans, OFL), no crop marks.
 - **The front is static.** The back has 5 value slots:
   - **Dla / For** = "Dla kogo". Optional; leave it blank for handwriting.
   - **Od / From** = the buyer's name.
@@ -67,6 +77,7 @@ Figma page "Printables" (132:6):
 - voucher pricing rules
 - delete confirmations (Usuń pytanie / Usuń zabieg)
 - the "Kwota" state of Dodaj bon
+- the "Edytuj bon" drawer (built as a copy of Dodaj bon)
 - edit forms for the WhatsApp and Instagram channels
 - reordering categories
 

@@ -48,6 +48,8 @@ Website for **Massage Heaven**, a massage studio at ul. Krucza 16/22, Warsaw. Th
 
 The voucher form only validates and shows the success screen. It doesn't send anything yet.
 
+**Admin panel UI prototype (done 2026-11-13):** `src/admin/`, at `/admin` on the dev server only. Sample data, saved in the browser. See `docs/behaviour/admin-and-vouchers.md`.
+
 **Developer (phase 2):**
 - form submission and storage
 - admin panel (login, vouchers, editing prices/FAQ/team/studio)
