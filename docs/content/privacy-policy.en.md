@@ -9,7 +9,7 @@ client/legal sign-off before launch. Placeholders in [brackets] are shown in plu
 We respect your privacy. Below we explain what personal data we collect, why, how long we keep it and what rights you have. This policy covers the massageheavenwarsaw.com website and contact with the Massage Heaven studio.
 
 ## 1. Who is the data controller
-The controller of your personal data is Anastasiia Zhelezniak, running a sole proprietorship (the Massage Heaven studio), ul. Krucza 16/22, 00-526 Warszawa, Poland, NIP 5253039331, REGON 541191343 (“Massage Heaven”, “we”). For any questions about personal data, write to us at [e-mail address] or call +48 731 711 509.
+The controller of your personal data is Anastasiia Zhelezniak, running a sole proprietorship (the Massage Heaven studio), Krucza 16/22, 00-526 Warszawa, Poland, NIP 5253039331, REGON 541191343 (“Massage Heaven”, “we”). For any questions about personal data, write to us at anastaziya111@gmail.com or call +48 731 711 509.
 
 ## 2. What data we collect
 - Gift voucher form: name, phone number, chosen massage or amount, duration and the content of your message.
@@ -36,7 +36,7 @@ Some providers, such as Meta and Google, may process data outside the European E
 - Health information — until you withdraw consent or our cooperation ends.
 
 ## 7. Your rights
-You have the right to access your data, to have it corrected, deleted or its processing restricted, to data portability, and to object to processing based on our legitimate interest. You can withdraw your consent at any time — this does not affect the lawfulness of processing before the withdrawal. To exercise your rights, write to [e-mail address]. You can also lodge a complaint with the President of the Personal Data Protection Office (Prezes Urzędu Ochrony Danych Osobowych, ul. Stawki 2, 00-193 Warszawa).
+You have the right to access your data, to have it corrected, deleted or its processing restricted, to data portability, and to object to processing based on our legitimate interest. You can withdraw your consent at any time — this does not affect the lawfulness of processing before the withdrawal. To exercise your rights, write to anastaziya111@gmail.com. You can also lodge a complaint with the President of the Personal Data Protection Office (Prezes Urzędu Ochrony Danych Osobowych, ul. Stawki 2, 00-193 Warszawa).
 
 ## 8. Do you have to provide your data
 Providing your data is voluntary, but without it we cannot answer your enquiry, prepare a voucher or book your visit. We do not make automated decisions or use profiling.

@@ -1,8 +1,8 @@
 {
   "_note": "English translation of site.json (text only; links and data come from the Polish file). Translated by Claude — please review.",
   "studio": {
-    "addressTopBar": "ul. Krucza 16/22, 3rd floor",
-    "addressLong": "ul. Krucza 16/22, Warsaw city centre",
+    "addressTopBar": "Krucza 16/22, 3rd floor",
+    "addressLong": "Krucza 16/22, Warsaw city centre",
     "city": "Warsaw",
     "floor": "3rd floor, lift"
   },
@@ -66,13 +66,13 @@
       "from pain and tension"
     ],
     "text": [
-      "Massage Heaven is a massage studio in the heart of Warsaw, on Krucza Street. Before we begin, we talk for a moment — about what’s bothering you, what you expect and how firm the pressure should be. Only then do we choose the technique.",
+      "Massage Heaven is a massage studio in the heart of Warsaw, at Krucza 16/22. Before we begin, we talk for a moment — about what’s bothering you, what you expect and how firm the pressure should be. Only then do we choose the technique.",
       "We combine therapeutic techniques with relaxing rituals, so that every visit is time just for you — unhurried, quiet and warm."
     ],
     "features": [
       {
         "title": "Warsaw city centre",
-        "text": "ul. Krucza 16/22 — easy to reach from anywhere in the city."
+        "text": "Krucza 16/22 — easy to reach from anywhere in the city."
       },
       {
         "title": "20+ treatments",
@@ -134,7 +134,7 @@
     "details": [
       {
         "label": "Address",
-        "value": "ul. Krucza 16/22, Warsaw city centre"
+        "value": "Krucza 16/22, Warsaw city centre"
       },
       {
         "label": "Bookings",
@@ -156,7 +156,7 @@
       "studio": {
         "title": "Studio",
         "lines": [
-          "ul. Krucza 16/22",
+          "Krucza 16/22",
           "Warsaw city centre"
         ]
       },

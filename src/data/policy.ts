@@ -2,7 +2,8 @@
  * Privacy policy from docs/content/privacy-policy.pl.md (the source of truth).
  * Turns the Markdown into a simple structure: lead paragraph, numbered sections
  * with paragraphs and bullet lists, and the "last updated" line.
- * [Bracketed placeholders] become <span class="policy-placeholder"> (shown in plum).
+ * [Bracketed placeholders] become <span class="policy-placeholder"> (shown in plum);
+ * e-mail addresses become mailto links.
  */
 import type { Locale } from './index';
 
@@ -19,9 +20,11 @@ export type Policy = { title: string; lead: string; sections: Section[]; updated
 const escape = (text: string) =>
   text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/** Escaped HTML with placeholders highlighted. */
+/** Escaped HTML with placeholders highlighted and e-mail addresses as mailto links. */
 export const inline = (text: string) =>
-  escape(text).replace(/\[([^\]]+)\]/g, '<span class="policy-placeholder">[$1]</span>');
+  escape(text)
+    .replace(/\[([^\]]+)\]/g, '<span class="policy-placeholder">[$1]</span>')
+    .replace(/\b([\w.+-]+@[\w-]+(?:\.[\w-]+)+)\b/g, '<a class="policy-link" href="mailto:$1">$1</a>');
 
 export function parsePolicy(markdown: string, updatedPrefix: string): Policy {
   const lines = markdown.replace(/<!--[\s\S]*?-->/g, '').split('\n');

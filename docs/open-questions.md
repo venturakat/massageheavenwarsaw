@@ -6,7 +6,7 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Cancellation notice:** FAQ 08 says 24 h (placeholder). It also names only Booksy; should it say Booksy, Fresha or a message?
 - [ ] **Walking time** from metro Centrum (FAQ 10 says 10 min).
 - [ ] **Opening hours:** taken from the door sign draft. Confirm before they go into the JSON-LD and footer.
-- [ ] **Privacy policy:** data-protection e-mail, publication date, the analytics tool (or none), and 12-month retention for unanswered voucher enquiries. Needs client/legal sign-off.
+- [ ] **Privacy policy:** publication date, the analytics tool (or none), and 12-month retention for unanswered voucher enquiries. Needs client/legal sign-off. (Data-protection e-mail filled in: anastaziya111@gmail.com, 2026-11-13.)
 - [ ] **Fresha links** use the en-GB locale. Is there a Polish URL?
 
 ## Copy
@@ -65,6 +65,7 @@ Build around these with the placeholder shown. Don't invent answers. Strike an i
 - [ ] **Performance (UA, mobile):** Lighthouse 90 vs 96 for Polish, because Ukrainian text needs the Cyrillic and Latin files of both fonts (digits, dashes and brand names are Latin). Fine for now; a merged font subset would close the gap.
 
 ## Decided (for reference)
+- Client e-mail: anastaziya111@gmail.com — the data-protection contact in all three privacy policies, and `studio.email` in `site.json` (2026-11-13).
 - English (`/en/`): same layout and Instrument fonts as Polish, text from the `*.en.json` files; British spelling; «zł» kept in prices (2026-11-13).
 - Ukrainian fonts: Playfair Display (Regular + Italic) and Onest (400/500/600), from the Figma «Cyrillic test» page (540:61), self-hosted and loaded only on `/ua/`. Ukrainian sizes: Display 75, H2 48, H3 25, H4 20, headings tracked −5 % / −3 % (2026-11-13).
 - Mobile booking choosers and cookie settings: a card centred on screen, 12 px from the sides, all corners rounded, instead of Figma's edge-to-edge bottom sheet (2026-11-13).

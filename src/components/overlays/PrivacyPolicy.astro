@@ -78,4 +78,13 @@ const title = [words[0], words.slice(1).join(' ')];
     font-weight: 500;
     color: var(--text-highlight);
   }
+  .policy :global(.policy-link) {
+    color: var(--text-highlight);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  @media (hover: hover) {
+    .policy :global(.policy-link:hover) { color: var(--plum-600); }
+  }
 </style>
